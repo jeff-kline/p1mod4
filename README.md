@@ -1,10 +1,10 @@
-# p1mod4 — a Paley‑II analogue of the Scarpis/Djoković construction
+# p1mod4 — a Paley‑II analogue of the Scarpis/Đoković construction
 
 An explicit, uniform construction of a **real Hadamard matrix of order
 `N = 2·q·(q+1)`** for every prime power `q ≡ 1 (mod 4)`, built from the quadratic
 character on `𝔽_q` and the `2×2` Paley‑II replacement blocks.
 
-This is the Paley‑II counterpart of Scarpis's lift and of Djoković's prime‑power
+This is the Paley‑II counterpart of Scarpis's lift and of Đoković's prime‑power
 extension for `q ≡ 3 (mod 4)` (which yields order `q(q+1)`); since the Paley‑II
 seed has order `2(q+1)`, the natural Scarpis‑type target here is `q·2(q+1) = 2q(q+1)`.
 
