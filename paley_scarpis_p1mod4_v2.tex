@@ -38,13 +38,14 @@ Hadamard matrix of order \(2q(q+1)\) for every prime power
 \(q\equiv 1\pmod 4\), built from the quadratic character on \(\F_q\) and
 the \(2\times 2\) Paley--II replacement blocks; since the Paley--II seed
 has order \(2(q+1)\), this is the natural Paley--II analogue of the lift.
-The orders so produced are not new existence results.  Every order
+The orders so produced are not claimed as new existence results.  Every order
 \(2q(q+1)\) whose odd part is at most \(3000\) is already recorded in the
 standard tables, and the smallest order lying beyond that audited range,
-\(q=81\) (order \(13284=4\cdot 41\cdot 81\)), is a classical Turyn
-product of \(T\)-matrices of order \(41\) with Williamson-type matrices
-of order \(81=9^{2}\).  We make the coverage explicit, exhibit the
-witnessing constructions, identify the smallest unaudited order, and
+\(q=81\) (order \(13284=4\cdot 41\cdot 81\)), also follows from a
+classical Turyn product using \(T\)-matrices of order \(41\) and
+Williamson-type matrices of order \(81=9^{2}\).  We make the coverage
+explicit, exhibit the witnessing constructions, identify the smallest
+unaudited order, and
 tabulate those orders up to \(q=2917\) for which no elementary witness is
 presently evident, emphasising that these are \emph{unaudited} rather
 than open.
@@ -211,8 +212,8 @@ The construction has been verified by full Gram computation for all
 
 Theorem~\ref{thm:main} supplies, for the \(q\equiv1\pmod4\) case, the
 uniform family that \DJ okovi\'c \cite{Djokovic2016} asked for.  It does
-not, however, produce Hadamard matrices of previously unconstructible
-orders, and we record why.
+not appear to resolve previously open Hadamard orders; its contribution is
+the uniform construction, and we record the evidence for that framing.
 
 Since \(q\equiv1\pmod4\), the \(2\)-adic valuation of the order is
 exactly \(2\):
@@ -225,14 +226,15 @@ Thus every order is \(4\times(\text{odd})\), so it is never a Kronecker
 product of two smaller Hadamard matrices, and its odd part
 \(q(q+1)/2\) is always composite.  Two consequences follow.  First, the
 family never meets the dominant list of open Hadamard orders, which are
-\(4\times\text{prime}\).  Second, \eqref{eq:fourodd} is itself a Turyn
-factorisation: with \(T\)-matrices of order \(t\) and Williamson-type
-matrices of order \(w\) one obtains a Hadamard matrix of order \(4tw\)
+\(4\times\text{prime}\).  Second, \eqref{eq:fourodd} has the form needed
+for Turyn's construction: when \(T\)-matrices of order \(t\) and
+Williamson-type matrices of order \(w\) are available, one obtains a
+Hadamard matrix of order \(4tw\)
 \cite{Turyn1974,SeberryYamada1992}, and here \(\{t,w\}=\{q,(q+1)/2\}\).
 The coverage analysis of Appendix~\ref{app:coverage} makes both points
 quantitative: all orders with odd part \(\le 3000\) are recorded in the
-standard tables, the first order beyond that range is itself a Turyn
-product, and the orders for which no elementary witness is currently
+standard tables, the first order beyond that range is covered by such a
+Turyn product, and the orders for which no elementary witness is currently
 evident are listed but are unaudited rather than open.
 
 \appendix
@@ -253,7 +255,7 @@ SeberryYamada2020} and the database of Cati and Pasechnik
 \cite{CatiPasechnik2024} record, for every odd \(m\le 3000\), the least
 \(t\) for which a Hadamard matrix of order \(2^{t}m\) is known.  The
 default is \(t=2\) (so \(N=4m\) is known), and the only odd \(m\le3000\)
-with \(t>2\) are the primes \(167,179,223\) (orders \(668,716,892\),
+with \(t>2\) are the primes \(167,179,223,283\) (orders \(668,716,892,1132\),
 still open).  Since \(m=q(q+1)/2\) is composite it is never one of these;
 hence \emph{every \(N\) with \(m\le3000\) is a known Hadamard order}.
 This is the range \(q\le73\), tabulated below with an explicit
@@ -509,26 +511,28 @@ J.~Seberry and M.~Yamada,
 \bibitem{Djokovic2016}
 D.~Z.~\DJ okovi\'c,
 \newblock Generalization of Scarpis's theorem on Hadamard matrices,
-\newblock {\em Linear Multilinear Algebra} 65 (2017), no.\ 10;
-  arXiv:1601.00635.
+\newblock arXiv:1601.00635, 2016.
 \newblock \url{https://arxiv.org/abs/1601.00635}.
 
 \bibitem{KharaghaniTayfehRezaie2005}
 H.~Kharaghani and B.~Tayfeh-Rezaie,
 \newblock A Hadamard matrix of order 428,
 \newblock {\em J.\ Combin.\ Des.} 13 (2005), 435--440.
+\newblock \url{https://doi.org/10.1002/jcd.20043}.
 
 \bibitem{SeberryYamada2020}
 J.~Seberry and M.~Yamada,
 \newblock {\em Hadamard Matrices: Constructions using Number Theory and
   Linear Algebra},
 \newblock Wiley, 2020.
+\newblock \url{https://doi.org/10.1002/9781119520252}.
 
 \bibitem{CatiPasechnik2024}
 M.~Cati and D.~V.~Pasechnik,
 \newblock A database of constructions of Hadamard matrices,
-\newblock arXiv:2411.18897, 2024.
+\newblock arXiv:2411.18897v2, 2025.
 \newblock \url{https://arxiv.org/abs/2411.18897}.
+\newblock \url{https://doi.org/10.48550/arXiv.2411.18897}.
 
 \end{thebibliography}
 
