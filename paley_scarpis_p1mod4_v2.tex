@@ -32,13 +32,14 @@ A Hadamard matrix of order \(m\) is a \(\{1,-1\}\)-matrix \(H\) with
 \(HH^{T}=mI_{m}\).  Scarpis (1898) showed that for a prime
 \(p\equiv 3\pmod 4\) a Hadamard matrix of order \(p+1\) can be lifted to
 one of order \(p(p+1)\), and \DJ okovi\'c extended the lift to all prime
-powers \(q\equiv 3\pmod 4\), leaving open the analogous procedure for
-\(q\equiv 1\pmod 4\).  We give an explicit, uniform construction of a
-Hadamard matrix of order \(2q(q+1)\) for every prime power
-\(q\equiv 1\pmod 4\), built from the quadratic character on \(\F_q\) and
-the \(2\times 2\) Paley--II replacement blocks; since the Paley--II seed
-has order \(2(q+1)\), this is the natural Paley--II analogue of the lift.
-The orders so produced are not claimed as new existence results.  Every order
+powers \(q\equiv 3\pmod 4\), asking for the analogous procedure for
+\(q\equiv 1\pmod 4\).  That case was settled by Farouk and Wang (2020),
+who constructed a Hadamard matrix of order \(2q(q+1)\) from the
+order-\(2(q+1)\) Paley--II seed for every prime power \(q\equiv 1\pmod 4\).
+We re-derive that family in an explicit, self-contained form built
+directly from the quadratic character on \(\F_q\) and the \(2\times 2\)
+Paley--II replacement blocks; this is an alternative presentation of the
+Farouk--Wang construction, not a new existence result.  Indeed every order
 \(2q(q+1)\) whose odd part is at most \(3000\) is already recorded in the
 standard tables, and the smallest order lying beyond that audited range,
 \(q=81\) (order \(13284=4\cdot 41\cdot 81\)), also follows from a
@@ -210,10 +211,14 @@ The construction has been verified by full Gram computation for all
 
 \section{Remarks on novelty}
 
-Theorem~\ref{thm:main} supplies, for the \(q\equiv1\pmod4\) case, the
-uniform family that \DJ okovi\'c \cite{Djokovic2016} asked for.  It does
-not appear to resolve previously open Hadamard orders; its contribution is
-the uniform construction, and we record the evidence for that framing.
+Theorem~\ref{thm:main} gives, for the \(q\equiv1\pmod4\) case, an
+explicit form of the Scarpis-type family that \DJ okovi\'c
+\cite{Djokovic2016} asked for.  That family was already constructed by
+Farouk and Wang \cite{FaroukWang2020,FaroukWang2022} from the same
+order-\(2(q+1)\) Paley--II seed; Theorem~\ref{thm:main} is therefore an
+alternative, self-contained presentation rather than a new existence
+result.  It does not resolve previously open Hadamard orders, and we
+record the evidence for that framing.
 
 Since \(q\equiv1\pmod4\), the \(2\)-adic valuation of the order is
 exactly \(2\):
@@ -474,6 +479,18 @@ whole family, including the region these tables do not reach, rather than
 to settle any open existence question.
 
 \begin{thebibliography}{99}
+
+\bibitem{FaroukWang2020}
+A.~Farouk and Q.-W.~Wang,
+\newblock An infinite family of Hadamard matrices constructed from
+  Paley type matrices,
+\newblock {\em Filomat} 34 (2020), no.\ 3, 815--834.
+
+\bibitem{FaroukWang2022}
+A.~Farouk and Q.-W.~Wang,
+\newblock Construction of new Hadamard matrices using known Hadamard
+  matrices,
+\newblock {\em Filomat} 36 (2022), no.\ 6, 2025--2042.
 
 \bibitem{Hadamard1893}
 J.~Hadamard,
