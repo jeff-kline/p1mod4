@@ -487,6 +487,93 @@ def verify(q, num_pairs=3000, force=None, verbose=True):
 
 
 # ----------------------------------------------------------------------------
+# 4b. Figures (lazy matplotlib import; the verification path stays numpy-only).
+# ----------------------------------------------------------------------------
+
+def _band_lines(ax, q, N):
+    """Light gridlines on the 2q-block lattice; bold cap/border separators."""
+    for k in range(1, q + 2):
+        z = 2 * q * k - 0.5
+        if z < N - 0.5:
+            ax.axvline(z, color="#d6336c", lw=0.35, alpha=0.5)
+            ax.axhline(z, color="#d6336c", lw=0.35, alpha=0.5)
+    ax.axhline(2 * q - 0.5, color="#e8590c", lw=1.6)   # cap | finite rows
+    ax.axvline(2 * q - 0.5, color="#1971c2", lw=1.6)   # border | K columns
+
+
+def save_pair_figure(q, outdir):
+    """Two-panel figure: H (left) and the Gram matrix HH^T = N I (right)."""
+    import os
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    con = PaleyScarpis(q)
+    H = con.build_full()
+    N = con.N
+    G = H.astype(np.int32) @ H.T.astype(np.int32)
+    fig, (axH, axG) = plt.subplots(1, 2, figsize=(11, 5.3))
+    axH.imshow(H, cmap="gray", vmin=-1, vmax=1, interpolation="nearest")
+    _band_lines(axH, q, N)
+    axH.set_title(rf"$H$: Hadamard matrix of order $N=2q(q+1)={N}$")
+    axH.set_xlabel(rf"$q={q}$  (white $=+1$, black $=-1$); "
+                   rf"lattice spacing $2q={2*q}$")
+    axH.set_xticks([]); axH.set_yticks([])
+    im = axG.imshow(G, cmap="magma", interpolation="nearest")
+    axG.set_title(rf"$HH^{{T}}={N}\,I_{{{N}}}$ (diagonal ${N}$, off-diagonal $0$)")
+    axG.set_xticks([]); axG.set_yticks([])
+    fig.colorbar(im, ax=axG, fraction=0.046, pad=0.04)
+    fig.tight_layout()
+    os.makedirs(outdir, exist_ok=True)
+    path = os.path.join(outdir, f"H_q{q}_N{N}.png")
+    fig.savefig(path, dpi=130)
+    plt.close(fig)
+    return path
+
+
+def save_structure_figure(q, outdir):
+    """Annotated H: cap band M_inf over finite bands M_r = [ B_r | K_{ar} ]."""
+    import os
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.patches import Rectangle, Patch
+    con = PaleyScarpis(q)
+    H = con.build_full()
+    N = con.N
+    tq = 2 * q
+    fig, ax = plt.subplots(figsize=(7.6, 6.8))
+    ax.imshow(H, cmap="gray", vmin=-1, vmax=1, interpolation="nearest")
+    _band_lines(ax, q, N)
+    regions = [
+        (-0.5, -0.5, N, tq, "#e8590c", r"cap rows $M_\infty$ (Paley II, order $2(q{+}1)$)"),
+        (-0.5, tq - 0.5, N, tq, "#2f9e44", r"finite band $M_0=[\,B_0\mid K_{a0}\,]$"),
+        (-0.5, tq - 0.5, tq, tq, "#1971c2", r"border block $B_r$"),
+        (tq - 0.5, tq - 0.5, tq, tq, "#9c36b5", r"Paley-II block $K_{ar}$"),
+    ]
+    for x, y, w, h, c, _ in regions:
+        ax.add_patch(Rectangle((x, y), w, h, fill=False, edgecolor=c, lw=2.2))
+    ax.legend(handles=[Patch(edgecolor=c, fill=False, label=l) for *_, c, l in regions],
+              loc="upper left", bbox_to_anchor=(1.02, 1.0), fontsize=9,
+              handlelength=1.6, borderaxespad=0.0, frameon=False)
+    ax.set_title(rf"Order $N={N}$ ($q={q}$): stack of cap rows $M_\infty$ and "
+                 rf"finite bands $M_r$")
+    ax.set_xticks([]); ax.set_yticks([])
+    os.makedirs(outdir, exist_ok=True)
+    path = os.path.join(outdir, f"structure_q{q}_N{N}.png")
+    fig.savefig(path, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+    return path
+
+
+def save_figures(qs, outdir):
+    """Structure figure for the smallest q, plus H|Gram for each q in qs."""
+    paths = [save_structure_figure(qs[0], outdir)]
+    for q in qs:
+        paths.append(save_pair_figure(q, outdir))
+    return paths
+
+
+# ----------------------------------------------------------------------------
 # 5. CLI.
 # ----------------------------------------------------------------------------
 
@@ -506,7 +593,17 @@ def main():
                     help="number of random row pairs in sampled mode")
     ap.add_argument("--big", action="store_true",
                     help="also run q=81 (N=13284) in sampled mode")
+    ap.add_argument("--figures", metavar="DIR", default=None,
+                    help="write PNG figures into DIR and exit")
+    ap.add_argument("--figq", default="5,9,13",
+                    help="comma-separated q values for --figures (default 5,9,13)")
     args = ap.parse_args()
+
+    if args.figures is not None:
+        qs = [int(x) for x in args.figq.split(",")]
+        for p in save_figures(qs, args.figures):
+            print("wrote", p)
+        raise SystemExit(0)
 
     force = "sampled" if args.sampled else ("full" if args.full else None)
 
