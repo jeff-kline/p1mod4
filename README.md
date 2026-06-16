@@ -11,6 +11,12 @@ seed has order `2(q+1)`, the natural Scarpis‑type target here is `q·2(q+1) = 
 > **Theorem.** Let `q ≡ 1 (mod 4)` be a prime power. Then there is a Hadamard
 > matrix of order `2q(q+1)`.
 
+> ⚠️ **This result is already known.** The order‑`2q(q+1)` family was constructed by
+> Farouk & Wang, *Filomat* **34:3** (2020) 815–834, from the same order‑`2(q+1)`
+> Paley‑II seed as a Scarpis/Đoković analogue (with a follow‑up in *Filomat* **36:6**
+> (2022) 2025–2042). What follows is an explicit, self‑contained re‑derivation of that
+> construction — **not a new existence result**.
+
 ## The construction at a glance
 
 `H` is a stack of one **cap band** `M∞` over `q` **finite bands** `M_r`:
@@ -84,8 +90,11 @@ Because `q ≡ 1 (mod 4)`, every order factors as `2q(q+1) = 4·q·(q+1)/2` with
   covered by a classical **Turyn product** using `T`‑matrices of order `41` with
   Williamson‑type matrices of order `81 = 9²`.
 
-The contribution is therefore **uniformity** — one closed‑form rule for the whole
-`4×odd` family `2q(q+1)` — rather than resolving known open orders. The accompanying note
+**This construction is already in the literature:** the order‑`2q(q+1)` family was
+given by Farouk & Wang, *Filomat* **34:3** (2020) 815–834, from the same Paley‑II seed
+(follow‑up in *Filomat* **36:6** (2022) 2025–2042). What this repo adds is an explicit,
+self‑contained re‑derivation using the `2×2` blocks, plus the coverage analysis — not a
+new existence result and not a resolution of any open order. The accompanying note
 [`paley_scarpis_p1mod4_v2.tex`](paley_scarpis_p1mod4_v2.tex) gives the proof, a
 coverage table for orders with odd part `≤ 3000`, the `q = 81` witness, and a list
 of orders up to `q = 2917` for which no elementary construction is presently
