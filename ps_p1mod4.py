@@ -23,6 +23,8 @@ Run:
     python paley_scarpis_from_tex.py            # default test sweep
     python paley_scarpis_from_tex.py --q 13     # one case
     python paley_scarpis_from_tex.py --q 81 --sampled --pairs 4000
+    python paley_scarpis_from_tex.py --q 13 --write H_q13.txt   # dump H to file
+    python paley_scarpis_from_tex.py --q 13 --write -           # dump H to stdout
 
 Only numpy is required.
 """
@@ -30,6 +32,7 @@ Only numpy is required.
 from __future__ import annotations
 
 import argparse
+import sys
 import time
 
 import numpy as np
@@ -574,6 +577,52 @@ def save_figures(qs, outdir):
 
 
 # ----------------------------------------------------------------------------
+# 4c. Matrix output (text dump of a chosen matrix to a file or stdout).
+# ----------------------------------------------------------------------------
+
+def _matrix_lines(M, fmt):
+    """Yield one text line per row of the +-1 matrix M (no trailing newline).
+
+    fmt='ints'  -> space-separated signed integers, e.g. '1 -1 1 -1'
+    fmt='signs' -> compact '+'/'-' characters, no separators, e.g. '+--+'
+    """
+    if fmt == "signs":
+        lut = np.array([ord("-"), ord("+")], dtype=np.uint8)  # index by (v > 0)
+        for row in M:
+            yield lut[(row > 0).astype(np.intp)].tobytes().decode("ascii")
+    else:  # 'ints'
+        for row in M:
+            yield " ".join(map(str, row.tolist()))
+
+
+def write_matrix(M, dest, fmt="ints"):
+    """Write the +-1 matrix M as text.
+
+    dest : a file path, or '-' for stdout.
+    fmt  : 'ints' (space-separated +-1) or 'signs' (compact +/- characters).
+    """
+    M = np.asarray(M)
+    lines = _matrix_lines(M, fmt)
+    if dest == "-":
+        for line in lines:
+            sys.stdout.write(line + "\n")
+    else:
+        with open(dest, "w") as fh:
+            for line in lines:
+                fh.write(line + "\n")
+
+
+def build_matrix(q, which):
+    """Build the requested matrix for prime power q = 1 (mod 4).
+
+    which='H'    -> order-N Hadamard matrix, N = 2 q (q+1).
+    which='seed' -> order-2(q+1) Paley-II seed S.
+    """
+    con = PaleyScarpis(q)
+    return con.build_full() if which == "H" else con.build_seed_S()
+
+
+# ----------------------------------------------------------------------------
 # 5. CLI.
 # ----------------------------------------------------------------------------
 
@@ -597,12 +646,30 @@ def main():
                     help="write PNG figures into DIR and exit")
     ap.add_argument("--figq", default="5,9,13",
                     help="comma-separated q values for --figures (default 5,9,13)")
+    ap.add_argument("--write", metavar="PATH", default=None,
+                    help="write the matrix for --q to PATH ('-' for stdout) and exit")
+    ap.add_argument("--which", choices=("H", "seed"), default="H",
+                    help="which matrix to --write: H = order-N Hadamard (default), "
+                         "seed = order-2(q+1) Paley-II seed S")
+    ap.add_argument("--fmt", choices=("ints", "signs"), default="ints",
+                    help="--write text format: 'ints' = space-separated +-1 "
+                         "(default), 'signs' = compact +/- characters")
     args = ap.parse_args()
 
     if args.figures is not None:
         qs = [int(x) for x in args.figq.split(",")]
         for p in save_figures(qs, args.figures):
             print("wrote", p)
+        raise SystemExit(0)
+
+    if args.write is not None:
+        if args.q is None:
+            ap.error("--write requires --q")
+        M = build_matrix(args.q, args.which)
+        write_matrix(M, args.write, fmt=args.fmt)
+        if args.write != "-":
+            print(f"wrote {args.which} for q={args.q} "
+                  f"({M.shape[0]}x{M.shape[1]}, fmt={args.fmt}) to {args.write}")
         raise SystemExit(0)
 
     force = "sampled" if args.sampled else ("full" if args.full else None)
