@@ -77,15 +77,15 @@ All default cases pass; `q = 9, 25, 49` exercise the extension‑field path.
 Because `q ≡ 1 (mod 4)`, every order factors as `2q(q+1) = 4·q·(q+1)/2` with both
 `q` and `(q+1)/2` **odd** — i.e. the order is always `4×(odd)`. Consequently:
 
-- the family never meets the open Hadamard orders (those are `4×prime`; here the
-  odd part is always composite), so it resolves **no** open existence case;
+- the family never meets the dominant open Hadamard orders of the form `4×prime`;
+  here the odd part is always composite, so it resolves no case from that list;
 - every order whose odd part is `≤ 3000` is already a known Hadamard order, and the
-  first instance beyond that audited range, `q = 81` (order `13284 = 4·41·81`), is a
-  classical **Turyn product** of `T`‑matrices of order `41` with Williamson‑type
-  matrices of order `81 = 9²`.
+  first instance beyond that audited range, `q = 81` (order `13284 = 4·41·81`), is
+  covered by a classical **Turyn product** using `T`‑matrices of order `41` with
+  Williamson‑type matrices of order `81 = 9²`.
 
 The contribution is therefore **uniformity** — one closed‑form rule for the whole
-`4×odd` family `2q(q+1)` — rather than new orders. The accompanying note
+`4×odd` family `2q(q+1)` — rather than resolving known open orders. The accompanying note
 [`paley_scarpis_p1mod4_v2.tex`](paley_scarpis_p1mod4_v2.tex) gives the proof, a
 coverage table for orders with odd part `≤ 3000`, the `q = 81` witness, and a list
 of orders up to `q = 2917` for which no elementary construction is presently
