@@ -1,0 +1,534 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{longtable}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\J}{J}
+\newcommand{\I}{I}
+\newcommand{\Rcal}{\mathcal R}
+
+\title{A Paley--II analogue of the Scarpis--Djokovi\'c construction\\
+       for prime powers \(q\equiv 1\pmod 4\)}
+% Edit author/affiliation as appropriate before submission.
+\author{Jeffery Kline}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+A Hadamard matrix of order \(m\) is a \(\{1,-1\}\)-matrix \(H\) with
+\(HH^{T}=mI_{m}\).  Scarpis (1898) showed that for a prime
+\(p\equiv 3\pmod 4\) a Hadamard matrix of order \(p+1\) can be lifted to
+one of order \(p(p+1)\), and Djokovi\'c extended the lift to all prime
+powers \(q\equiv 3\pmod 4\), leaving open the analogous procedure for
+\(q\equiv 1\pmod 4\).  We give an explicit, uniform construction of a
+Hadamard matrix of order \(2q(q+1)\) for every prime power
+\(q\equiv 1\pmod 4\), built from the quadratic character on \(\F_q\) and
+the \(2\times 2\) Paley--II replacement blocks; since the Paley--II seed
+has order \(2(q+1)\), this is the natural Paley--II analogue of the lift.
+The orders so produced are not new existence results.  Every order
+\(2q(q+1)\) whose odd part is at most \(3000\) is already recorded in the
+standard tables, and the smallest order lying beyond that audited range,
+\(q=81\) (order \(13284=4\cdot 41\cdot 81\)), is a classical Turyn
+product of \(T\)-matrices of order \(41\) with Williamson-type matrices
+of order \(81=9^{2}\).  We make the coverage explicit, exhibit the
+witnessing constructions, identify the smallest unaudited order, and
+tabulate those orders up to \(q=2917\) for which no elementary witness is
+presently evident, emphasising that these are \emph{unaudited} rather
+than open.
+\end{abstract}
+
+\section{Introduction}
+
+For a prime power \(q\) let \(\F=\F_q\) and let
+\(\chi\colon\F\to\{0,\pm1\}\) be the quadratic character,
+\(\chi(0)=0\), \(\chi(x)=1\) for nonzero squares and \(-1\) otherwise.
+Paley's two constructions split on the residue of \(q\): for
+\(q\equiv 3\pmod 4\) Paley~I gives a Hadamard matrix of order \(q+1\),
+and for \(q\equiv 1\pmod 4\) Paley~II gives one of order \(2(q+1)\)
+\cite{Paley1933}.
+
+Scarpis \cite{Scarpis1898} showed that for a prime \(p\equiv 3\pmod 4\) a
+Hadamard matrix of order \(p+1\) lifts to one of order \(p(p+1)\).
+Djokovi\'c \cite{Djokovic2016} replaced the prime by an arbitrary prime
+power: if \(q\equiv 3\pmod 4\) is a prime power there is a Hadamard
+matrix of order \(q(q+1)\); his note closes with the open problem of an
+analogous procedure for \(q\equiv 1\pmod 4\).
+
+Because the Paley--II seed has order \(2(q+1)\), the natural
+Scarpis-type target in the \(q\equiv 1\pmod 4\) case is
+\[
+        q\cdot 2(q+1)=2q(q+1).
+\]
+We construct such a matrix directly from \(\chi\).  Throughout, \(q\equiv
+1\pmod 4\) is a prime power, so \(\chi(-1)=1\); this is the only place
+the residue class is used, and it is exactly what fails for
+\(q\equiv 3\pmod 4\).
+
+\section{The Paley--II blocks}
+
+Put
+\[
+P=\begin{pmatrix}1&1\\ 1&-1\end{pmatrix},\quad
+Z=\begin{pmatrix}1&-1\\ -1&-1\end{pmatrix},\quad
+R=\begin{pmatrix}0&-1\\ 1&0\end{pmatrix},
+\]
+and let \(\psi\colon\{0,\pm1\}\to\{\pm1\}^{2\times2}\) be
+\(\psi(0)=Z\), \(\psi(1)=P\), \(\psi(-1)=-P\); these are the Paley--II
+replacement blocks, and \(ZR=-P\).  Write \(\Rcal=\J_q\otimes I_2\),
+where \(\J_q\) is the \(q\times q\) all-ones matrix.  We use repeatedly
+\[
+        \sum_{u\in\F}\psi(\chi(u))=Z,
+        \tag{2.1}\label{eq:rowsum}
+\]
+which holds because the nonzero squares and non-squares are equinumerous.
+
+\section{The construction}
+
+For \(t\in\F\) let \(K_t\) be the \(2q\times2q\) matrix with rows and
+columns indexed by pairs \((x,a)\), \(x\in\F\), \(a\in\{0,1\}\), whose
+\(2\times2\) block in position \((x,y)\) is
+\[
+        K_t[x,y]=\psi\bigl(\chi(y-x-t)\bigr).
+\]
+
+\begin{lemma}\label{lem:self}
+For every \(t\in\F\), \(\;K_tK_t^{T}=2(q+1)I_{2q}-2\Rcal.\)
+\end{lemma}
+
+\begin{proof}
+The \((x,x')\) block of \(K_tK_t^{T}\), with \(d=x'-x\) and
+\(z=y-x-t\), equals \(\sum_{z}\psi(\chi(z))\psi(\chi(z-d))^{T}\).  For
+\(d=0\) each summand is \(2I_2\), giving \(2qI_2\).  For \(d\neq0\) the
+terms \(z=0\) and \(z=d\) carry opposite skew parts and cancel, using
+\(\chi(-d)=\chi(d)\) (here \(\chi(-1)=1\)); for \(z\neq0,d\),
+\(\psi(\chi(z))\psi(\chi(z-d))^{T}=2\chi(z)\chi(z-d)I_2\), and
+\(\sum_z\chi(z(z-d))=-1\) yields \(-2I_2\).  These are the diagonal and
+off-diagonal blocks of \(2(q+1)I-2\Rcal\).
+\end{proof}
+
+\begin{lemma}\label{lem:cross}
+For \(r,s\in\F\),
+\[
+        \sum_{a\in\F}K_{ar}K_{as}^{T}=
+        \begin{cases}
+        2q(q+1)I_{2q}-2q\Rcal,&r=s,\\
+        2\Rcal,&r\neq s.
+        \end{cases}
+\]
+\end{lemma}
+
+\begin{proof}
+The case \(r=s\) is \(q\) copies of Lemma~\ref{lem:self}.  For
+\(r\neq s\), in the \((x,x')\) block put \(z=y-x-ar\); the second
+argument becomes \(z-(x'-x)+a(r-s)\), which ranges over all of \(\F\)
+independently of \(z\) as \(a\) does.  By \eqref{eq:rowsum} each block is
+\(Z Z^{T}=2I_2\), i.e.\ the corresponding block of \(2\Rcal\).
+\end{proof}
+
+For \(r\in\F\) let \(B_r\) be the \(2q\times2q\) matrix whose row
+\((x,a)\) equals row \((r,a)\) of \(K_0\) for every \(x\); thus \(B_r\)
+has only two distinct rows.  From Lemma~\ref{lem:self},
+\(B_rB_s^{T}=2q\Rcal\) if \(r=s\) and \(-2\Rcal\) if \(r\neq s\).
+
+Form the \(2q\times2q(q+1)\) block rows
+\(M_r=\bigl[\,B_r\mid K_{ar}\ (a\in\F)\,\bigr].\)
+
+\begin{lemma}\label{lem:finite}
+\(M_rM_s^{T}=2q(q+1)I_{2q}\) if \(r=s\), and \(0\) if \(r\neq s\).
+\end{lemma}
+
+\begin{proof}
+\(M_rM_s^{T}=B_rB_s^{T}+\sum_aK_{ar}K_{as}^{T}\).  For \(r=s\) the
+\(2q\Rcal\) of the border cancels the \(-2q\Rcal\) of
+Lemma~\ref{lem:cross}; for \(r\neq s\) the \(-2\Rcal\) cancels the
+\(2\Rcal\).
+\end{proof}
+
+Let \(C\) be the Paley conference matrix indexed by
+\(\{\infty\}\cup\F\), namely \(C_{u,u}=0\),
+\(C_{\infty,x}=C_{x,\infty}=1\), \(C_{x,y}=\chi(y-x)\), and let \(S\) be
+the order-\(2(q+1)\) Paley--II Hadamard matrix obtained by replacing
+\(0,1,-1\) by \(Z,P,-P\).  Delete the two rows of \(S\) indexed by
+\(\infty\); in each remaining row repeat the \(\infty\)-column pair
+\(q\) times unchanged, and replace each finite column pair by its
+product with \(R\), repeated \(q\) times.  This is a
+\(2q\times2q(q+1)\) matrix \(M_\infty\).
+
+\begin{lemma}\label{lem:cap}
+\(M_\infty M_\infty^{T}=2q(q+1)I_{2q}\) and \(M_\infty M_r^{T}=0\) for all
+\(r\in\F\).
+\end{lemma}
+
+\begin{proof}
+The first identity holds because \(S\) is Hadamard, each column pair is
+repeated \(q\) times, and right multiplication by \(R\) preserves row
+inner products.  For the cross identity, summing a cap row against a row
+of \(M_r\) and using \eqref{eq:rowsum} on every \(2q\)-block leaves
+\(\bigl(P_\alpha+(\sum_{a}S[e,a]_\alpha)R\bigr)\cdot Z_\beta\); the inner
+sum of finite entries of a row of \(S\) is \(Z_\alpha\), and
+\(P+ZR=P-P=0\).
+\end{proof}
+
+\begin{theorem}\label{thm:main}
+Let \(q\equiv1\pmod4\) be a prime power.  Then
+\[
+        H=\begin{bmatrix}M_\infty\\ M_r\ (r\in\F)\end{bmatrix}
+\]
+is a Hadamard matrix of order \(2q(q+1)\).
+\end{theorem}
+
+\begin{proof}
+\(H\) is \(\{1,-1\}\) and square of order \(2q+q\cdot2q=2q(q+1)\).
+Lemmas~\ref{lem:finite} and \ref{lem:cap} give
+\(HH^{T}=2q(q+1)I\).
+\end{proof}
+
+\begin{corollary}
+For every prime power \(q\equiv1\pmod4\) there is a Hadamard matrix of
+order \(2q(q+1)\); the smallest non-prime instance is \(q=9\), of order
+\(180\).
+\end{corollary}
+
+The construction has been verified by full Gram computation for all
+\(q\le49\) (orders \(60,\dots,4900\), including the extension fields
+\(q=9,25,49\)) and by streamed row-orthogonality checks for \(q=81\) and
+\(q=125\) (orders \(13284\) and \(31500\)).
+
+\section{Remarks on novelty}
+
+Theorem~\ref{thm:main} supplies, for the \(q\equiv1\pmod4\) case, the
+uniform family that Djokovi\'c \cite{Djokovic2016} asked for.  It does
+not, however, produce Hadamard matrices of previously unconstructible
+orders, and we record why.
+
+Since \(q\equiv1\pmod4\), the \(2\)-adic valuation of the order is
+exactly \(2\):
+\[
+        2q(q+1)=4\cdot q\cdot\tfrac{q+1}{2},
+        \qquad q\ \text{and}\ \tfrac{q+1}{2}\ \text{both odd.}
+        \tag{4.1}\label{eq:fourodd}
+\]
+Thus every order is \(4\times(\text{odd})\), so it is never a Kronecker
+product of two smaller Hadamard matrices, and its odd part
+\(q(q+1)/2\) is always composite.  Two consequences follow.  First, the
+family never meets the dominant list of open Hadamard orders, which are
+\(4\times\text{prime}\).  Second, \eqref{eq:fourodd} is itself a Turyn
+factorisation: with \(T\)-matrices of order \(t\) and Williamson-type
+matrices of order \(w\) one obtains a Hadamard matrix of order \(4tw\)
+\cite{Turyn1974,SeberryYamada1992}, and here \(\{t,w\}=\{q,(q+1)/2\}\).
+The coverage analysis of Appendix~\ref{app:coverage} makes both points
+quantitative: all orders with odd part \(\le 3000\) are recorded in the
+standard tables, the first order beyond that range is itself a Turyn
+product, and the orders for which no elementary witness is currently
+evident are listed but are unaudited rather than open.
+
+\appendix
+
+\section{Coverage analysis}\label{app:coverage}
+
+Write \(N=2q(q+1)\) and \(m=q(q+1)/2\) for its odd part, so
+\(N=4m\).  We assess coverage of \(N\) by prior constructions on three
+levels: the audited tables (\S\ref{app:audit}), the first unaudited
+order (\S\ref{app:81}), and an elementary-witness test that isolates
+candidate orders (\S\ref{app:candidates}).
+
+\subsection{Orders with odd part at most \texorpdfstring{\(3000\)}{3000}}
+\label{app:audit}
+
+The surveys of Seberry and Yamada \cite{SeberryYamada1992,
+SeberryYamada2020} and the database of Cati and Pasechnik
+\cite{CatiPasechnik2024} record, for every odd \(m\le 3000\), the least
+\(t\) for which a Hadamard matrix of order \(2^{t}m\) is known.  The
+default is \(t=2\) (so \(N=4m\) is known), and the only odd \(m\le3000\)
+with \(t>2\) are the primes \(167,179,223\) (orders \(668,716,892\),
+still open).  Since \(m=q(q+1)/2\) is composite it is never one of these;
+hence \emph{every \(N\) with \(m\le3000\) is a known Hadamard order}.
+This is the range \(q\le73\), tabulated below with an explicit
+elementary witness where one exists (Paley~I/II, or a Turyn product
+\(4tw\)).
+
+\begin{center}
+\begin{tabular}{r r l l}
+\(q\) & \(N=2q(q+1)\) & odd part \(m\) & witnessing construction\\\hline
+5  & 60    & \(3\cdot5\)        & Paley II, \(p=29\)\\
+9  & 180   & \(3^{2}\cdot5\)    & Paley II, \(p=89\)\\
+13 & 364   & \(7\cdot13\)       & Paley II, \(p=181\)\\
+17 & 612   & \(3^{2}\cdot17\)   & Turyn \(4\cdot9\cdot17\)\\
+25 & 1300  & \(5^{2}\cdot13\)   & Turyn \(4\cdot13\cdot25\)\\
+29 & 1740  & \(3\cdot5\cdot29\) & Turyn \(4\cdot15\cdot29\)\\
+37 & 2812  & \(19\cdot37\)      & Turyn \(4\cdot19\cdot37\)\\
+41 & 3444  & \(3\cdot7\cdot41\) & Paley II, \(p=1721\)\\
+49 & 4900  & \(5^{2}\cdot7^{2}\)& Turyn \(4\cdot25\cdot49\)\\
+53 & 5724  & \(3^{3}\cdot53\)   & Paley II, \(p=2861\)\\
+61 & 7564  & \(31\cdot61\)      & Turyn \(4\cdot31\cdot61\)\\
+73 & 10804 & \(37\cdot73\)      & tables; no elementary witness (see \S\ref{app:candidates})\\
+\end{tabular}
+\end{center}
+
+\noindent
+The entry \(q=73\) is instructive: its odd part \(2701=37\cdot73\)
+carries the same obstruction we use below (the prime \(73\)), yet
+\(N=10804\) is a known Hadamard order because \(m\le3000\) is audited.
+Obstruction in the elementary test is therefore a property of that test,
+not of Hadamard existence.
+
+\subsection{The first unaudited order: \texorpdfstring{\(q=81\)}{q=81}}
+\label{app:81}
+
+The smallest order of the family whose odd part exceeds \(3000\), and
+hence lies beyond the audited range, is
+\[
+        q=81=3^{4},\qquad N=13284,\qquad m=3321=3^{4}\cdot41>3000 .
+\]
+It is nevertheless a known Hadamard order.  By \eqref{eq:fourodd},
+\[
+        13284 = 4\cdot 41\cdot 81 = 4tw,\qquad t=41,\ w=81,
+\]
+and both ingredients are classical: \(T\)-matrices of order \(41\) come
+from the base sequences \(BS(21,20)\) \cite{Turyn1974,
+KharaghaniTayfehRezaie2005}, and Williamson-type matrices of order
+\(81=9^{2}\) come from Turyn's \(9\)-power family
+\cite{Turyn1974,SeberryYamada1992}.  The Turyn array on these
+\cite{SeberryYamada1992,SeberryYamada2020} yields a Hadamard matrix of
+order \(4\cdot41\cdot81=13284\).  Thus \(q=81\) is the smallest unaudited
+order, and it is covered.
+
+\subsection{An elementary-witness test and the candidate orders}
+\label{app:candidates}
+
+Beyond the audited range we have no table to appeal to, so we apply a
+deliberately conservative \emph{elementary-witness} test based on
+\eqref{eq:fourodd} and Turyn's array.  Call an odd prime \(p\)
+\emph{\(T\)-eligible} if \(p\le59\) (so that \(T\)-matrices of order
+\(p\) follow from base sequences \(BS(m{+}1,m)\), \(m\le29\)) and
+\emph{\(W\)-eligible} if \(p\le33\) or \(2p-1\) is a prime power
+(Williamson-type matrices of order \(p\), the latter by Turyn's
+\((P{+}1)/2\) family with \(P=2p-1\equiv1\pmod4\)); both classes are
+multiplicatively closed.  An order \(N=4m\) passes the test, and is then
+a Hadamard order, if \(N\) is a Paley~I/II order or if every prime factor
+of \(m\) is \(T\)- or \(W\)-eligible.  A prime factor \(p\) of \(m\) is
+\emph{obstructing} if \(p>59\) and \(2p-1\) is not a prime power.
+
+A passing verdict is a genuine construction; a failing verdict
+(\emph{no elementary witness}) is a statement about this test only, not a
+claim that \(N\) is open.  Over the \(232\) orders with \(q\le3000\), the
+test passes \(131\) (audited, Paley, or Turyn) and fails \(101\).  The
+smallest failure is
+\[
+        q=109,\qquad N=23980,\qquad m=5\cdot11\cdot109,
+\]
+obstructed by \(109\) (\(2\cdot109-1=217=7\cdot31\) is not a prime
+power).  This \(N=23980\) is the smallest order of the family for which
+we exhibit neither an audited entry nor an elementary witness; we do not
+assert it is open, and indeed Williamson-type matrices of order \(109\),
+were they tabulated, would settle it at once (compare \(q=73\)).
+
+Table~\ref{tab:candidates} lists all such candidate orders up to
+\(q=2917\).  The previously discussed \(q=2689\) and \(q=2917\) appear at
+the end; both are obstructed (\(2689\) and \(2917\) are primes with
+\(2\cdot2689-1=5377=19\cdot283\) and \(2\cdot2917-1=5833=19\cdot307\)),
+and \(q=2917\) has the extreme form \(m=1459\cdot2917\), a product of two
+obstructing primes.  They are not distinguished among the candidates
+except by size.
+
+{\footnotesize
+\begin{longtable}{r r l l}
+\caption{Orders \(N=2q(q+1)\), \(q\) a prime power \(\equiv1\pmod4\),
+with no elementary witness (\S\ref{app:candidates}), \(109\le q\le2917\).
+``obstr.'' lists the obstructing prime factors of the odd part
+\(m=q(q+1)/2\).}\label{tab:candidates}\\
+\hline
+\(q\) & \(N\) & odd part \(m\) & obstr.\\\hline
+\endfirsthead
+\hline
+\(q\) & \(N\) & odd part \(m\) & obstr.\\\hline
+\endhead
+\hline
+\endfoot
+109 & 23980 & \(5\cdot11\cdot109\) & 109 \\
+173 & 60204 & \(3\cdot29\cdot173\) & 173 \\
+197 & 78012 & \(3^{2}\cdot11\cdot197\) & 197 \\
+277 & 154012 & \(139\cdot277\) & 277 \\
+389 & 303420 & \(3\cdot5\cdot13\cdot389\) & 389 \\
+397 & 316012 & \(199\cdot397\) & 397 \\
+409 & 335380 & \(5\cdot41\cdot409\) & 409 \\
+457 & 418612 & \(229\cdot457\) & 457 \\
+509 & 519180 & \(3\cdot5\cdot17\cdot509\) & 509 \\
+521 & 543924 & \(3^{2}\cdot29\cdot521\) & 521 \\
+593 & 704484 & \(3^{3}\cdot11\cdot593\) & 593 \\
+613 & 752764 & \(307\cdot613\) & 613 \\
+617 & 762612 & \(3\cdot103\cdot617\) & 103, 617 \\
+641 & 823044 & \(3\cdot107\cdot641\) & 107, 641 \\
+701 & 984204 & \(3^{3}\cdot13\cdot701\) & 701 \\
+733 & 1076044 & \(367\cdot733\) & 733 \\
+757 & 1147612 & \(379\cdot757\) & 757 \\
+797 & 1272012 & \(3\cdot7\cdot19\cdot797\) & 797 \\
+821 & 1349724 & \(3\cdot137\cdot821\) & 137, 821 \\
+829 & 1376140 & \(5\cdot83\cdot829\) & 83 \\
+853 & 1456924 & \(7\cdot61\cdot853\) & 853 \\
+937 & 1757812 & \(7\cdot67\cdot937\) & 67 \\
+953 & 1818324 & \(3^{2}\cdot53\cdot953\) & 953 \\
+1009 & 2038180 & \(5\cdot101\cdot1009\) & 101 \\
+1021 & 2086924 & \(7\cdot73\cdot1021\) & 73, 1021 \\
+1033 & 2136244 & \(11\cdot47\cdot1033\) & 1033 \\
+1097 & 2409012 & \(3^{2}\cdot61\cdot1097\) & 1097 \\
+1109 & 2461980 & \(3\cdot5\cdot37\cdot1109\) & 1109 \\
+1117 & 2497612 & \(13\cdot43\cdot1117\) & 1117 \\
+1129 & 2551540 & \(5\cdot113\cdot1129\) & 113, 1129 \\
+1153 & 2661124 & \(577\cdot1153\) & 1153 \\
+1181 & 2791884 & \(3\cdot197\cdot1181\) & 197, 1181 \\
+1213 & 2945164 & \(607\cdot1213\) & 1213 \\
+1217 & 2964612 & \(3\cdot7\cdot29\cdot1217\) & 1217 \\
+1249 & 3122500 & \(5^{4}\cdot1249\) & 1249 \\
+1289 & 3325620 & \(3\cdot5\cdot43\cdot1289\) & 1289 \\
+1321 & 3492724 & \(661\cdot1321\) & 1321 \\
+1361 & 3707364 & \(3\cdot227\cdot1361\) & 227, 1361 \\
+1373 & 3773004 & \(3\cdot229\cdot1373\) & 1373 \\
+1381 & 3817084 & \(691\cdot1381\) & 1381 \\
+1453 & 4225324 & \(727\cdot1453\) & 1453 \\
+1481 & 4389684 & \(3\cdot13\cdot19\cdot1481\) & 1481 \\
+1553 & 4826724 & \(3\cdot7\cdot37\cdot1553\) & 1553 \\
+1597 & 5104012 & \(17\cdot47\cdot1597\) & 1597 \\
+1601 & 5129604 & \(3^{2}\cdot89\cdot1601\) & 89, 1601 \\
+1613 & 5206764 & \(3\cdot269\cdot1613\) & 269, 1613 \\
+1637 & 5362812 & \(3^{2}\cdot7\cdot13\cdot1637\) & 1637 \\
+1709 & 5844780 & \(3^{2}\cdot5\cdot19\cdot1709\) & 1709 \\
+1721 & 5927124 & \(3\cdot7\cdot41\cdot1721\) & 1721 \\
+1733 & 6010044 & \(3\cdot17^{2}\cdot1733\) & 1733 \\
+1741 & 6065644 & \(13\cdot67\cdot1741\) & 67 \\
+1753 & 6149524 & \(877\cdot1753\) & 1753 \\
+1777 & 6319012 & \(7\cdot127\cdot1777\) & 127, 1777 \\
+1789 & 6404620 & \(5\cdot179\cdot1789\) & 179, 1789 \\
+1873 & 7020004 & \(937\cdot1873\) & 1873 \\
+1877 & 7050012 & \(3\cdot313\cdot1877\) & 1877 \\
+1889 & 7140420 & \(3^{3}\cdot5\cdot7\cdot1889\) & 1889 \\
+1933 & 7476844 & \(967\cdot1933\) & 1933 \\
+1997 & 7980012 & \(3^{3}\cdot37\cdot1997\) & 1997 \\
+2017 & 8140612 & \(1009\cdot2017\) & 2017 \\
+2053 & 8433724 & \(13\cdot79\cdot2053\) & 2053 \\
+2081 & 8665284 & \(3\cdot347\cdot2081\) & 347, 2081 \\
+2113 & 8933764 & \(7\cdot151\cdot2113\) & 151, 2113 \\
+2129 & 9069540 & \(3\cdot5\cdot71\cdot2129\) & 71, 2129 \\
+2161 & 9344164 & \(23\cdot47\cdot2161\) & 2161 \\
+2213 & 9799164 & \(3^{3}\cdot41\cdot2213\) & 2213 \\
+2269 & 10301260 & \(5\cdot227\cdot2269\) & 227, 2269 \\
+2273 & 10337604 & \(3\cdot379\cdot2273\) & 2273 \\
+2281 & 10410484 & \(7\cdot163\cdot2281\) & 163 \\
+2293 & 10520284 & \(31\cdot37\cdot2293\) & 2293 \\
+2297 & 10557012 & \(3\cdot383\cdot2297\) & 383, 2297 \\
+2309 & 10667580 & \(3\cdot5\cdot7\cdot11\cdot2309\) & 2309 \\
+2341 & 10965244 & \(1171\cdot2341\) & 2341 \\
+2357 & 11115612 & \(3^{2}\cdot131\cdot2357\) & 131, 2357 \\
+2377 & 11305012 & \(29\cdot41\cdot2377\) & 2377 \\
+2381 & 11343084 & \(3\cdot397\cdot2381\) & 397, 2381 \\
+2389 & 11419420 & \(5\cdot239\cdot2389\) & 239, 2389 \\
+2417 & 11688612 & \(3\cdot13\cdot31\cdot2417\) & 2417 \\
+2437 & 11882812 & \(23\cdot53\cdot2437\) & 2437 \\
+2441 & 11921844 & \(3\cdot11\cdot37\cdot2441\) & 2441 \\
+2473 & 12236404 & \(1237\cdot2473\) & 2473 \\
+2477 & 12276012 & \(3\cdot7\cdot59\cdot2477\) & 2477 \\
+2609 & 13618980 & \(3^{2}\cdot5\cdot29\cdot2609\) & 2609 \\
+2621 & 13744524 & \(3\cdot19\cdot23\cdot2621\) & 2621 \\
+2657 & 14124612 & \(3\cdot443\cdot2657\) & 443, 2657 \\
+2677 & 14338012 & \(13\cdot103\cdot2677\) & 103, 2677 \\
+2689 & 14466820 & \(5\cdot269\cdot2689\) & 269, 2689 \\
+2693 & 14509884 & \(3\cdot449\cdot2693\) & 449, 2693 \\
+2713 & 14726164 & \(23\cdot59\cdot2713\) & 2713 \\
+2749 & 15119500 & \(5^{3}\cdot11\cdot2749\) & 2749 \\
+2777 & 15429012 & \(3\cdot463\cdot2777\) & 463, 2777 \\
+2789 & 15562620 & \(3^{2}\cdot5\cdot31\cdot2789\) & 2789 \\
+2797 & 15652012 & \(1399\cdot2797\) & 2797 \\
+2801 & 15696804 & \(3\cdot467\cdot2801\) & 467, 2801 \\
+2833 & 16057444 & \(13\cdot109\cdot2833\) & 109, 2833 \\
+2837 & 16102812 & \(3\cdot11\cdot43\cdot2837\) & 2837 \\
+2857 & 16330612 & \(1429\cdot2857\) & 2857 \\
+2909 & 16930380 & \(3\cdot5\cdot97\cdot2909\) & 2909 \\
+2917 & 17023612 & \(1459\cdot2917\) & 2917 \\
+\end{longtable}
+}
+
+\noindent
+None of the orders in Table~\ref{tab:candidates} is a known open
+Hadamard order; by \eqref{eq:fourodd} each odd part is composite, while
+the open orders below \(10^{4}\) are \(4\times\text{prime}\).  Widening
+the ingredient set (computer-tabulated Williamson and \(T\)-matrices, or
+Goethals--Seidel cyclotomic difference sets) removes candidates from the
+table but can never produce one that meets the open list.  The role of
+Theorem~\ref{thm:main} is thus to give a single closed-form rule for the
+whole family, including the region these tables do not reach, rather than
+to settle any open existence question.
+
+\begin{thebibliography}{99}
+
+\bibitem{Hadamard1893}
+J.~Hadamard,
+\newblock R\'esolution d'une question relative aux d\'eterminants,
+\newblock {\em Bull.\ Sci.\ Math.} 17 (1893), 240--246.
+
+\bibitem{Paley1933}
+R.~E.~A.~C.~Paley,
+\newblock On orthogonal matrices,
+\newblock {\em J.\ Math.\ Phys.} 12 (1933), 311--320.
+
+\bibitem{Scarpis1898}
+U.~Scarpis,
+\newblock Sui determinanti di valore massimo,
+\newblock {\em Rend.\ R.\ Ist.\ Lombardo Sci.\ Lett.} (2) 31 (1898),
+  1441--1446.
+
+\bibitem{Williamson1944}
+J.~Williamson,
+\newblock Hadamard's determinant theorem and the sum of four squares,
+\newblock {\em Duke Math.\ J.} 11 (1944), 65--81.
+
+\bibitem{Turyn1974}
+R.~J.~Turyn,
+\newblock Hadamard matrices, Baumert--Hall units, four-symbol sequences,
+  pulse compression, and surface wave encodings,
+\newblock {\em J.\ Combin.\ Theory Ser.\ A} 16 (1974), 313--333.
+
+\bibitem{SeberryYamada1992}
+J.~Seberry and M.~Yamada,
+\newblock Hadamard matrices, sequences, and block designs,
+\newblock in {\em Contemporary Design Theory} (J.~H.~Dinitz and
+  D.~R.~Stinson, eds.), Wiley, 1992, pp.\ 431--560.
+
+\bibitem{Djokovic2016}
+D.~Z.~Djokovi\'c,
+\newblock Generalization of Scarpis's theorem on Hadamard matrices,
+\newblock {\em Linear Multilinear Algebra} 65 (2017), no.\ 10;
+  arXiv:1601.00635.
+\newblock \url{https://arxiv.org/abs/1601.00635}.
+
+\bibitem{KharaghaniTayfehRezaie2005}
+H.~Kharaghani and B.~Tayfeh-Rezaie,
+\newblock A Hadamard matrix of order 428,
+\newblock {\em J.\ Combin.\ Des.} 13 (2005), 435--440.
+
+\bibitem{SeberryYamada2020}
+J.~Seberry and M.~Yamada,
+\newblock {\em Hadamard Matrices: Constructions using Number Theory and
+  Linear Algebra},
+\newblock Wiley, 2020.
+
+\bibitem{CatiPasechnik2024}
+M.~Cati and D.~V.~Pasechnik,
+\newblock A database of constructions of Hadamard matrices,
+\newblock arXiv:2411.18897, 2024.
+\newblock \url{https://arxiv.org/abs/2411.18897}.
+
+\end{thebibliography}
+
+\end{document}
