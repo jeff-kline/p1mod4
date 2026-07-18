@@ -12,6 +12,9 @@ seed has order `2(q+1)`, the natural Scarpis‑type target here is `q·2(q+1) = 
 > matrix of order `2q(q+1)`.
 
 > **What this repo contributes is the method, not a new existence result.**
+> Both constructions are constructive; the difference is procedure versus
+> formula: Farouk–Wang's lift takes choices (an input matrix, a bijection `α`)
+> that can change the output — ours takes none, one matrix per `q`.
 > The order‑`2q(q+1)` family was constructed by Farouk & Wang [FW2020] from
 > the same order‑`2(q+1)` Paley‑II seed as a Scarpis/Đoković analogue, with a
 > follow‑up in [FW2022]. Farouk–Wang lift an
