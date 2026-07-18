@@ -11,10 +11,10 @@ seed has order `2(q+1)`, the natural Scarpis‑type target here is `q·2(q+1) = 
 > **Theorem.** Let `q ≡ 1 (mod 4)` be a prime power. Then there is a Hadamard
 > matrix of order `2q(q+1)`.
 
-> ⚠️ **This result is already known.** The order‑`2q(q+1)` family was constructed by
-> Farouk & Wang [FW2020] from the same order‑`2(q+1)` Paley‑II seed as a
-> Scarpis/Đoković analogue, with a follow‑up in [FW2022]. **What this repo
-> contributes is the method, not a new existence result:** Farouk–Wang lift an
+> **What this repo contributes is the method, not a new existence result.**
+> The order‑`2q(q+1)` family was constructed by Farouk & Wang [FW2020] from
+> the same order‑`2(q+1)` Paley‑II seed as a Scarpis/Đoković analogue, with a
+> follow‑up in [FW2022]. Farouk–Wang lift an
 > input Hadamard matrix of order `2(q+1)` (subject to eligibility conditions)
 > and verify orthogonality by row‑pair counting arguments that import inner
 > products from the input matrix's Hadamard property. Here there is no input
