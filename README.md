@@ -30,6 +30,20 @@ seed has order `2(q+1)`, the natural Scarpis‑type target here is `q·2(q+1) = 
 > some other output of their procedure is left open. See
 > [References](#references) below.
 
+## Ours vs. Farouk–Wang at q = 5
+
+![Side-by-side: this note's q=5 matrix vs Farouk–Wang's printed order-60 example](images/q5_side_by_side.png)
+
+The two are visibly different constructions: ours (left) has a cap band of
+period‑2 column patterns and finite bands with the diagonal texture of the
+shifts `ψ(χ(y−x−ar))`; Farouk–Wang's printed example (right) has a coarse
+tiled top band (its border block is four constant `5×5` quadrants) and no
+diagonal structure. The inequivalence is not just visual: the multiset of
+`|Σ_c h_ic·h_jc·h_kc·h_lc|` over all C(60,4) = 487,635 row quadruples — which
+is invariant under row/column permutations and negations — contains the value
+`28` on 400 quadruples for their matrix and on none for ours (and the
+comparison fails in both orientations, covering the transpose convention).
+
 ## The construction at a glance
 
 `H` is a stack of one **cap band** `M∞` over `q` **finite bands** `M_r`:
@@ -52,21 +66,6 @@ The colored regions below are exactly these pieces for the smallest case `q = 5`
 
 ![Block structure for q=5, order 60](images/structure_q5_N60.png)
 
-## Examples (small orders)
-
-Left: the Hadamard matrix `H` (white `= +1`, black `= −1`), with the cap/finite
-separator (orange) and border/`K` separator (blue). Right: the Gram matrix
-`HHᵀ`, which is exactly `N·I` — diagonal `N`, off‑diagonal `0`.
-
-**`q = 5`, order `60`:**
-![q=5](images/H_q5_N60.png)
-
-**`q = 9 = 3²`, order `180`** (an extension field — needs genuine `𝔽_9` arithmetic):
-![q=9](images/H_q9_N180.png)
-
-**`q = 13`, order `364`:**
-![q=13](images/H_q13_N364.png)
-
 ## How to use this repo
 
 **What to run first** — verify the default sweep (`q = 5,9,13,17,25,29,37,41,49`)
@@ -86,8 +85,10 @@ This prints `ALL PASS` (exit code `0`) if every case in the sweep satisfies
   the figure/matrix export code. Everything below is a flag on this one script.
 - `paley_scarpis_p1mod4_v2.tex` / `.pdf` — the write‑up: the proof, the coverage
   analysis, and the novelty discussion summarized above.
-- `images/` — the four PNGs shown above (`structure_q5_N60.png`,
-  `H_q5_N60.png`, `H_q9_N180.png`, `H_q13_N364.png`).
+- `images/` — the figures shown above (`q5_side_by_side.png`,
+  `structure_q5_N60.png`) plus per‑order `H`|Gram figures for `q = 5, 9, 13`
+  (`H_q5_N60.png`, `H_q9_N180.png`, `H_q13_N364.png`), regenerable with
+  `--figures` below.
 
 **Reproducing the verification:**
 
@@ -108,7 +109,7 @@ All default cases pass; `q = 9, 25, 49` exercise the extension‑field path.
 **Reproducing the figures:**
 
 ```bash
-python ps_p1mod4.py --figures images --figq 5,9,13   # regenerate the PNGs above
+python ps_p1mod4.py --figures images --figq 5,9,13   # structure + per-order H|Gram figures
 ```
 
 **Exporting a matrix** (e.g. to inspect or compare against another
@@ -147,21 +148,9 @@ Farouk–Wang's eligibility‑conditioned lift and row‑pair counting argument 
 the coverage analysis, which has no counterpart in [FW2020, FW2022]. The two
 constructions also produce different outputs: at `q = 5` the matrix built here
 is not Hadamard‑equivalent to the order‑`60` example printed in [FW2020]'s
-appendix (caveat: their output may vary with a choice of bijection `α`, so this is
+appendix — see the side‑by‑side comparison at the top of this page (caveat: their output may vary with a choice of bijection `α`, so this is
 inequivalence to their published example, not a claim about every output their
-procedure could produce).
-
-![Side-by-side: this note's q=5 matrix vs Farouk–Wang's printed order-60 example](images/q5_side_by_side.png)
-
-The two are visibly different constructions: ours (left) has a cap band of
-period‑2 column patterns and finite bands with the diagonal texture of the
-shifts `ψ(χ(y−x−ar))`; Farouk–Wang's printed example (right) has a coarse
-tiled top band (its border block is four constant `5×5` quadrants) and no
-diagonal structure. The inequivalence is not just visual: the multiset of
-`|Σ_c h_ic·h_jc·h_kc·h_lc|` over all C(60,4) = 487,635 row quadruples — which
-is invariant under row/column permutations and negations — contains the value
-`28` on 400 quadruples for their matrix and on none for ours (and the
-comparison fails in both orientations, covering the transpose convention). None of this is a new existence result or a
+procedure could produce). None of this is a new existence result or a
 resolution of any open order. The accompanying note
 [`paley_scarpis_p1mod4_v2.tex`](paley_scarpis_p1mod4_v2.tex) gives the proof, a
 coverage table for orders with odd part `≤ 3000`, the `q = 81` witness, and a list
