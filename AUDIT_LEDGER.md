@@ -248,3 +248,35 @@ scope deviation noted. Control byproduct `H_note_scrambled.txt` retained.
 | 4 | `Co-Authored-By: Claude Opus 4.8` trailers on 5 commits | INFORMATIONAL | open — owner decision (removal requires history rewrite) |
 | 5 | All reachable blobs, PDF/PNG metadata, LICENSE: clean (no secrets, no paths, empty Author fields, matplotlib-only PNG tags) | — | none needed |
 | 6 | Not git-visible: PR #1 inline comments, repo Settings (secrets/webhooks/Pages), Wiki/Discussions | INFORMATIONAL | open — owner manual review before flipping public |
+
+---
+
+## Audit 004 — privacy re-audit incl. origin history — 2026-07-18
+
+- **Artifact:** the delta `f237d93..8eacb5a` (5 commits, 19 new blobs) on
+  `origin/main`, plus direct enumeration of all origin-side refs and the
+  full reachable object set (77 objects) after fetch.
+- **Auditor:** fresh agent (general-purpose), model claude-sonnet-5,
+  cold-context: yes. Read-only.
+- **Scope:** origin ref enumeration (git ls-remote cross-checked against the
+  GitHub API); origin/main vs local sync and force-push check; absence of
+  the Audit 003 remediated checkpoint tree and of the string "claude-501"
+  in every reachable object; commit metadata and messages of the delta;
+  content grep of all 19 new blobs (paths, usernames, emails, secrets);
+  binary metadata of both new PDF versions and the new PNG; committed
+  `AUDIT_LEDGER.md` and de-pathed `q5_equivalence/` scripts verified clean
+  as committed; working-tree ignore resolution; cryptographic regression
+  check that pre-f237d93 history is byte-identical to the Audit 003
+  baseline.
+- **Overall verdict:** SAFE-TO-PUBLISH — 0 BLOCKER, 0 SHOULD-FIX in the
+  delta. Key verifications: origin holds exactly refs/heads/main,
+  refs/heads/codex/revise-paper-framing, refs/pull/1/head; the purged
+  checkpoint tree `d3e00ddc…` does not exist in the object database;
+  zero "claude-501"/username/path strings in any reachable blob; both new
+  PDFs have empty Author/Title/Subject/Keywords (pdfTeX Producer only);
+  the new PNG carries only a matplotlib Software tag; repo still private;
+  no new PRs/issues/branches. Pre-existing owner-accepted items from
+  Audit 003 (author email; exclude-file durability; GitHub-side manual
+  review) remain open by owner decision and are not re-flagged.
+- **Orchestrator spot-check:** ls-remote ref set, 5-commit delta count, and
+  local==origin sync independently re-confirmed before this entry.
