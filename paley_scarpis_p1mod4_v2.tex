@@ -46,14 +46,14 @@ closed form by the quadratic character on \(\F_q\) composed with the
 is proved by four block-Gram identities computed directly from
 character sums.  The outputs differ as well: at \(q=5\) our matrix is
 not Hadamard-equivalent to the order-\(60\) example printed by Farouk
-and Wang.  The family nevertheless resolves no open Hadamard order:
+and Wang.  We also make the family's coverage explicit:
 every order \(2q(q+1)\) whose odd part is at most \(3000\) is already
 recorded in the
 standard tables, and the smallest order lying beyond that audited range,
 \(q=81\) (order \(13284=4\cdot 41\cdot 81\)), also follows from a
 classical Turyn product using \(T\)-matrices of order \(41\) and
-Williamson-type matrices of order \(81=9^{2}\).  We make the coverage
-explicit, exhibit the witnessing constructions, identify the smallest
+Williamson-type matrices of order \(81=9^{2}\).  We exhibit the
+witnessing constructions, identify the smallest
 unaudited order, and
 tabulate those orders up to \(q=2917\) for which no elementary witness is
 presently evident, emphasising that these are \emph{unaudited} rather
@@ -88,8 +88,8 @@ the residue class is used, and it is exactly what fails for
 \(q\equiv 3\pmod 4\).
 
 The existence of Hadamard matrices of order \(2q(q+1)\) for prime powers
-\(q\equiv1\pmod4\) is due to Farouk and Wang \cite{FaroukWang2020}; this
-note claims no new existence result.  Its contribution is the method of
+\(q\equiv1\pmod4\) is due to Farouk and Wang \cite{FaroukWang2020}; the
+contribution of this note is the method of
 construction and proof.  Farouk and Wang obtain the matrix as the output
 of a lifting procedure applied to an input Hadamard matrix of order
 \(2(q+1)\) meeting certain eligibility conditions, and their verification
@@ -105,8 +105,7 @@ level of character sums, and the single place where the residue class
 enters, \(\chi(-1)=1\), is isolated.  A secondary contribution is the
 coverage analysis of Appendix~\ref{app:coverage}, which has no
 counterpart in \cite{FaroukWang2020}: it locates every order of the
-family against the audited tables and shows the family resolves no open
-Hadamard order.
+family against the audited tables of known Hadamard orders.
 
 \section{The Paley--II blocks}
 
@@ -238,16 +237,15 @@ The construction has been verified by full Gram computation for all
 \(q=9,25,49\)) and by streamed row-orthogonality checks for \(q=81\) and
 \(q=125\) (orders \(13284\) and \(31500\)).
 
-\section{Remarks on novelty}
+\section{Relation to the Farouk--Wang construction}
 
 Theorem~\ref{thm:main} gives, for the \(q\equiv1\pmod4\) case, an
 explicit form of the Scarpis-type family that \DJ okovi\'c
 \cite{Djokovic2016} asked for.  That family was already constructed by
 Farouk and Wang \cite{FaroukWang2020,FaroukWang2022} from the same
-order-\(2(q+1)\) Paley--II seed; Theorem~\ref{thm:main} is therefore an
-alternative, self-contained presentation rather than a new existence
-result.  It does not resolve previously open Hadamard orders, and we
-record the evidence for that framing.
+order-\(2(q+1)\) Paley--II seed.  This section records how the two
+routes differ and where the orders of the family sit relative to the
+audited tables of known Hadamard orders.
 
 While Theorem~\ref{thm:main} and \cite[Cor.~2.1]{FaroukWang2020} assert
 the same existence result, the routes differ.  Farouk and Wang obtain

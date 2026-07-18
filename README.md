@@ -83,8 +83,8 @@ This prints `ALL PASS` (exit code `0`) if every case in the sweep satisfies
 - `ps_p1mod4.py` — the construction, a small finite‑field layer (so extension
   fields such as `q = 9, 25, 49, 81, 125` work), the verification routines, and
   the figure/matrix export code. Everything below is a flag on this one script.
-- `paley_scarpis_p1mod4_v2.tex` / `.pdf` — the write‑up: the proof, the coverage
-  analysis, and the novelty discussion summarized above.
+- `paley_scarpis_p1mod4_v2.tex` / `.pdf` — the write‑up: the proof, the
+  Farouk–Wang comparison, and the coverage analysis.
 - `images/` — the figures shown above (`q5_side_by_side.png`,
   `structure_q5_N60.png`) plus per‑order `H`|Gram figures for `q = 5, 9, 13`
   (`H_q5_N60.png`, `H_q9_N180.png`, `H_q13_N364.png`), regenerable with
@@ -128,30 +128,19 @@ order‑`2(q+1)` Paley‑II seed `S`); `--fmt` selects `ints` (space‑separated
 - Python 3, `numpy` (verification) and `matplotlib` (figures only).
 - The figure import is lazy, so verification needs `numpy` alone.
 
-## Notes on novelty (honest framing)
+## Coverage
 
 Because `q ≡ 1 (mod 4)`, every order factors as `2q(q+1) = 4·q·(q+1)/2` with both
 `q` and `(q+1)/2` **odd** — i.e. the order is always `4×(odd)`. Consequently:
 
-- the family never meets the dominant open Hadamard orders of the form `4×prime`;
-  here the odd part is always composite, so it resolves no case from that list;
+- the family never meets the dominant open Hadamard orders of the form `4×prime`
+  (here the odd part is always composite);
 - every order whose odd part is `≤ 3000` is already a known Hadamard order, and the
   first instance beyond that audited range, `q = 81` (order `13284 = 4·41·81`), is
   covered by a classical **Turyn product** using `T`‑matrices of order `41` with
   Williamson‑type matrices of order `81 = 9²`.
 
-**The order‑`2q(q+1)` existence result is already in the literature** — Farouk &
-Wang [FW2020, FW2022], from the same Paley‑II seed. What this repo adds is the
-*method*: a closed‑form, input‑free construction (no input Hadamard matrix to
-lift) with a self‑contained character‑sum block‑Gram proof, in place of
-Farouk–Wang's eligibility‑conditioned lift and row‑pair counting argument — plus
-the coverage analysis, which has no counterpart in [FW2020, FW2022]. The two
-constructions also produce different outputs: at `q = 5` the matrix built here
-is not Hadamard‑equivalent to the order‑`60` example printed in [FW2020]'s
-appendix — see the side‑by‑side comparison at the top of this page (caveat: their output may vary with a choice of bijection `α`, so this is
-inequivalence to their published example, not a claim about every output their
-procedure could produce). None of this is a new existence result or a
-resolution of any open order. The accompanying note
+The accompanying note
 [`paley_scarpis_p1mod4_v2.tex`](paley_scarpis_p1mod4_v2.tex) gives the proof, a
 coverage table for orders with odd part `≤ 3000`, the `q = 81` witness, and a list
 of orders up to `q = 2917` for which no elementary construction is presently
