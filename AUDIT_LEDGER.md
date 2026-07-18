@@ -260,8 +260,9 @@ scope deviation noted. Control byproduct `H_note_scrambled.txt` retained.
   cold-context: yes. Read-only.
 - **Scope:** origin ref enumeration (git ls-remote cross-checked against the
   GitHub API); origin/main vs local sync and force-push check; absence of
-  the Audit 003 remediated checkpoint tree and of the string "claude-501"
-  in every reachable object; commit metadata and messages of the delta;
+  the Audit 003 remediated checkpoint tree and of the local scratchpad-path
+  marker string in every reachable object; commit metadata and messages of
+  the delta;
   content grep of all 19 new blobs (paths, usernames, emails, secrets);
   binary metadata of both new PDF versions and the new PNG; committed
   `AUDIT_LEDGER.md` and de-pathed `q5_equivalence/` scripts verified clean
@@ -272,7 +273,7 @@ scope deviation noted. Control byproduct `H_note_scrambled.txt` retained.
   delta. Key verifications: origin holds exactly refs/heads/main,
   refs/heads/codex/revise-paper-framing, refs/pull/1/head; the purged
   checkpoint tree `d3e00ddc…` does not exist in the object database;
-  zero "claude-501"/username/path strings in any reachable blob; both new
+  zero scratchpad-marker/username/path strings in any reachable blob; both new
   PDFs have empty Author/Title/Subject/Keywords (pdfTeX Producer only);
   the new PNG carries only a matplotlib Software tag; repo still private;
   no new PRs/issues/branches. Pre-existing owner-accepted items from
