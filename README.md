@@ -66,7 +66,47 @@ The colored regions below are exactly these pieces for the smallest case `q = 5`
 
 ![Block structure for q=5, order 60](images/structure_q5_N60.png)
 
-## How to use this repo
+## How to use this repository
+
+This repository was written with substantial assistance from large language
+models and is designed, in part, for other language models to ingest. The
+intended workflow is:
+
+1. Give an AI agent access to the repository.
+2. Ask it to trace definitions, proofs, computations, and dependencies across
+   the paper, the verification code, and the audit records.
+3. Interrogate its answers as a human reader—request derivations, file
+   references, counterexamples, assumptions, and supporting evidence.
+
+The paper's proofs occupy a space somewhere between prose and source code: the
+four block‑Gram lemmas in `paley_scarpis_p1mod4_v2.tex` are structured
+precisely enough for an agent to navigate and analyze, while remaining
+readable by humans. They should not be treated as an automatic guarantee of
+correctness; the repository includes an audit record (`AUDIT_LEDGER.md`) and
+reproducibility checks (`ps_p1mod4.py`, `q5_equivalence/`) so that claims can
+be examined rather than merely accepted.
+
+### Ask your agent
+
+Point your agent to this repository and try questions such as:
+
+- What are the main claims, and which are proved here, computed here, or taken
+  from the cited literature?
+- Trace the proof of Theorem 1 through the four lemmas: where exactly does
+  `χ(−1) = 1` enter, and what fails for `q ≡ 3 (mod 4)`?
+- How does this construction differ from Farouk–Wang's, and where is that
+  comparison audited?
+- Rebuild the `q = 5` inequivalence evidence from `q5_equivalence/` and check
+  the 4‑profile computation independently.
+- Run the verification sweep in `ps_p1mod4.py` and say what passes and what
+  those checks actually establish.
+- What are the strongest unresolved limitations (for example, what remains
+  open about equivalence to other outputs of the Farouk–Wang procedure)?
+
+For important conclusions, ask the agent to cite exact files, lemma labels,
+and line numbers—and verify the answer against the underlying source.
+
+### Run it yourself
 
 **What to run first** — verify the default sweep (`q = 5,9,13,17,25,29,37,41,49`)
 against a full Gram check:
