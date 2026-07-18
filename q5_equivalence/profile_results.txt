@@ -1,0 +1,11 @@
+FW_rows: 4:353800 12:111525 20:21910 28:400
+FW_cols: 4:355800 12:107925 20:23910
+NOTE_rows: 4:359000 12:103125 20:25510
+NOTE_cols: 4:359000 12:103125 20:25510
+
+FW_rows == NOTE_rows : False
+FW_cols == NOTE_cols : False
+FW_rows == NOTE_cols : False
+FW_cols == NOTE_rows : False
+control scrambled-NOTE rows == NOTE rows: True
+control scrambled-NOTE cols == NOTE cols: True

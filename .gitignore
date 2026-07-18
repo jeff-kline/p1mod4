@@ -5,3 +5,6 @@ __pycache__/
 *.out
 *.synctex.gz
 .DS_Store
+tmp/
+.claude/
+q5_equivalence/H_note_scrambled.txt
