@@ -4,6 +4,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage{longtable}
+\usepackage{graphicx}
 \usepackage{hyperref}
 
 \newtheorem{theorem}{Theorem}
@@ -34,13 +35,20 @@ A Hadamard matrix of order \(m\) is a \(\{1,-1\}\)-matrix \(H\) with
 one of order \(p(p+1)\), and \DJ okovi\'c extended the lift to all prime
 powers \(q\equiv 3\pmod 4\), asking for the analogous procedure for
 \(q\equiv 1\pmod 4\).  That case was settled by Farouk and Wang (2020),
-who constructed a Hadamard matrix of order \(2q(q+1)\) from the
-order-\(2(q+1)\) Paley--II seed for every prime power \(q\equiv 1\pmod 4\).
-We re-derive that family in an explicit, self-contained form built
-directly from the quadratic character on \(\F_q\) and the \(2\times 2\)
-Paley--II replacement blocks; this is an alternative presentation of the
-Farouk--Wang construction, not a new existence result.  Indeed every order
-\(2q(q+1)\) whose odd part is at most \(3000\) is already recorded in the
+who lift an input Hadamard matrix of order \(2(q+1)\), subject to
+eligibility conditions, to one of order \(2q(q+1)\), verifying
+orthogonality by row-pair counting arguments in which the key inner
+products are imported from the Hadamard property of the input matrix.
+This note contributes a different method, not a new existence result:
+there is no input matrix; the finite bands are given entrywise in
+closed form by the quadratic character on \(\F_q\) composed with the
+\(2\times 2\) Paley--II replacement blocks, and the Hadamard property
+is proved by four block-Gram identities computed directly from
+character sums.  The outputs differ as well: at \(q=5\) our matrix is
+not Hadamard-equivalent to the order-\(60\) example printed by Farouk
+and Wang.  The family nevertheless resolves no open Hadamard order:
+every order \(2q(q+1)\) whose odd part is at most \(3000\) is already
+recorded in the
 standard tables, and the smallest order lying beyond that audited range,
 \(q=81\) (order \(13284=4\cdot 41\cdot 81\)), also follows from a
 classical Turyn product using \(T\)-matrices of order \(41\) and
@@ -78,6 +86,27 @@ We construct such a matrix directly from \(\chi\).  Throughout, \(q\equiv
 1\pmod 4\) is a prime power, so \(\chi(-1)=1\); this is the only place
 the residue class is used, and it is exactly what fails for
 \(q\equiv 3\pmod 4\).
+
+The existence of Hadamard matrices of order \(2q(q+1)\) for prime powers
+\(q\equiv1\pmod4\) is due to Farouk and Wang \cite{FaroukWang2020}; this
+note claims no new existence result.  Its contribution is the method of
+construction and proof.  Farouk and Wang obtain the matrix as the output
+of a lifting procedure applied to an input Hadamard matrix of order
+\(2(q+1)\) meeting certain eligibility conditions, and their verification
+proceeds row pair by row pair, by counting arguments in which the key
+inner-product values are imported from the Hadamard property of the
+input matrix.  Here there is no input matrix: the finite bands are
+written entrywise in the closed form \(\psi(\chi(y-x-t))\), and the
+Hadamard property follows from four block-Gram identities whose
+ingredients are computed directly from the quadratic character --- the
+sums \eqref{eq:rowsum} and \(\sum_{z}\chi(z(z-d))=-1\), together with
+the block identity \(P+ZR=0\).  The proof is thus self-contained at the
+level of character sums, and the single place where the residue class
+enters, \(\chi(-1)=1\), is isolated.  A secondary contribution is the
+coverage analysis of Appendix~\ref{app:coverage}, which has no
+counterpart in \cite{FaroukWang2020}: it locates every order of the
+family against the audited tables and shows the family resolves no open
+Hadamard order.
 
 \section{The Paley--II blocks}
 
@@ -219,6 +248,67 @@ order-\(2(q+1)\) Paley--II seed; Theorem~\ref{thm:main} is therefore an
 alternative, self-contained presentation rather than a new existence
 result.  It does not resolve previously open Hadamard orders, and we
 record the evidence for that framing.
+
+While Theorem~\ref{thm:main} and \cite[Cor.~2.1]{FaroukWang2020} assert
+the same existence result, the routes differ.  Farouk and Wang obtain
+the order-\(2q(q+1)\) matrix from a lifting procedure applied to a
+Hadamard matrix of order \(2(q+1)\) satisfying the eligibility
+conditions of \cite[Lem.~2.2]{FaroukWang2020} --- a formally larger
+input class, with Paley~II the only exhibited member --- and verify
+orthogonality row pair by row pair through counting arguments (row
+sums, balanced sign-pair tallies, and a unique-intersection
+computation), importing the key inner-product values from the Hadamard
+property of the input matrix.  The present note fixes the Paley--II
+seed and writes the finite bands entrywise in the closed form
+\(\psi(\chi(y-x-t))\); the Hadamard property follows from four
+block-Gram identities in which the corresponding quantities are
+computed directly from the character sums \eqref{eq:rowsum} and
+\(\sum_{z}\chi(z(z-d))=-1\), together with \(P+ZR=0\) and the
+Hadamard property of the Paley--II seed \(S\) (itself a
+character-sum identity).  The
+correspondence is exact: their unique-intersection index matches the
+affine collision \(x+ar=x'+as\) in the substitution step of
+Lemma~\ref{lem:cross}, and their imported inner products match the
+values that Lemma~\ref{lem:self} derives from
+\(\sum_{z}\chi(z(z-d))=-1\).  The devices used for the cap band also
+differ: a column permutation arranging balanced sign pairs in
+\cite{FaroukWang2020} versus right multiplication by \(R\) here.  The
+two constructions moreover produce genuinely different matrices, not
+merely different presentations: at \(q=5\) the matrix of
+Theorem~\ref{thm:main} is not Hadamard-equivalent to the order-\(60\)
+example printed in the appendix of \cite{FaroukWang2020} --- the
+multiset of absolute row-quadruple correlations
+\(\bigl|\sum_{c}h_{ic}h_{jc}h_{kc}h_{lc}\bigr|\), an invariant of
+Hadamard equivalence, differs for the two matrices
+(Figure~\ref{fig:q5sbs}).  Since Farouk and
+Wang note that their output may vary with the choice of bijection
+\(\alpha\), we leave open whether the matrix of
+Theorem~\ref{thm:main} is equivalent to some other output of their
+procedure.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{images/q5_side_by_side}
+\caption{The two constructions at \(q=5\) (order \(60\); white
+\(=+1\), black \(=-1\); lattice spacing \(2q=10\)).  Left: the matrix
+of Theorem~\ref{thm:main} --- the cap band \(M_\infty\) above the
+orange separator is a family of period-two column patterns, and the
+finite bands \(M_r\) carry the diagonal texture of the shifts
+\(\psi(\chi(y-x-ar))\).  Right: the order-\(60\) example
+\(\Psi_{5,\alpha}(P_5')\) printed in the appendix of
+\cite{FaroukWang2020}, whose top band is a coarse tiling (its border
+block consists of four constant \(5\times5\) quadrants) and whose
+finite bands show no diagonal structure.  The two matrices are
+Hadamard-inequivalent: over the \(\binom{60}{4}=487{,}635\) row
+quadruples, the right matrix attains
+\(\bigl|\sum_{c}h_{ic}h_{jc}h_{kc}h_{lc}\bigr|=28\) on \(400\)
+quadruples, the left on none, and this multiset is invariant under row
+and column permutations and negations (and the comparison fails in
+both orientations, covering the transpose convention as well).  This
+separates the printed representative only: outputs of the Farouk--Wang
+procedure for other choices of \(\alpha\) are not addressed.}
+\label{fig:q5sbs}
+\end{figure}
 
 Since \(q\equiv1\pmod4\), the \(2\)-adic valuation of the order is
 exactly \(2\):
