@@ -59,9 +59,9 @@ classical Turyn product using \(T\)-matrices of order \(41\) and
 Williamson-type matrices of order \(81=9^{2}\).  We exhibit the
 witnessing constructions, identify the smallest
 unaudited order, and
-tabulate those orders up to \(q=2917\) for which no elementary witness is
-presently evident, emphasising that these are \emph{unaudited} rather
-than open.
+tabulate, for \(q\le3000\), those orders for which a deliberately
+restricted elementary screen supplies no witness, emphasising that these
+are \emph{unaudited} rather than open.
 \end{abstract}
 
 \section{Introduction}
@@ -108,8 +108,9 @@ the block identity \(P+ZR=0\).  The proof is thus self-contained at the
 level of character sums, and the single place where the residue class
 enters, \(\chi(-1)=1\), is isolated.  A secondary contribution is the
 coverage analysis of Appendix~\ref{app:coverage}, which has no
-counterpart in \cite{FaroukWang2020}: it locates every order of the
-family against the audited tables of known Hadamard orders.
+counterpart in \cite{FaroukWang2020}: it locates the initial range
+against audited tables of known Hadamard orders and applies a restricted
+elementary screen beyond that range.
 
 \section{The Paley--II blocks}
 
@@ -331,8 +332,9 @@ Hadamard matrix of order \(4tw\)
 The coverage analysis of Appendix~\ref{app:coverage} makes both points
 quantitative: all orders with odd part \(\le 3000\) are recorded in the
 standard tables, the first order beyond that range is covered by such a
-Turyn product, and the orders for which no elementary witness is currently
-evident are listed but are unaudited rather than open.
+Turyn product, and a restricted screen beyond the audited range records
+exactly which orders it does and does not cover.  Failure of that screen is
+not a claim that an order is open.
 
 \appendix
 
@@ -373,16 +375,16 @@ elementary witness where one exists (Paley~I/II, or a Turyn product
 49 & 4900  & \(5^{2}\cdot7^{2}\)& Turyn \(4\cdot25\cdot49\)\\
 53 & 5724  & \(3^{3}\cdot53\)   & Paley II, \(p=2861\)\\
 61 & 7564  & \(31\cdot61\)      & Turyn \(4\cdot31\cdot61\)\\
-73 & 10804 & \(37\cdot73\)      & tables; no elementary witness (see \S\ref{app:candidates})\\
+73 & 10804 & \(37\cdot73\)      & tables; no restricted witness (see \S\ref{app:candidates})\\
 \end{tabular}
 \end{center}
 
 \noindent
-The entry \(q=73\) is instructive: its odd part \(2701=37\cdot73\)
-carries the same obstruction we use below (the prime \(73\)), yet
+The entry \(q=73\) is instructive: the restricted test below supplies no
+divisor-split witness for its odd part \(2701=37\cdot73\), yet
 \(N=10804\) is a known Hadamard order because \(m\le3000\) is audited.
-Obstruction in the elementary test is therefore a property of that test,
-not of Hadamard existence.
+Failure of the elementary test is therefore a property of that test, not
+of Hadamard existence.
 
 \subsection{The first unaudited order: \texorpdfstring{\(q=81\)}{q=81}}
 \label{app:81}
@@ -410,165 +412,215 @@ order, and it is covered.
 
 Beyond the audited range we have no table to appeal to, so we apply a
 deliberately conservative \emph{elementary-witness} test based on
-\eqref{eq:fourodd} and Turyn's array.  Call an odd prime \(p\)
-\emph{\(T\)-eligible} if \(p\le59\) (so that \(T\)-matrices of order
-\(p\) follow from base sequences \(BS(m{+}1,m)\), \(m\le29\)) and
-\emph{\(W\)-eligible} if \(p\le33\) or \(2p-1\) is a prime power
-(Williamson-type matrices of order \(p\), the latter by Turyn's
-\((P{+}1)/2\) family with \(P=2p-1\equiv1\pmod4\)); both classes are
-multiplicatively closed.  An order \(N=4m\) passes the test, and is then
-a Hadamard order, if \(N\) is a Paley~I/II order or if every prime factor
-of \(m\) is \(T\)- or \(W\)-eligible.  A prime factor \(p\) of \(m\) is
-\emph{obstructing} if \(p>59\) and \(2p-1\) is not a prime power.
+\eqref{eq:fourodd} and Turyn's array.  We call an odd order \(t\)
+\emph{\(T\)-known} when \(t\le59\); the required \(T\)-matrices follow
+from the known base sequences
+\(BS((t+1)/2,(t-1)/2)\), whose second parameter is at most \(29\).
+We call an odd order \(w\) \emph{\(W\)-known} when \(w\le33\), or when
+\(2w-1\) is a prime power; in the latter case Turyn's
+\((P+1)/2\) family, with \(P=2w-1\equiv1\pmod4\), supplies the required
+Williamson-type matrices.  An unaudited order \(N=4m\) passes the test
+if \(N\) is a Paley~I/II order, or if there is an \emph{exhibited}
+factorization
+\[
+        m=tw,\qquad t\ \hbox{\(T\)-known},\qquad
+        w\ \hbox{\(W\)-known}.
+        \tag{C.1}\label{eq:strictwitness}
+\]
+Thus every passing verdict is an unconditional construction from the
+ingredients just listed; no multiplicative closure is assumed.
 
-A passing verdict is a genuine construction; a failing verdict
-(\emph{no elementary witness}) is a statement about this test only, not a
-claim that \(N\) is open.  Over the \(232\) orders with \(q\le3000\), the
-test passes \(131\) (audited, Paley, or Turyn) and fails \(101\).  The
-smallest failure is
+\begin{remark}\label{rem:mult}
+An earlier version of this appendix asserted that classes of eligible
+\(T\)- and Williamson orders were multiplicatively closed and then
+classified \(m\) prime factor by prime factor.  That assertion was uncited,
+and we withdraw both it and the factorwise test.  Even for Williamson
+matrices proper, unrestricted closure is false:
+\DJ okovi\'c \cite{Djokovic1993} enumerated Williamson matrices at orders
+\(33\) and \(39\), but proved that none exist at
+\(35=5\cdot7\), although they exist at both orders \(5\) and \(7\).
+Holzmann, Kharaghani and Tayfeh-Rezaie
+\cite{HolzmannKharaghaniTayfehRezaie2008} later found the further
+nonexistence orders \(47\), \(53\), and \(59\).  Terminology in the
+literature includes broader variants called Williamson-type matrices;
+we make no closure claim for any such class.  Instead,
+\eqref{eq:strictwitness} requires the two actual ingredient orders used
+by Turyn's array to be known individually.
+
+The factorwise test was unreliable in both directions.  It could accept
+an \(m\) merely because each prime factor was eligible, without producing
+a pair \(t,w\).  It could also reject an \(m\) because of a prime factor
+that nevertheless lies inside a directly known composite \(W\)-order.
+For example, at \(q=197\),
+\[
+        m=19503=3\cdot6501,\qquad 2\cdot6501-1=13001
+\]
+is prime, so \(t=3,w=6501\) is a witness under
+\eqref{eq:strictwitness}; the old factorwise test rejected it because of
+the prime factor \(197\).  This is why the table below is recomputed from
+actual divisor splits rather than inherited from the earlier screen.
+
+The audited range of \S\ref{app:audit} is a table lookup, and the
+\(q=81\) witness of \S\ref{app:81} cites its two ingredients
+individually.  Both are independent of this correction.  Nothing in
+\S\S1--4, and in particular neither Theorem~\ref{thm:main} nor its proof,
+depends on this appendix.
+\end{remark}
+
+A passing verdict now exhibits a construction.  A failing verdict
+(\emph{no restricted elementary witness}) is a statement about this test
+only, not a claim that \(N\) is open.  Over the \(232\) orders with
+\(q\le3000\), the strict test covers \(128\) (audited, Paley, or Turyn)
+and leaves \(104\) without a witness.  The smallest failure remains
 \[
         q=109,\qquad N=23980,\qquad m=5\cdot11\cdot109,
 \]
-obstructed by \(109\) (\(2\cdot109-1=217=7\cdot31\) is not a prime
-power).  This \(N=23980\) is the smallest order of the family for which
-we exhibit neither an audited entry nor an elementary witness; we do not
-assert it is open, and indeed Williamson-type matrices of order \(109\),
-were they tabulated, would settle it at once (compare \(q=73\)).
+for which none of the possible \(T\)-known divisors produces a
+\(W\)-known complementary factor.  In particular,
+\(2\cdot109-1=217=7\cdot31\) is not a prime power.  This
+\(N=23980\) is the smallest order of the family for which we exhibit
+neither an audited entry nor a restricted elementary witness; we do not
+assert it is open.  Williamson-type matrices of order \(109\), if
+available, would settle it at once using \(t=55,w=109\) (compare
+\(q=73\)).
 
-Table~\ref{tab:candidates} lists all such candidate orders up to
-\(q=2917\).  The previously discussed \(q=2689\) and \(q=2917\) appear at
-the end; both are obstructed (\(2689\) and \(2917\) are primes with
-\(2\cdot2689-1=5377=19\cdot283\) and \(2\cdot2917-1=5833=19\cdot307\)),
-and \(q=2917\) has the extreme form \(m=1459\cdot2917\), a product of two
-obstructing primes.  They are not distinguished among the candidates
-except by size.
+Table~\ref{tab:candidates} lists all \(104\) failures of this restricted
+test for \(q\le3000\).  It is a reproducible classification relative to
+the stated ingredient sets, not a literature-complete classification of
+the corresponding Hadamard orders.
 
 {\footnotesize
-\begin{longtable}{r r l l}
+\begin{longtable}{r r l}
 \caption{Orders \(N=2q(q+1)\), \(q\) a prime power \(\equiv1\pmod4\),
-with no elementary witness (\S\ref{app:candidates}), \(109\le q\le2917\).
-``obstr.'' lists the obstructing prime factors of the odd part
-\(m=q(q+1)/2\).}\label{tab:candidates}\\
+with no restricted elementary witness (\S\ref{app:candidates}),
+\(109\le q\le2969\).}\label{tab:candidates}\\
 \hline
-\(q\) & \(N\) & odd part \(m\) & obstr.\\\hline
+\(q\) & \(N\) & odd part \(m\)\\\hline
 \endfirsthead
 \hline
-\(q\) & \(N\) & odd part \(m\) & obstr.\\\hline
+\(q\) & \(N\) & odd part \(m\)\\\hline
 \endhead
 \hline
 \endfoot
-109 & 23980 & \(5\cdot11\cdot109\) & 109 \\
-173 & 60204 & \(3\cdot29\cdot173\) & 173 \\
-197 & 78012 & \(3^{2}\cdot11\cdot197\) & 197 \\
-277 & 154012 & \(139\cdot277\) & 277 \\
-389 & 303420 & \(3\cdot5\cdot13\cdot389\) & 389 \\
-397 & 316012 & \(199\cdot397\) & 397 \\
-409 & 335380 & \(5\cdot41\cdot409\) & 409 \\
-457 & 418612 & \(229\cdot457\) & 457 \\
-509 & 519180 & \(3\cdot5\cdot17\cdot509\) & 509 \\
-521 & 543924 & \(3^{2}\cdot29\cdot521\) & 521 \\
-593 & 704484 & \(3^{3}\cdot11\cdot593\) & 593 \\
-613 & 752764 & \(307\cdot613\) & 613 \\
-617 & 762612 & \(3\cdot103\cdot617\) & 103, 617 \\
-641 & 823044 & \(3\cdot107\cdot641\) & 107, 641 \\
-701 & 984204 & \(3^{3}\cdot13\cdot701\) & 701 \\
-733 & 1076044 & \(367\cdot733\) & 733 \\
-757 & 1147612 & \(379\cdot757\) & 757 \\
-797 & 1272012 & \(3\cdot7\cdot19\cdot797\) & 797 \\
-821 & 1349724 & \(3\cdot137\cdot821\) & 137, 821 \\
-829 & 1376140 & \(5\cdot83\cdot829\) & 83 \\
-853 & 1456924 & \(7\cdot61\cdot853\) & 853 \\
-937 & 1757812 & \(7\cdot67\cdot937\) & 67 \\
-953 & 1818324 & \(3^{2}\cdot53\cdot953\) & 953 \\
-1009 & 2038180 & \(5\cdot101\cdot1009\) & 101 \\
-1021 & 2086924 & \(7\cdot73\cdot1021\) & 73, 1021 \\
-1033 & 2136244 & \(11\cdot47\cdot1033\) & 1033 \\
-1097 & 2409012 & \(3^{2}\cdot61\cdot1097\) & 1097 \\
-1109 & 2461980 & \(3\cdot5\cdot37\cdot1109\) & 1109 \\
-1117 & 2497612 & \(13\cdot43\cdot1117\) & 1117 \\
-1129 & 2551540 & \(5\cdot113\cdot1129\) & 113, 1129 \\
-1153 & 2661124 & \(577\cdot1153\) & 1153 \\
-1181 & 2791884 & \(3\cdot197\cdot1181\) & 197, 1181 \\
-1213 & 2945164 & \(607\cdot1213\) & 1213 \\
-1217 & 2964612 & \(3\cdot7\cdot29\cdot1217\) & 1217 \\
-1249 & 3122500 & \(5^{4}\cdot1249\) & 1249 \\
-1289 & 3325620 & \(3\cdot5\cdot43\cdot1289\) & 1289 \\
-1321 & 3492724 & \(661\cdot1321\) & 1321 \\
-1361 & 3707364 & \(3\cdot227\cdot1361\) & 227, 1361 \\
-1373 & 3773004 & \(3\cdot229\cdot1373\) & 1373 \\
-1381 & 3817084 & \(691\cdot1381\) & 1381 \\
-1453 & 4225324 & \(727\cdot1453\) & 1453 \\
-1481 & 4389684 & \(3\cdot13\cdot19\cdot1481\) & 1481 \\
-1553 & 4826724 & \(3\cdot7\cdot37\cdot1553\) & 1553 \\
-1597 & 5104012 & \(17\cdot47\cdot1597\) & 1597 \\
-1601 & 5129604 & \(3^{2}\cdot89\cdot1601\) & 89, 1601 \\
-1613 & 5206764 & \(3\cdot269\cdot1613\) & 269, 1613 \\
-1637 & 5362812 & \(3^{2}\cdot7\cdot13\cdot1637\) & 1637 \\
-1709 & 5844780 & \(3^{2}\cdot5\cdot19\cdot1709\) & 1709 \\
-1721 & 5927124 & \(3\cdot7\cdot41\cdot1721\) & 1721 \\
-1733 & 6010044 & \(3\cdot17^{2}\cdot1733\) & 1733 \\
-1741 & 6065644 & \(13\cdot67\cdot1741\) & 67 \\
-1753 & 6149524 & \(877\cdot1753\) & 1753 \\
-1777 & 6319012 & \(7\cdot127\cdot1777\) & 127, 1777 \\
-1789 & 6404620 & \(5\cdot179\cdot1789\) & 179, 1789 \\
-1873 & 7020004 & \(937\cdot1873\) & 1873 \\
-1877 & 7050012 & \(3\cdot313\cdot1877\) & 1877 \\
-1889 & 7140420 & \(3^{3}\cdot5\cdot7\cdot1889\) & 1889 \\
-1933 & 7476844 & \(967\cdot1933\) & 1933 \\
-1997 & 7980012 & \(3^{3}\cdot37\cdot1997\) & 1997 \\
-2017 & 8140612 & \(1009\cdot2017\) & 2017 \\
-2053 & 8433724 & \(13\cdot79\cdot2053\) & 2053 \\
-2081 & 8665284 & \(3\cdot347\cdot2081\) & 347, 2081 \\
-2113 & 8933764 & \(7\cdot151\cdot2113\) & 151, 2113 \\
-2129 & 9069540 & \(3\cdot5\cdot71\cdot2129\) & 71, 2129 \\
-2161 & 9344164 & \(23\cdot47\cdot2161\) & 2161 \\
-2213 & 9799164 & \(3^{3}\cdot41\cdot2213\) & 2213 \\
-2269 & 10301260 & \(5\cdot227\cdot2269\) & 227, 2269 \\
-2273 & 10337604 & \(3\cdot379\cdot2273\) & 2273 \\
-2281 & 10410484 & \(7\cdot163\cdot2281\) & 163 \\
-2293 & 10520284 & \(31\cdot37\cdot2293\) & 2293 \\
-2297 & 10557012 & \(3\cdot383\cdot2297\) & 383, 2297 \\
-2309 & 10667580 & \(3\cdot5\cdot7\cdot11\cdot2309\) & 2309 \\
-2341 & 10965244 & \(1171\cdot2341\) & 2341 \\
-2357 & 11115612 & \(3^{2}\cdot131\cdot2357\) & 131, 2357 \\
-2377 & 11305012 & \(29\cdot41\cdot2377\) & 2377 \\
-2381 & 11343084 & \(3\cdot397\cdot2381\) & 397, 2381 \\
-2389 & 11419420 & \(5\cdot239\cdot2389\) & 239, 2389 \\
-2417 & 11688612 & \(3\cdot13\cdot31\cdot2417\) & 2417 \\
-2437 & 11882812 & \(23\cdot53\cdot2437\) & 2437 \\
-2441 & 11921844 & \(3\cdot11\cdot37\cdot2441\) & 2441 \\
-2473 & 12236404 & \(1237\cdot2473\) & 2473 \\
-2477 & 12276012 & \(3\cdot7\cdot59\cdot2477\) & 2477 \\
-2609 & 13618980 & \(3^{2}\cdot5\cdot29\cdot2609\) & 2609 \\
-2621 & 13744524 & \(3\cdot19\cdot23\cdot2621\) & 2621 \\
-2657 & 14124612 & \(3\cdot443\cdot2657\) & 443, 2657 \\
-2677 & 14338012 & \(13\cdot103\cdot2677\) & 103, 2677 \\
-2689 & 14466820 & \(5\cdot269\cdot2689\) & 269, 2689 \\
-2693 & 14509884 & \(3\cdot449\cdot2693\) & 449, 2693 \\
-2713 & 14726164 & \(23\cdot59\cdot2713\) & 2713 \\
-2749 & 15119500 & \(5^{3}\cdot11\cdot2749\) & 2749 \\
-2777 & 15429012 & \(3\cdot463\cdot2777\) & 463, 2777 \\
-2789 & 15562620 & \(3^{2}\cdot5\cdot31\cdot2789\) & 2789 \\
-2797 & 15652012 & \(1399\cdot2797\) & 2797 \\
-2801 & 15696804 & \(3\cdot467\cdot2801\) & 467, 2801 \\
-2833 & 16057444 & \(13\cdot109\cdot2833\) & 109, 2833 \\
-2837 & 16102812 & \(3\cdot11\cdot43\cdot2837\) & 2837 \\
-2857 & 16330612 & \(1429\cdot2857\) & 2857 \\
-2909 & 16930380 & \(3\cdot5\cdot97\cdot2909\) & 2909 \\
-2917 & 17023612 & \(1459\cdot2917\) & 2917 \\
+109 & 23980 & \(5\cdot11\cdot109\) \\
+121 & 29524 & \(11^{2}\cdot61\) \\
+157 & 49612 & \(79\cdot157\) \\
+173 & 60204 & \(3\cdot29\cdot173\) \\
+229 & 105340 & \(5\cdot23\cdot229\) \\
+277 & 154012 & \(139\cdot277\) \\
+289 & 167620 & \(5\cdot17^{2}\cdot29\) \\
+313 & 196564 & \(157\cdot313\) \\
+397 & 316012 & \(199\cdot397\) \\
+409 & 335380 & \(5\cdot41\cdot409\) \\
+421 & 355324 & \(211\cdot421\) \\
+457 & 418612 & \(229\cdot457\) \\
+529 & 560740 & \(5\cdot23^{2}\cdot53\) \\
+577 & 667012 & \(17^{2}\cdot577\) \\
+601 & 723604 & \(7\cdot43\cdot601\) \\
+613 & 752764 & \(307\cdot613\) \\
+617 & 762612 & \(3\cdot103\cdot617\) \\
+641 & 823044 & \(3\cdot107\cdot641\) \\
+661 & 875164 & \(331\cdot661\) \\
+733 & 1076044 & \(367\cdot733\) \\
+757 & 1147612 & \(379\cdot757\) \\
+797 & 1272012 & \(3\cdot7\cdot19\cdot797\) \\
+821 & 1349724 & \(3\cdot137\cdot821\) \\
+829 & 1376140 & \(5\cdot83\cdot829\) \\
+841 & 1416244 & \(29^{2}\cdot421\) \\
+853 & 1456924 & \(7\cdot61\cdot853\) \\
+877 & 1540012 & \(439\cdot877\) \\
+937 & 1757812 & \(7\cdot67\cdot937\) \\
+961 & 1848964 & \(13\cdot31^{2}\cdot37\) \\
+997 & 1990012 & \(499\cdot997\) \\
+1009 & 2038180 & \(5\cdot101\cdot1009\) \\
+1021 & 2086924 & \(7\cdot73\cdot1021\) \\
+1033 & 2136244 & \(11\cdot47\cdot1033\) \\
+1097 & 2409012 & \(3^{2}\cdot61\cdot1097\) \\
+1109 & 2461980 & \(3\cdot5\cdot37\cdot1109\) \\
+1117 & 2497612 & \(13\cdot43\cdot1117\) \\
+1129 & 2551540 & \(5\cdot113\cdot1129\) \\
+1153 & 2661124 & \(577\cdot1153\) \\
+1181 & 2791884 & \(3\cdot197\cdot1181\) \\
+1201 & 2887204 & \(601\cdot1201\) \\
+1213 & 2945164 & \(607\cdot1213\) \\
+1237 & 3062812 & \(619\cdot1237\) \\
+1249 & 3122500 & \(5^{4}\cdot1249\) \\
+1297 & 3367012 & \(11\cdot59\cdot1297\) \\
+1321 & 3492724 & \(661\cdot1321\) \\
+1361 & 3707364 & \(3\cdot227\cdot1361\) \\
+1373 & 3773004 & \(3\cdot229\cdot1373\) \\
+1381 & 3817084 & \(691\cdot1381\) \\
+1453 & 4225324 & \(727\cdot1453\) \\
+1481 & 4389684 & \(3\cdot13\cdot19\cdot1481\) \\
+1553 & 4826724 & \(3\cdot7\cdot37\cdot1553\) \\
+1597 & 5104012 & \(17\cdot47\cdot1597\) \\
+1601 & 5129604 & \(3^{2}\cdot89\cdot1601\) \\
+1609 & 5180980 & \(5\cdot7\cdot23\cdot1609\) \\
+1637 & 5362812 & \(3^{2}\cdot7\cdot13\cdot1637\) \\
+1657 & 5494612 & \(829\cdot1657\) \\
+1681 & 5654884 & \(29^{2}\cdot41^{2}\) \\
+1709 & 5844780 & \(3^{2}\cdot5\cdot19\cdot1709\) \\
+1753 & 6149524 & \(877\cdot1753\) \\
+1777 & 6319012 & \(7\cdot127\cdot1777\) \\
+1789 & 6404620 & \(5\cdot179\cdot1789\) \\
+1873 & 7020004 & \(937\cdot1873\) \\
+1877 & 7050012 & \(3\cdot313\cdot1877\) \\
+1933 & 7476844 & \(967\cdot1933\) \\
+2017 & 8140612 & \(1009\cdot2017\) \\
+2029 & 8237740 & \(5\cdot7\cdot29\cdot2029\) \\
+2053 & 8433724 & \(13\cdot79\cdot2053\) \\
+2089 & 8732020 & \(5\cdot11\cdot19\cdot2089\) \\
+2113 & 8933764 & \(7\cdot151\cdot2113\) \\
+2137 & 9137812 & \(1069\cdot2137\) \\
+2161 & 9344164 & \(23\cdot47\cdot2161\) \\
+2197 & 9658012 & \(7\cdot13^{3}\cdot157\) \\
+2209 & 9763780 & \(5\cdot13\cdot17\cdot47^{2}\) \\
+2213 & 9799164 & \(3^{3}\cdot41\cdot2213\) \\
+2269 & 10301260 & \(5\cdot227\cdot2269\) \\
+2273 & 10337604 & \(3\cdot379\cdot2273\) \\
+2281 & 10410484 & \(7\cdot163\cdot2281\) \\
+2297 & 10557012 & \(3\cdot383\cdot2297\) \\
+2341 & 10965244 & \(1171\cdot2341\) \\
+2377 & 11305012 & \(29\cdot41\cdot2377\) \\
+2381 & 11343084 & \(3\cdot397\cdot2381\) \\
+2389 & 11419420 & \(5\cdot239\cdot2389\) \\
+2401 & 11534404 & \(7^{4}\cdot1201\) \\
+2417 & 11688612 & \(3\cdot13\cdot31\cdot2417\) \\
+2437 & 11882812 & \(23\cdot53\cdot2437\) \\
+2473 & 12236404 & \(1237\cdot2473\) \\
+2557 & 13081612 & \(1279\cdot2557\) \\
+2617 & 13702612 & \(7\cdot11\cdot17\cdot2617\) \\
+2621 & 13744524 & \(3\cdot19\cdot23\cdot2621\) \\
+2657 & 14124612 & \(3\cdot443\cdot2657\) \\
+2689 & 14466820 & \(5\cdot269\cdot2689\) \\
+2693 & 14509884 & \(3\cdot449\cdot2693\) \\
+2713 & 14726164 & \(23\cdot59\cdot2713\) \\
+2749 & 15119500 & \(5^{3}\cdot11\cdot2749\) \\
+2777 & 15429012 & \(3\cdot463\cdot2777\) \\
+2797 & 15652012 & \(1399\cdot2797\) \\
+2801 & 15696804 & \(3\cdot467\cdot2801\) \\
+2833 & 16057444 & \(13\cdot109\cdot2833\) \\
+2837 & 16102812 & \(3\cdot11\cdot43\cdot2837\) \\
+2857 & 16330612 & \(1429\cdot2857\) \\
+2909 & 16930380 & \(3\cdot5\cdot97\cdot2909\) \\
+2917 & 17023612 & \(1459\cdot2917\) \\
+2953 & 17446324 & \(7\cdot211\cdot2953\) \\
+2969 & 17635860 & \(3^{3}\cdot5\cdot11\cdot2969\) \\
 \end{longtable}
 }
 
 \noindent
-None of the orders in Table~\ref{tab:candidates} is a known open
-Hadamard order; by \eqref{eq:fourodd} each odd part is composite, while
-the open orders below \(10^{4}\) are \(4\times\text{prime}\).  Widening
-the ingredient set (computer-tabulated Williamson and \(T\)-matrices, or
-Goethals--Seidel cyclotomic difference sets) removes candidates from the
-table but can never produce one that meets the open list.  The role of
-Theorem~\ref{thm:main} is thus to give a single closed-form rule for the
-whole family, including the region these tables do not reach, rather than
-to settle any open existence question.
+Every odd part in Table~\ref{tab:candidates} is composite by
+\eqref{eq:fourodd}, so these orders do not meet the
+\(4\times\text{prime}\) form that dominates the initial list of open
+Hadamard orders.  At the larger sizes in the table we make no
+literature-complete assertion of known or open status.  Widening the
+ingredient set (for example with computer-tabulated Williamson and
+\(T\)-matrices or Goethals--Seidel cyclotomic difference sets) can remove
+entries from this restricted list.  The role of
+Theorem~\ref{thm:main} is to give a single closed-form rule for the whole
+family, including the region this elementary screen does not reach,
+rather than to derive novelty from a coverage-table gap.
 
 \begin{thebibliography}{99}
 
@@ -616,6 +668,18 @@ J.~Seberry and M.~Yamada,
 \newblock Hadamard matrices, sequences, and block designs,
 \newblock in {\em Contemporary Design Theory} (J.~H.~Dinitz and
   D.~R.~Stinson, eds.), Wiley, 1992, pp.\ 431--560.
+
+\bibitem{Djokovic1993}
+D.~Z.~\DJ okovi\'c,
+\newblock Williamson matrices of order \(4n\) for \(n=33,35,39\),
+\newblock {\em Discrete Math.} 115 (1993), 267--271.
+\newblock \url{https://doi.org/10.1016/0012-365X(93)90495-F}.
+
+\bibitem{HolzmannKharaghaniTayfehRezaie2008}
+W.~H.~Holzmann, H.~Kharaghani, and B.~Tayfeh-Rezaie,
+\newblock Williamson matrices up to order 59,
+\newblock {\em Des.\ Codes Cryptogr.} 46 (2008), no.\ 3, 343--352.
+\newblock \url{https://doi.org/10.1007/s10623-007-9163-5}.
 
 \bibitem{Djokovic2016}
 D.~Z.~\DJ okovi\'c,
