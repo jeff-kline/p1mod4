@@ -281,3 +281,74 @@ scope deviation noted. Control byproduct `H_note_scrambled.txt` retained.
   review) remain open by owner decision and are not re-flagged.
 - **Orchestrator spot-check:** ls-remote ref set, 5-commit delta count, and
   local==origin sync independently re-confirmed before this entry.
+
+---
+
+## Scorecard 001 — repo-rank pass — 2026-07-26
+
+- **Artifact:** full repository @ commit `19a69585ae9335872758d34e9db5565481f15113`
+  (2026-07-19).
+- **Method:** `repo-rank` skill — four independent cold agents (no shared
+  context, no visibility into each other's scoring), one per axis (Novelty,
+  Depth, Reach, Evidence), each instructed to search external literature
+  and/or run the repo's own scripts rather than trust the paper's
+  self-description. Numeric scores are intentionally not recorded here or
+  anywhere in this repository (see the skill's own log for the private
+  numeric record); this entry carries only the qualitative substance.
+- **Overall read:** a self-consciously non-existence-result — the paper is
+  explicit throughout that Farouk–Wang (2020) already proved existence at
+  these orders. The scorecard axes therefore sit apart from the usual
+  "new theorem" profile: methodological novelty is real but bounded, the
+  proof is essentially complete with one presentation gap, the result is
+  fully settled but cannot resolve any presently-open Hadamard order by
+  its own arithmetic, and the computational evidence is unusually strong
+  except for one unscripted table.
+
+**Novelty.** The existence statement is verbatim Farouk–Wang's; what's new
+is a choice-free, closed-form, entrywise construction from character sums
+in place of Farouk–Wang's eligibility-conditioned lifting procedure (which
+genuinely varies with an input matrix and a bijection α — verified against
+the primary FW2020/FW2022 text, not just this repo's summary), backed by a
+demonstrated non-equivalent output at q = 5. Lands mid-band: a real
+structural simplification (a free parameter eliminated by two identities),
+but the connecting argument substantially parallels FW's once unpacked, and
+FW2022 Cor. 4.2 already identifies the same underlying affine skeleton.
+*What would move it:* evidence the inequivalence persists at scale (not
+just q = 5), or that no other choice-free variant exists in the wider
+literature (a broader search than this pass ran).
+
+**Depth.** The four block-Gram lemmas and the main theorem were re-derived
+independently line-by-line and check out; the tiering of proved vs.
+numerically-verified vs. literature-dependent claims (the coverage
+appendix, the q = 81 Turyn witness) is stated honestly rather than blurred.
+One soft spot: the column-alignment between the cap band and the finite
+bands in the fourth lemma is disambiguated by the construction code
+(`ps_p1mod4.py`) more crisply than by the prose. *What would move it:*
+spelling out that alignment explicitly in the tex would remove the one
+identified gap.
+
+**Reach.** Fully settles the question the paper itself poses (a canonical,
+choice-free representative where only a parameterized procedure existed),
+with concrete partially-attacked follow-ons (the q = 5 inequivalence
+question, the q = 81 coverage witness, the q = 109 gap named as the next
+target). Structurally capped, and disclosed as such: the coverage argument
+proves the family's orders are always 4×(composite), so it can never land
+on a presently-open 4×prime Hadamard order. *What would move it:* an
+extension to q ≡ 3 (mod 4) unifying with Đoković's case, or resolution of
+the named q = 109 gap.
+
+**Evidence.** The core numerical claims are unusually well supported:
+exact-integer (not floating-point) Gram checks across the stated sweep,
+independently reproduced by a cold auditor rather than merely re-run
+(Audit 002); the q = 5 inequivalence check is full-scale (all C(60,4)
+quadruples, not sampled), transcription-verified against the printed
+source twice, and carries a positive control. One gap: the coverage
+appendix's order-by-order divisor-split table (232 orders, 128 covered)
+has no corresponding script anywhere in the repository — asserted as
+computed, not reproducible here. *What would move it:* committing the
+script that produced the coverage table.
+
+**Disposition:** informational — no fixes required to merge; the two
+"what would move it" items above (Depth's alignment prose, Evidence's
+missing coverage script) are the only concrete, actionable gaps this pass
+surfaced.

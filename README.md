@@ -33,6 +33,18 @@ seed has order `2(q+1)`, the natural Scarpis‑type target here is `q·2(q+1) = 
 > some other output of their procedure is left open. See
 > [References](#references) below.
 
+## Scorecard
+
+_`repo-rank` pass, commit `19a6958` (2026-07-19), run 2026-07-26. Qualitative
+notes only — full reasoning in [`AUDIT_LEDGER.md`](AUDIT_LEDGER.md), Scorecard 001._
+
+| Axis | Note |
+|---|---|
+| Novelty | Choice-free closed-form method vs. Farouk–Wang's choice-dependent lift; real but bounded — same underlying skeleton once unpacked. |
+| Depth | Core proof re-derived and holds; one presentation gap (cap/finite-band column alignment leans on the code, not the prose). |
+| Reach | Fully settles the question posed; structurally can't resolve any open Hadamard order (family is always 4×composite by construction). |
+| Evidence | Exact-integer checks, independently re-derived by a cold auditor, full-scale q=5 inequivalence check; one unscripted table (coverage appendix). |
+
 ## Ours vs. Farouk–Wang at q = 5
 
 ![Side-by-side: this note's q=5 matrix vs Farouk–Wang's printed order-60 example](images/q5_side_by_side.png)
