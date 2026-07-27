@@ -65,17 +65,17 @@ Beyond the construction and the Farouk–Wang comparison:
 
 ## Scorecard
 
-_`repo-rank` pass, commit `0afd56a` (branch `merge/audits-005-006-additions`),
-run 2026-07-27, grading the paper as merged (§5, §6, §A.3). Qualitative notes
-only._ Per-axis reasoning, the confirmed defects and what would move each axis
-are recorded in [`AUDIT_LEDGER.md`](AUDIT_LEDGER.md), Scorecard 002.
+_`repo-rank` pass, commit `5cb92e7` (branch `merge/audits-005-006-additions`),
+run 2026-07-27 — four independent cold graders, each shown only its own axis.
+Qualitative notes only._ Per-axis reasoning, the confirmed findings and what
+would move each axis are in [`AUDIT_LEDGER.md`](AUDIT_LEDGER.md), Scorecard 003.
 
 | Axis | Note |
 |---|---|
-| Novelty | Choice-free closed form vs. Farouk–Wang's choice-*dependent* lift (verified against their 2020 text: it takes an input matrix, a bijection and two unexhibited permutations). Bounded: FW 2022 Cor. 4.2 already has the same affine shift array, §6's Γ is conceded equivalent to a Sargent–Lee–Rushall output, and §5's sufficiency half is prior art. |
-| Depth | Every theorem and corollary proved outright — nothing conditional, nothing carried by numerics; §5's necessity direction re-derived independently by a second route. Two presentation gaps found and closed: §3 now states the M∞ column alignment explicitly (the interleaved reading satisfied the old prose but is not Hadamard), and the character sum `Σ_z χ(z(z−d)) = −1`, used four times and previously imported silently, is now stated and proved where the blocks are defined. |
-| Reach | Settles the question posed and gives a real quantitative delimitation (non-prime-power instances need a projective plane of non-prime-power order); partially answers Farouk–Wang's published open problem 2. Adds no new Hadamard order. §7 now states the open problems, including the T-slot program that was previously exercised once at q=9 but never posed. |
-| Evidence | Every shipped script reproduces exactly (sweep, sampled q=81/125, figures byte-identical, full-scale q=5 inequivalence). The three claims this pass found unscripted — the coverage screen, `rem:q9` and `rem:c30` — now ship as `coverage_table.py`, `nearfield_q9.py` and `gaussian_c30.py`, each re-deriving its published numbers and failing loudly if they disagree. |
+| Novelty | The weakest axis, and the paper says so itself. Existence at these orders is Farouk–Wang's; §5's *sufficiency* half is prior art (Seberry; Nuñez Ponasso); §6's Γ is conceded equivalent to a Sargent–Lee–Rushall output; and Nuñez Ponasso's dissertation turns out to reach the existence statement too, by a route the paper does not yet cite. What is left, and what no grader could locate anywhere, is §5's **converse** — that the two conditions are forced. |
+| Depth | The strongest axis. Every theorem and corollary proved outright, nothing conditional, nothing carried by numerics. A grader working *only from the paper's text* — not from the code — reimplemented the construction and got exact Hadamard matrices at q = 5, 9, 13, 17, 25, so the prose now determines the object. Open: the row-quadruple statistic is used as a Hadamard-equivalence invariant in three places without that invariance being stated as a lemma. |
+| Reach | Settles the question §5 poses and gives a proved, quantitative delimitation — the entire non-prime-power obstruction is localised to the `T`-slot, with the smallest conceivable instance pinned at order 63,292,500 and Bruck–Ryser explicitly ruled out as a tool. It partially answers a published Farouk–Wang open problem. It reaches **no** currently-open Hadamard order, and could not: that cap is prior art, not arithmetic. |
+| Evidence | Every script runs, reproduces its published numbers, and leaves the tree clean; the fast profile routine is genuinely validated against a direct O(n⁴) reference before being trusted at scale, and all 104 rows of the coverage screen match the paper's printed table. Open: one sub-claim of Remark 11 (that 6 of 16 sign patterns are of Paley type) is still unscripted, and the transcribed external table has no internal consistency check. |
 
 ## Ours vs. Farouk–Wang at q = 5
 

@@ -722,3 +722,75 @@ Item 3 is the one new observation rather than a restatement: the paper already
 had both halves (Wang's classification, Polhill's construction, and the
 absence of a difference matrix) but had not drawn the asymmetry between the
 two slots.
+
+---
+
+## Scorecard 003 — repo-rank pass — 2026-07-27
+
+- **Artifact:** full repository @ commit `5cb92e7`, branch
+  `merge/audits-005-006-additions` — Scorecard 002's object plus three commits
+  of repairs (`4d23bc9` false coverage claim and attribution, `0cd28b4`
+  reproducibility scripts and the character sum, `5cb92e7` restructure and §7).
+- **Directly comparable to Scorecard 002**, unlike 002 vs 001: same skill, same
+  rubrics, same object with known deltas.
+- **Method:** four fresh cold graders, no cross-visibility, each given only its
+  own axis rubric and instructed not to read `README.md` or this file until its
+  own view was on disk; all four confirmed compliance and named the point at
+  which they read. Improvement over the previous pass: the primary-source PDFs
+  were pre-supplied, removing the retrieval failure that left the last pass with
+  an unresolved three-point swing. Numeric scores are absent here and everywhere
+  in this repository by policy.
+
+### Confirmed movement, and what caused it
+
+| # | Axis | Finding | Evidence |
+|---|---|---|---|
+| 1 | Depth | **The `M_∞` repair is confirmed effective by the strongest available test.** A grader reimplemented the construction *from the paper's text alone*, explicitly not from `code/ps_p1mod4.py`, and obtained exact Hadamard matrices at q = 5, 9, 13, 17, 25 — i.e. the prose now determines the object, which is precisely what the repair was for. It independently confirmed the interleaved reading fails, reporting off-diagonal Gram 48 at q = 5, matching the coordinator's own earlier computation exactly. Both directions of Theorem 2 closed; 25 of 33 checkable steps closed | axis moved up one band-step |
+| 2 | Evidence | **The reproducibility repair is confirmed.** Every script ran, reproduced its published numbers, and left `git status --porcelain` empty. The grader verified that `nearfield_q9.py` *genuinely* validates its fast profile against a direct O(n⁴) reference rather than merely claiming to, and cross-checked all 104 rows of `coverage_table.py --table` against the printed `tab:candidates` longtable — exact match | axis moved up two |
+| 3 | Reach | **The Appendix A repair is independently confirmed by a third party.** The grader re-extracted Cati–Pasechnik Table 4 by its own script and reproduced 195 entries, 124 prime, 71 composite, smallest composite 515, and all 104 screen failures with the first at q = 109 | unchanged, but the fix is now externally corroborated |
+| 4 | Reach | **§7 bought a fraction of a band, not a band.** The grader judged the five problems real and genuinely following, but noted that a section written to answer a reach criticism is worth less than it looks, and that its most consequential item is a restatement of the prime power conjecture | recorded honestly; the axis did not move |
+
+### New findings, all open
+
+| # | Item | Verdict | Evidence | Disposition |
+|---|---|---|---|---|
+| 5 | The row-quadruple statistic's **invariance** under Hadamard equivalence | **GAP** | It is the sole engine of all three inequivalence claims (§4 q=5; `rem:q9`; `rem:c30`) and is asserted, never stated as a lemma or proved. The three scripts added in `0cd28b4` make the *counts* reproducible but supply no invariance argument — that was an Evidence fix, and this is a Depth gap. The grader's own counter-argument (that this makes the distinctness claims rest on nothing) was rejected on the ground that no theorem depends on them: delete all three remarks and every theorem stands | **open** — a two-line lemma would close it |
+| 6 | Nuñez Ponasso also reaches the **existence** statement | **GAP (attribution)** | Composing his Thm 4.3.3 with Thm 4.4.1 (Turyn, `BH(n,4) → BH(2n,2)`) yields a real Hadamard matrix of order 2q(q+1). **Coordinator-verified by construction**: instantiated with the Turyn `C+iI` seed and the field multiplication table, it gives a valid `BH(30,4)` at q = 5 and `BH(182,4)` at q = 13. The paper cites Ponasso only for §5's sufficiency. Mechanically this is the same move already credited to Sargent–Lee–Rushall, stated more generally — it widens the attribution rather than introducing a new mechanism | **open** — one sentence |
+| 7 | The claim that Ponasso's output **is** Γ up to unimodular scaling | **REFUTED by the coordinator** | Under the paper's own invariant, over the same 657,720 ordered quadruples, the value 500 is attained on **240** quadruples for Γ and on **80** for the Ponasso matrix; the full profiles differ throughout. Differing profiles under an invariant of the stated equivalence means the two are *inequivalent*. Scope: this refutes the claim for the natural instantiation; a different seed or GH matrix might land elsewhere | closed — no change to the paper |
+| 8 | The claim that this makes Ponasso "strictly stronger for every odd prime power" | **DISCOUNTED** | True but nearly vacuous on the half that strengthens: for q ≡ 3 (mod 4), q+1 is divisible by 4, so Đoković's order q(q+1) plus a Kronecker product with `H_2` already gives 2q(q+1). Checked q = 7, 11, 19, 23, 27. The substantive content is exactly the q ≡ 1 (mod 4) case | closed |
+| 9 | `rem:q9`'s sub-claim "6 of the 16 sign patterns are of Paley type, all `Aut(Z₃²)`-equivalent" | **GAP (reproducibility)** | No script anywhere covers it. `nearfield_q9.py` scripts the difference-matrix property and the 44-count but not this. Introduced by the coordinator in `0cd28b4` while believing `rem:q9` fully covered; the grader verified the claim is numerically correct, which does not close the repository's gap | **open** |
+| 10 | `CP_TABLE4` in `coverage_table.py` | **GAP (minor)** | The transcription of the external table has no internal consistency check, unlike the Farouk–Wang matrix transcription which self-validates via `HHᵀ = 60I` | **open** |
+| 11 | The true cap on this work's reach | **GAP (framing)** | Because existence at order 2q(q+1) is Farouk–Wang's, this note *could never* contribute a new Hadamard order, whatever the coverage analysis shows. The cap is prior art, not arithmetic. Scorecard 001's version of this claim reasoned from "always 4×composite" and was invalid (fixed in `4d23bc9`); the true cap survives and is stated plainly in neither the paper nor the README | **open** |
+
+### The dominant risk
+
+Two graders working independently, on different axes, nominated the **same**
+single item as the one that would collapse their score, and neither could check
+it: whether §5's **necessity** direction already exists in the de Launey /
+Flannery generalized-Hadamard ("orthogonality set") literature. Novelty would
+fall to the bottom band; Reach to roughly 3. Both negative results are
+therefore "not located under a constrained search", not "not in the
+literature" — this session's web-search budget was exhausted before the Novelty
+grader's first query, so all external work was fetch-only, with no MathSciNet,
+zbMATH or Scholar traversal.
+
+**This is the highest-value open question about the repository, and it is a
+literature search rather than a computation.** §5's converse is, by every
+grader's account, the one thing in the paper that is not already in print.
+
+### Cheapest available gains, in order
+
+1. **Reach:** settle §7 problem 5 at q = 5. There are only **120** bijections α,
+   and the invariant is already implemented in `code/q5_equivalence/`.
+2. **Depth:** state the row-quadruple invariance as a lemma (row 5) — two lines.
+3. **Evidence:** script the 6-of-16 count and add a consistency check to
+   `CP_TABLE4` (rows 9–10).
+4. **Novelty/attribution:** one sentence recording the Ponasso existence route
+   (row 6).
+
+**Disposition summary:** the three repairs made since Scorecard 002 are all
+independently confirmed effective, two axes moved up, and no previously-fixed
+defect regressed. Seven items are open, none of them a false statement: five
+are gaps of proof-status, reproducibility or framing, one is an attribution
+sentence, and one — the de Launey/Flannery search — is the single question on
+which two axis scores depend.
