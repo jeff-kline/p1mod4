@@ -57,7 +57,10 @@ character by a function \(\delta\colon G\to\{0,\pm1\}\) with
 \(\delta(0)=0\) on a finite abelian group \(G\) of order \(n\), and the
 shift by an arbitrary array \(T\), the resulting matrix is Hadamard
 \emph{if and only if} \(\delta\) is of Paley type and \(T\) is a
-\((G,n;1)\)-difference matrix.  The two conditions separate the sign
+\((G,n;1)\)-difference matrix.  The sufficiency half is known in greater
+generality, in the Butson setting and without commutativity, from Seberry
+and from Nu\~nez Ponasso; what is new here is the converse, that the two
+conditions are forced.  They separate the sign
 pattern from the shift array and account for the shape of the family:
 the first makes \(\{z:\delta(z)=1\}\) a regular partial difference set
 with the Paley parameters, forcing \(n\equiv1\pmod4\); the second
@@ -226,7 +229,17 @@ the order-\(2(q+1)\) Paley--II Hadamard matrix obtained by replacing
 \(\infty\); in each remaining row repeat the \(\infty\)-column pair
 \(q\) times unchanged, and replace each finite column pair by its
 product with \(R\), repeated \(q\) times.  This is a
-\(2q\times2q(q+1)\) matrix \(M_\infty\).
+\(2q\times2q(q+1)\) matrix \(M_\infty\).  In both cases the \(q\) copies
+of a given column pair are placed \emph{consecutively}, so that a column
+pair \(V\) (of size \(2q\times2\)) becomes the \(2q\times2q\) block
+\(\J_{1,q}\otimes V=[\,V\mid V\mid\cdots\mid V\,]\).
+Thus \(M_\infty\) carries the same column partition as \(M_r\)
+above, an initial \(2q\)-wide \(\infty\)-block followed by \(q\) blocks
+of width \(2q\) indexed by \(\F\), and for each \(a\in\F\) the
+\(a\)-block of \(M_\infty\) occupies the columns that \(K_{ar}\) occupies
+in \(M_r\).  This alignment is what the block-by-block summation in
+Lemma~\ref{lem:cap} uses; the interleaved reading, in which the copies of
+distinct column pairs alternate, does not yield a Hadamard matrix.
 
 \begin{lemma}\label{lem:cap}
 \(M_\infty M_\infty^{T}=2q(q+1)I_{2q}\) and \(M_\infty M_r^{T}=0\) for all
@@ -348,9 +361,14 @@ exactly \(2\):
 \]
 Thus every order is \(4\times(\text{odd})\), so it is never a Kronecker
 product of two smaller Hadamard matrices, and its odd part
-\(q(q+1)/2\) is always composite.  Two consequences follow.  First, the
-family never meets the dominant list of open Hadamard orders, which are
-\(4\times\text{prime}\).  Second, \eqref{eq:fourodd} has the form needed
+\(q(q+1)/2\) is always composite.  That last fact is a structural
+description and not an exclusion: of the \(195\) odd \(m\le2999\) for
+which \cite{CatiPasechnik2024} records no Hadamard matrix of order
+\(4m\), fully \(71\) are composite, so compositeness of the odd part does
+not by itself keep an order off the open list.  Whether the family meets
+that list has to be checked value by value, and
+Appendix~\ref{app:audit} does so for the whole range \(q\le73\).
+A second and more useful consequence is that \eqref{eq:fourodd} has the form needed
 for Turyn's construction: when \(T\)-matrices of order \(t\) and
 Williamson-type matrices of order \(w\) are available, one obtains a
 Hadamard matrix of order \(4tw\)
@@ -446,6 +464,19 @@ Let \(G\) be a finite abelian group of order \(n\), let
 if and only if \(\delta\) is of Paley type and \(T\) is a
 \((G,n;1)\)-difference matrix.
 \end{theorem}
+
+The sufficiency direction is not new, and in the Butson setting it is
+already known in greater generality.  Seberry \cite{Seberry1980}, building
+on Rajkundlia, gave a generalized-Hadamard form of the Scarpis
+construction, and Nu\~nez Ponasso \cite[Thm.~4.3.3]{Ponasso2024} proves
+that a \(BH(n+1,m)\) together with a \(GH(n,G)\) with \(|G|=n\) yields a
+\(BH(n(n+1),m)\), for any group \(G\) and any \(m\).  Taking \(m=4\) and
+composing with the doubling of \S6 recovers the ``if'' half of
+Theorem~\ref{thm:char} without the hypothesis that \(G\) be abelian.  What
+is proved here and does not follow from those results is the converse:
+that the two conditions are \emph{forced}, so that the construction admits
+no other input.  That is the direction Corollaries~\ref{cor:mod4} and
+\ref{cor:plane} rest on.
 
 \begin{proof}
 Let \(B\) be as in \eqref{eq:blocksum} and put
@@ -840,10 +871,18 @@ The surveys of Seberry and Yamada \cite{SeberryYamada1992,
 SeberryYamada2020} and the database of Cati and Pasechnik
 \cite{CatiPasechnik2024} record, for every odd \(m\le 3000\), the least
 \(t\) for which a Hadamard matrix of order \(2^{t}m\) is known.  The
-default is \(t=2\) (so \(N=4m\) is known), and the only odd \(m\le3000\)
-with \(t>2\) are the primes \(167,179,223,283\) (orders \(668,716,892,1132\),
-still open).  Since \(m=q(q+1)/2\) is composite it is never one of these;
-hence \emph{every \(N\) with \(m\le3000\) is a known Hadamard order}.
+default is \(t=2\), so that \(N=4m\) is known.  Table~4 of
+\cite{CatiPasechnik2024} lists the \(195\) odd \(m\le2999\) with
+\(t>2\); of these \(124\) are prime and \(71\) are composite, the
+smallest entry being \(167\) and the smallest composite entry \(515\).
+Compositeness of \(m\) is therefore no guarantee on its own, and the
+check has to be made value by value.  The twelve odd parts
+\(m=q(q+1)/2\) arising here for \(q\le73\), namely
+\[
+        15,\ 45,\ 91,\ 153,\ 325,\ 435,\ 703,\ 861,\ 1225,\ 1431,\ 1891,\ 2701,
+\]
+are each absent from that table; hence \emph{every \(N\) with
+\(m\le3000\) is a known Hadamard order}.
 This is the range \(q\le73\), tabulated below with an explicit
 elementary witness where one exists (Paley~I/II, or a Turyn product
 \(4tw\)).
@@ -1277,6 +1316,19 @@ M.~Cati and D.~V.~Pasechnik,
 \newblock arXiv:2411.18897v2, 2025.
 \newblock \url{https://arxiv.org/abs/2411.18897}.
 \newblock \url{https://doi.org/10.48550/arXiv.2411.18897}.
+
+\bibitem{Seberry1980}
+J.~Seberry,
+\newblock A construction for generalized Hadamard matrices,
+\newblock {\em J.\ Statist.\ Plann.\ Inference} 4 (1980), no.\ 4, 365--368.
+\newblock \url{https://doi.org/10.1016/0378-3758(80)90021-X}.
+
+\bibitem{Ponasso2024}
+G.~Nu\~nez Ponasso,
+\newblock Combinatorics of complex maximal determinant matrices,
+\newblock Ph.D.\ thesis, Worcester Polytechnic Institute, 2024;
+  arXiv:2404.09040v2, 2026.
+\newblock \url{https://arxiv.org/abs/2404.09040}.
 
 \bibitem{Wang2020}
 Z.~Wang,

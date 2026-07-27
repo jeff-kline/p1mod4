@@ -564,3 +564,84 @@ discloses the second literature route. Two items remain **open**: the §1
 contribution paragraph carries the identical gap and was left alone as
 out of scope, and the abstract's length is an owner call. No claim in
 the paper body changed; this entry concerns summary surfaces only.
+
+---
+
+## Scorecard 002 — repo-rank pass — 2026-07-27
+
+- **Artifact:** full repository @ commit `0afd56a`, branch
+  `merge/audits-005-006-additions` — the paper **as merged**, carrying §5
+  (characterisation), §6 (factorisation over `Z[i]`), §A.3 and the revised
+  abstract.
+- **Not directly comparable to Scorecard 001**, which graded `19a6958`: a
+  four-section paper without any of the above. Movement on an axis between
+  the two passes is expected, not noise.
+- **Method:** `repo-rank` skill — four fresh cold agents, one per axis, no
+  cross-visibility, each given only its own axis rubric and instructed **not
+  to read this file or `README.md`** until it had independently formed a
+  view. Numeric scores are deliberately absent here and everywhere in this
+  repository; the private numeric record lives with the skill.
+- **What distinguishes this pass from Scorecard 001:** three of the four
+  agents' self-reported counter-arguments were acted on rather than noted
+  and set aside — one refuted by the coordinator retrieving a primary source
+  the agent could not reach, one resolved in the paper's favour, one
+  accepted and the axis revised down. Two must-fix defects were found and
+  independently re-verified by the coordinator before any edit was made.
+
+### Confirmed defects and their disposition
+
+| # | Claim/target | Verdict | Evidence | Required fix | Disposition |
+|---|---|---|---|---|---|
+| 1 | Appendix A.1: "the only odd `m ≤ 3000` with `t > 2` are the primes 167, 179, 223, 283" | **WRONG** | Found independently by two cold agents (Reach, from Cati–Pasechnik 2024; Depth, from a 2014 source and marked "probable"). Coordinator settled it by reparsing Table 4 of arXiv:2411.18897 from the PDF: **195** odd `m ≤ 2999` are listed with `t > 2`, so there are **191 counterexamples**, the smallest being **311**. Traced to the source of the error: Cati–Pasechnik's prose naming exactly those four is scoped to *orders* `≤ 1208` (odd part `≤ 302`); the paper re-scoped it to odd part `≤ 3000` | replace with the direct value-by-value check | fixed |
+| 2 | The inference "Since `m = q(q+1)/2` is composite it is never one of these" | **WRONG** (non sequitur) | **71 of the 195** open odd parts are composite, smallest **515**. Compositeness affords no protection whatever. Note Depth's proposed repair — "the conclusion survives if every open `m ≤ 3000` is prime" — is *also* wrong for the same reason | state the twelve values and check them individually | fixed |
+| 3 | The conclusion "every `N` with `m ≤ 3000` is a known Hadamard order" | **CONFIRMED** | Right conclusion reached by an invalid route. Coordinator checked all twelve in-range odd parts `m = q(q+1)/2` (15, 45, 91, 153, 325, 435, 703, 861, 1225, 1431, 1891, 2701) directly against Table 4 — **none appears**. `q = 73` (`m = 2701`) had been covered *only* by the false blanket claim | none — but the justification had to be rebuilt | fixed |
+| 4 | Same broken premise at §4 ("the family never meets the dominant list of open Hadamard orders, which are 4×prime") | **WRONG** | Identical non sequitur, in the paper body rather than the appendix | replace with the honest statement + pointer to §A.1 | fixed |
+| 5 | Same broken premise, twice in `README.md` | **WRONG** | The front door restated it in the Coverage section and in Scorecard 001's Reach note — exactly the "README is a second copy of every claim" failure mode | rewrite both | fixed |
+| 6 | Uncited prior work subsuming §5's **sufficiency** half | **GAP (attribution)** | Nuñez Ponasso, arXiv:2404.09040v2, Thm. 4.3.3, verbatim: *"Let H be a BH(n + 1, m), and suppose that there is a GH(n, G) where \|G\| = n. Then there is a BH(n(n + 1), m) matrix."* A `GH(n,G)` with `\|G\| = n` **is** a `(G,n;1)`-difference matrix; at `m = 4`, composed with the doubling §6 already cites, this gives the "if" half for any group and any `m`. Not a survey restatement — Ponasso states "We state here our own version of this result, which is more general than the ones previously found in the literature." Seberry (1980) gave a GH form of the same construction | cite both; state plainly which half is new | fixed |
+| 7 | `AUDIT_LEDGER.md` Audit 005 row 19 ("uncited borrowing CONFIRMED ABSENT") | **FALSIFIED** for the sufficiency half | Superseded by row 6 above. The finding was correct about the *necessity* direction only | superseded, recorded here | fixed |
+| 8 | §5's **necessity** direction (that both conditions are forced) | **CONFIRMED NEW** | Neither Ponasso nor Seberry states it; the Reach agent searched for it specifically and could not locate it; the Depth agent re-derived it independently by a different route than the author's and calls it the sharpest argument in the paper | foreground it as the contribution | fixed |
+| 9 | §3's `M∞` column alignment | **GAP (specification)** — repeat finding | Scorecard 001 named this and it was still unfixed a pass later. The Depth agent *proved* it load-bearing: it built a matrix satisfying every word of §3 under the interleaved reading and it is **not Hadamard** (`M∞M₀ᵀ ≠ 0`, max 48/336/576 at `q = 5/13/17`, failing only at `r = 0`). Also contradicts Audit 005 missed-point 7's reassurance that "any other placement permutes column blocks only" — true for reassigning S-pairs to blocks, false for the block-vs-within-block ambiguity | state the alignment explicitly in §3 | fixed |
+| 10 | `rem:q9` paper numbers vs this ledger's Audit 005 row 5 numbers | **NOT an inconsistency** | Raised unresolved by the Evidence agent, which flagged that if both described the same computation there was a live numerical contradiction behind a claim stated as fact. They do not: the paper's **112,752** is the 44-count of the *nearfield* matrix; the ledger's 12960/17496/11664/11664/18144/18144 are the 44-counts of *six band-relabelled Desarguesian* matrices, supporting the separate claim in the paper's closing sentence. They agree on the only shared quantity — the Theorem 1 matrix's count of **0** | none | — |
+| 11 | Reproducibility coverage of numeric claims | **GAP** | Every shipped script reproduced exactly (default sweep `ALL PASS` exit 0; `--q 81/125 --sampled` pass; regenerated figures byte-identical to the committed PNGs; `profile_results.txt` exact including its positive control; working tree clean after every run). But three confidently-stated numeric claims have **no committed script**: the 104-row coverage table, `rem:q9` and `rem:c30`. The agent independently reimplemented the coverage table and matched all 104 rows and the 232/128/104 counts | commit the three scripts | **open** |
+| 12 | Provenance of that gap | **INTRODUCED BY THIS CAMPAIGN** | Verified with `git show main:` — `rem:q9` and `rem:c30` are **absent pre-merge**. The merge took the count of unscripted numeric claims from **1 to 3** without adding a script. The 104-row table is the pre-existing item Scorecard 001 already flagged | see row 11 | **open** |
+| 13 | Theorems 2 and 3 as merged | **CONFIRMED** | Scorecard 001 predates them and Audit 006 was scoped only to repair-text, so they appear never to have been audited end-to-end before this pass. The Depth agent closed 41 of 43 checkable proof steps, re-deriving Lemmas 1–4 and Theorem 1 by hand *before* reading the proofs. All theorems and corollaries are **PROVED** — nothing conditional, nothing carried by numerics; the sole external import is MOLS ⟺ projective plane, correctly cited | none | — |
+
+### Qualitative axis notes
+
+- **Novelty.** The contrast with Farouk–Wang is real and was verified against
+  their 2020 primary text, which the grading agent could not reach
+  (DOISerbia was returning 503 at its root) and the coordinator recovered
+  from the publisher's host: FW2020's Thm. 2.2 is a map of sets `Ψ_{q,α}`
+  depending on an input matrix, a bijection `α` and two permutations whose
+  existence is asserted but not exhibited, and its §3 "Other Form" pins `α`
+  down but still requires an input Hadamard matrix. So *closed form relative
+  to a choice* versus *choice-free closed form* — not "already present".
+  Bounded on three sides all the same: FW2022 Cor. 4.2 has the same affine
+  shift array, §6's `Γ` is conceded equivalent to an SLR output, and §5's
+  sufficiency half is now known to be prior art (row 6).
+- **Depth.** The strongest axis. Everything proved outright. Held one band
+  below the top *only* because of row 9 — a construction paper's first duty
+  is to specify its object unambiguously, and until this pass §3 admitted a
+  reading that is not Hadamard. With that fixed the reservation is gone.
+- **Reach.** Settles the question posed and gives a genuine quantitative
+  delimitation — the smallest conceivable non-prime-power instance is
+  `n = 5625`, order 63,292,500, gated on a projective plane of order `3²·5⁴`.
+  Partially answers Farouk–Wang 2022's **published** open problem 2
+  (confirmed verbatim from their PDF) for group-developed squares, which is
+  what distinguishes it from answering a purely self-posed question. Adds no
+  new Hadamard order. There is no open-problems section, and the one real
+  program implied — every quasifield/translation plane of order `q` feeds the
+  `T`-slot — is exercised once at `q = 9` and never stated as a program.
+- **Evidence.** Weakest axis, and the fall from Scorecard 001 is this
+  campaign's own doing (rows 11–12). Nothing checked was found *wrong*; the
+  defect is that a third of the paper's confident numeric claims cannot be
+  re-run from the repository.
+
+**Disposition summary:** nine defects fixed in this pass — one false
+statement and one non sequitur in the appendix, the same premise in the
+body and twice in the README, a two-source attribution gap, a superseded
+prior finding, and the repeat `M∞` specification gap. **Two remain open**,
+both the same item: the coverage table, `rem:q9` and `rem:c30` still have no
+committed script, and two of those three were introduced by the merge
+recorded above. Closing them is the single highest-value action available
+on this repository.

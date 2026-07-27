@@ -33,17 +33,42 @@ seed has order `2(q+1)`, the natural Scarpis‑type target here is `q·2(q+1) = 
 > some other output of their procedure is left open. See
 > [References](#references) below.
 
+## What else is in the paper
+
+Beyond the construction and the Farouk–Wang comparison:
+
+- **§5 — what the construction needs.** Replacing the character by a function
+  `δ` with `δ(0)=0` on a finite abelian group and the shift by an arbitrary
+  array `T`, the result is Hadamard **iff** `δ` is of Paley type and `T` is a
+  `(G,n;1)`-difference matrix. *The sufficiency half is not new* — Seberry
+  (1980) and Nuñez Ponasso (Thm. 4.3.3) have it in greater generality, in the
+  Butson setting and without commutativity. **What is new is the converse:**
+  that both conditions are *forced*. The two corollaries (`n ≡ 1 mod 4`; a
+  non-prime-power instance would yield a projective plane of non-prime-power
+  order) rest on that direction.
+- **§6 — over the Gaussian integers.** The Paley‑II blocks are the real `2×2`
+  representation of the Gaussian units, so the construction factors through a
+  Butson matrix `Γ ∈ BH(q(q+1), 4)` whose Turyn double is `H`. `Γ` is
+  equivalent to an output of Sargent–Lee–Rushall (2024), which with the same
+  doubling gives a second literature route to the existence statement.
+- **Appendix A — coverage.** Which orders in the family are already known
+  Hadamard orders, an explicit witness where one exists, the first unaudited
+  order (`q = 81`), a second worked example (`q = 109`), and a screen over
+  `q ≤ 3000`.
+
 ## Scorecard
 
-_`repo-rank` pass, commit `19a6958` (2026-07-19), run 2026-07-26. Qualitative
-notes only — full reasoning in [`AUDIT_LEDGER.md`](AUDIT_LEDGER.md), Scorecard 001._
+_`repo-rank` pass, commit `0afd56a` (branch `merge/audits-005-006-additions`),
+run 2026-07-27, grading the paper as merged (§5, §6, §A.3). Qualitative notes
+only._ Per-axis reasoning, the confirmed defects and what would move each axis
+are recorded in [`AUDIT_LEDGER.md`](AUDIT_LEDGER.md), Scorecard 002.
 
 | Axis | Note |
 |---|---|
-| Novelty | Choice-free closed-form method vs. Farouk–Wang's choice-dependent lift; real but bounded — same underlying skeleton once unpacked. |
-| Depth | Core proof re-derived and holds; one presentation gap (cap/finite-band column alignment leans on the code, not the prose). |
-| Reach | Fully settles the question posed; structurally can't resolve any open Hadamard order (family is always 4×composite by construction). |
-| Evidence | Exact-integer checks, independently re-derived by a cold auditor, full-scale q=5 inequivalence check; one unscripted table (coverage appendix). |
+| Novelty | Choice-free closed form vs. Farouk–Wang's choice-*dependent* lift (verified against their 2020 text: it takes an input matrix, a bijection and two unexhibited permutations). Bounded: FW 2022 Cor. 4.2 already has the same affine shift array, §6's Γ is conceded equivalent to a Sargent–Lee–Rushall output, and §5's sufficiency half is prior art. |
+| Depth | Every theorem and corollary proved outright — nothing conditional, nothing carried by numerics; §5's necessity direction re-derived independently by a second route. One repeat presentation gap, now closed: §3 states the M∞ column alignment explicitly, since the interleaved reading satisfied the old prose but is not Hadamard. |
+| Reach | Settles the question posed and gives a real quantitative delimitation (non-prime-power instances need a projective plane of non-prime-power order); partially answers Farouk–Wang's published open problem 2. Adds no new Hadamard order. No open-problems section; the quasifield/translation-plane program the T-slot implies is exercised once at q=9 and never stated. |
+| Evidence | Every shipped script reproduces exactly (sweep, sampled q=81/125, figures byte-identical, full-scale q=5 inequivalence). Weakest axis: three numeric claims stated with equal confidence have no committed script — the coverage table, `rem:q9` and `rem:c30`. |
 
 ## Ours vs. Farouk–Wang at q = 5
 
@@ -188,9 +213,13 @@ order‑`2(q+1)` Paley‑II seed `S`); `--fmt` selects `ints` (space‑separated
 Because `q ≡ 1 (mod 4)`, every order factors as `2q(q+1) = 4·q·(q+1)/2` with both
 `q` and `(q+1)/2` **odd** — i.e. the order is always `4×(odd)`. Consequently:
 
-- the family never meets the dominant open Hadamard orders of the form `4×prime`
-  (here the odd part is always composite);
-- every order whose odd part is `≤ 3000` is already a known Hadamard order, and the
+- the odd part is always composite — but that is a structural description, **not**
+  an exclusion: of the 195 odd `m ≤ 2999` with no known Hadamard matrix of order
+  `4m` (Cati–Pasechnik, Table 4), 71 are composite, so the check has to be made
+  value by value rather than inferred;
+- made value by value, it passes: every order whose odd part is `≤ 3000` is
+  already a known Hadamard order — the twelve odd parts arising for `q ≤ 73` are
+  each absent from that table — and the
   first instance beyond that audited range, `q = 81` (order `13284 = 4·41·81`), is
   covered by a classical **Turyn product** using `T`‑matrices of order `41` with
   Williamson‑type matrices of order `81 = 9²`.
