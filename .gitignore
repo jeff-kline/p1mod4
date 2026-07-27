@@ -7,4 +7,4 @@ __pycache__/
 .DS_Store
 tmp/
 .claude/
-q5_equivalence/H_note_scrambled.txt
+code/q5_equivalence/H_note_scrambled.txt

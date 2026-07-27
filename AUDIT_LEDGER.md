@@ -670,3 +670,55 @@ Farouk–Wang comparison, and the three scripts above for Appendix A, Remark 11,
 Remark 13 and Theorem 3. The reproducibility regression introduced by the §5/§6
 merge is undone, and the paper no longer imports a character-sum identity
 without proof.
+
+### Repository layout change and §7 — 2026-07-27
+
+**Layout.** The repository was restructured to match the layout of the
+author's `geometric-difference-families` repo:
+
+| Was | Now |
+|---|---|
+| `paley_scarpis_p1mod4_v2.tex` / `.pdf` | `paper/main.tex` / `paper/main.pdf` |
+| `images/` | `paper/images/` |
+| `ps_p1mod4.py`, `coverage_table.py`, `nearfield_q9.py`, `gaussian_c30.py` | `code/` |
+| `q5_equivalence/` | `code/q5_equivalence/` |
+| — | `code/README.md` (new, per-script table) |
+
+`README.md`, `AUDIT_LEDGER.md`, `LICENSE` and `.gitignore` stay at the root.
+All moves used `git mv`, so history follows the files. `images/` went under
+`paper/` rather than the root so that the single `\includegraphics` path in
+the source resolves unchanged when compiling inside `paper/`; the figures were
+regenerated to the new location and are byte-identical. Earlier entries in
+this ledger name files by their pre-move paths; those entries were accurate
+when written and are left as they stand.
+
+**One deliberate difference from the target layout:** there is no `audit/`
+directory. The target repo uses it for per-round audit reports, but this
+repo's audit record is this single file, and the only separate artifacts that
+exist — the four per-axis grading reports and three coordinator verification
+notes from Scorecard 002 — carry numeric scores, which are kept out of this
+repository by policy. Adding `audit/` would mean either an empty directory or
+publishing scored material.
+
+**§7 Open problems.** Added, at the owner's direction, closing the gap
+Scorecard 002 recorded on the Reach axis (no open-problems section; the
+`T`-slot program exercised once at `q = 9` and never stated as a program).
+Five items, each tied to an existing result rather than freestanding:
+
+1. the `T`-slot as a program — how many Hadamard-equivalence classes arise as
+   `T` ranges over the `(G,n;1)`-difference matrices, unanswered even at
+   `n = 9`, where the field and Dickson-nearfield products already differ;
+2. whether a Paley-type `δ` is unique up to `Aut(G)` (rigid at `n = 9`);
+3. where the obstruction sits beyond the prime powers — at `n = 5625` the
+   `δ`-slot is available by Polhill's construction while no
+   `(G,5625;1)`-difference matrix is known, so for this construction the
+   entire non-prime-power obstruction lies in the `T`-slot;
+4. whether `q ≡ 3 (mod 4)` admits a choice-free closed form, the residue class
+   entering in exactly one place (the proof of Lemma 1);
+5. equivalence to the rest of the Farouk–Wang family, and to the
+   Sargent–Lee–Rushall lift beyond the equivalence already recorded.
+
+Item 3 is the one new observation rather than a restatement: the paper already
+had both halves (Wang's classification, Polhill's construction, and the
+absence of a difference matrix) but had not drawn the asymmetry between the
+two slots.

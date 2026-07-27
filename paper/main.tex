@@ -862,6 +862,61 @@ value \(500\) on \(240\) quadruples for \(\Gamma\) and on none for
 \(C_{30}+iI\), in both orientations.
 \end{remark}
 
+\section{Open problems}\label{sec:open}
+
+Theorem~\ref{thm:char} turns the construction into two independent slots, and
+most of what is not settled here is a question about one of them.
+
+\emph{1.  The \(T\)-slot as a program.}  For a fixed abelian \(G\) of order
+\(n\), the admissible shift arrays are exactly the \((G,n;1)\)-difference
+matrices, equivalently the \(G\)-regular complete sets of \(n-1\) mutually
+orthogonal Latin squares \cite[Thm.~1]{Jungnickel1980}.  At \(n=9\) at least
+two are available --- the field product \(T(r,a)=ar\) and the Dickson
+nearfield product of Remark~\ref{rem:q9} --- and they give Hadamard
+matrices of order \(180\) that are inequivalent.  Remark~\ref{rem:q9} also
+shows that mere relabelling of the bands already produces inequivalent
+outputs, so the count of classes exceeds one for an uninteresting reason.
+The question is quantitative: as \(T\) ranges over all
+\((G,n;1)\)-difference matrices, how many Hadamard-equivalence classes of
+order \(2n(n+1)\) arise, and is the field choice distinguished among them by
+any invariant?  Nothing here answers this even at \(n=9\).
+
+\emph{2.  Uniqueness in the \(\delta\)-slot.}  By Corollary~\ref{cor:mod4} a
+Paley-type \(\delta\) is the same thing as a regular partial difference set
+with the Paley parameters.  At \(n=9\) exactly \(6\) of the \(16\) admissible
+sign patterns are of Paley type and all \(6\) are equivalent under
+\(\mathrm{Aut}(\Z_3^{2})\), so the slot is rigid there.  Is \(\delta\) always
+unique up to \(\mathrm{Aut}(G)\)?  The classification of Wang \cite{Wang2020}
+settles which orders occur but not how many inequivalent sets occur at a
+given order.
+
+\emph{3.  Where the obstruction actually sits at non-prime-power order.}
+Remark~\ref{rem:supply} locates the smallest conceivable non-prime-power
+instance at \(n=9\cdot5^{4}=5625\), order \(63\,292\,500\).  The two slots are
+not symmetric there: the \(\delta\)-slot \emph{is} available, since Polhill
+\cite{Polhill2010} constructs Paley type partial difference sets at every
+order \(m^{4}\) and \(9m^{4}\), while no \((G,5625;1)\)-difference matrix is
+known and one would supply a projective plane of order \(5625\).  So for this
+construction the entire obstruction beyond the prime powers lies in the
+\(T\)-slot.  Does a \((G,n;1)\)-difference matrix exist for any
+non-prime-power \(n\)?
+
+\emph{4.  The residue class \(q\equiv3\pmod4\).}  \DJ okovi\'c
+\cite{Djokovic2016} extends Scarpis to prime powers there, producing order
+\(q(q+1)\) from a Paley~I seed, and \(\chi(-1)=-1\) is exactly what obstructs
+the argument of \S3 --- the residue class is used in one place only, the
+proof of Lemma~\ref{lem:self}.  Is
+there a choice-free closed form in that class as well, and does it fall under
+a characterisation of the shape of Theorem~\ref{thm:char}?
+
+\emph{5.  Equivalence to the rest of the Farouk--Wang family.}  The
+inequivalence recorded in \S4 is to the order-\(60\) matrix printed in
+\cite{FaroukWang2020}.  Their procedure varies with a bijection \(\alpha\),
+so whether the matrix of Theorem~\ref{thm:main} is equivalent to
+\emph{some} output of that procedure is open; likewise for the complex lift
+of \cite{SargentLeeRushall2024} beyond the equivalence noted in
+Remark~\ref{rem:slr}.
+
 \appendix
 
 \section{Coverage analysis}\label{app:coverage}
