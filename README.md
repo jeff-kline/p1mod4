@@ -29,25 +29,63 @@ seed has order `2(q+1)`, the natural Scarpis‑type target here is `q·2(q+1) = 
 > [FW2020]** (the two matrices' row‑quadruple correlation multisets, an
 > invariant of Hadamard equivalence, differ). Farouk–Wang note that their
 > output may vary with a choice of bijection `α`, so this is inequivalence to
-> their *published* example specifically — whether the matrix here matches
-> some other output of their procedure is left open. See
+> their *published* example specifically. Whether the matrix here matches some
+> other output of their procedure is open for `q > 5`; **at `q = 5` an
+> unrefereed computation reports that it does** — see Remark 5 of the paper and
+> `code/alpha_family.py`. That report is agent-produced and has not been
+> refereed, but if it holds, the inequivalence above is to their printed
+> representative rather than to their family. See
 > [References](#references) below.
+
+## What else is in the paper
+
+Beyond the construction and the Farouk–Wang comparison:
+
+- **§5 — what the construction needs.** Replacing the character by a function
+  `δ` with `δ(0)=0` on a finite abelian group and the shift by an arbitrary
+  array `T`, the result is Hadamard **iff** `δ` is of Paley type and `T` is a
+  `(G,n;1)`-difference matrix. *The sufficiency half is not new* — Seberry
+  (1980) and Nuñez Ponasso (Thm. 4.3.3) have it in greater generality, in the
+  Butson setting and without commutativity. **What is new is the converse:**
+  that both conditions are *forced*. The two corollaries (`n ≡ 1 mod 4`; a
+  non-prime-power instance would yield a projective plane of non-prime-power
+  order) rest on that direction.
+- **§6 — over the Gaussian integers.** The Paley‑II blocks are the real `2×2`
+  representation of the Gaussian units, so the construction factors through a
+  Butson matrix `Γ ∈ BH(q(q+1), 4)` whose Turyn double is `H`. `Γ` is
+  equivalent to an output of Sargent–Lee–Rushall (2024), which with the same
+  doubling gives a second literature route to the existence statement.
+- **§7 — open problems.** Five, mostly one slot or the other of §5: how many
+  Hadamard classes the `T`-slot produces as it ranges over all difference
+  matrices (unanswered even at `n = 9`); whether `δ` is always unique up to
+  `Aut(G)`; where the obstruction sits beyond the prime powers (the `δ`-slot
+  *is* available at `n = 5625`, the `T`-slot is not, so the whole obstruction
+  is in `T`); the `q ≡ 3 (mod 4)` class; and equivalence to the rest of the
+  Farouk–Wang family — the last of which is now answered at `q = 5` by the
+  unrefereed Remark 5, and open beyond it.
+- **Appendix A — coverage.** Which orders in the family are already known
+  Hadamard orders, an explicit witness where one exists, the first unaudited
+  order (`q = 81`), a second worked example (`q = 109`), and a screen over
+  `q ≤ 3000`.
 
 ## Scorecard
 
-_`repo-rank` pass, commit `19a6958` (2026-07-19), run 2026-07-26. Qualitative
-notes only — full reasoning in [`AUDIT_LEDGER.md`](AUDIT_LEDGER.md), Scorecard 001._
+_`repo-rank` pass, commit `5cb92e7`, run 2026-07-27 — four independent cold
+graders, each shown only its own axis — with the notes revised after the
+follow-up work of Scorecard 003's addendum. Qualitative notes only._ Per-axis
+reasoning, the confirmed findings, the open items and what would move each axis
+are in [`AUDIT_LEDGER.md`](AUDIT_LEDGER.md), Scorecard 003 and its addendum.
 
 | Axis | Note |
 |---|---|
-| Novelty | Choice-free closed-form method vs. Farouk–Wang's choice-dependent lift; real but bounded — same underlying skeleton once unpacked. |
-| Depth | Core proof re-derived and holds; one presentation gap (cap/finite-band column alignment leans on the code, not the prose). |
-| Reach | Fully settles the question posed; structurally can't resolve any open Hadamard order (family is always 4×composite by construction). |
-| Evidence | Exact-integer checks, independently re-derived by a cold auditor, full-scale q=5 inequivalence check; one unscripted table (coverage appendix). |
+| Novelty | Unchanged this round. Existence at these orders is Farouk–Wang's; §5's *sufficiency* half is prior art (Seberry; Nuñez Ponasso, whose dissertation also reaches the existence statement); and §6 *proves*, for every `q`, that Γ is equivalent to a Sargent–Lee–Rushall output. That last point is the operative one: the object is already conceded to the literature by argument, so the `q = 5` equivalence of Remark 5 subtracts nothing further — a closed form that canonically selects a member of the known family is behaving as a choice-free representative should. What is left, and what no grader could locate, is §5's **converse**. |
+| Depth | The strongest axis. Every theorem and corollary proved outright, nothing conditional, nothing carried by numerics. A grader working *only from the paper's text* — not from the code — reimplemented the construction and got exact Hadamard matrices at q = 5, 9, 13, 17, 25, so the prose determines the object. The quadruple-statistic invariance, previously used in three places without proof, is now Lemma 5. Still asserted rather than proved: that Γ is equivalent to a Sargent–Lee–Rushall output. |
+| Reach | Settles the question §5 poses and gives a proved, quantitative delimitation — the entire non-prime-power obstruction is localised to the `T`-slot, the smallest conceivable instance pinned at order 63,292,500, Bruck–Ryser explicitly ruled out. It partially answers a published Farouk–Wang open problem, and §7 problem 5 is now answered at `q = 5` — though the answer is negative for this work, which is why the axis did not move. It reaches **no** currently-open Hadamard order, and could not: that cap is prior art, not arithmetic. |
+| Evidence | The most improved axis. Every script runs, reproduces its published numbers, and leaves the tree clean; the fast profile routine is genuinely validated against a direct O(n⁴) reference before being trusted at scale, and all 104 rows of the coverage screen match the paper's printed table. The two gaps found last round are closed: the 6-of-16 Paley-type count is scripted, and the transcribed external table now carries an integrity check that catches compensating edits. |
 
 ## Ours vs. Farouk–Wang at q = 5
 
-![Side-by-side: this note's q=5 matrix vs Farouk–Wang's printed order-60 example](images/q5_side_by_side.png)
+![Side-by-side: this note's q=5 matrix vs Farouk–Wang's printed order-60 example](paper/images/q5_side_by_side.png)
 
 The two are visibly different constructions: ours (left) has a cap band of
 period‑2 column patterns and finite bands with the diagonal texture of the
@@ -79,7 +117,7 @@ The whole proof is a set of block‑Gram identities; `HHᵀ = 2q(q+1)·I`.
 The colored regions below are exactly these pieces for the smallest case `q = 5`
 (order `60`):
 
-![Block structure for q=5, order 60](images/structure_q5_N60.png)
+![Block structure for q=5, order 60](paper/images/structure_q5_N60.png)
 
 ## How to use this repository
 
@@ -94,12 +132,12 @@ intended workflow is:
    references, counterexamples, assumptions, and supporting evidence.
 
 The paper's proofs occupy a space somewhere between prose and source code: the
-four block‑Gram lemmas in `paley_scarpis_p1mod4_v2.tex` are structured
+four block‑Gram lemmas in `paper/main.tex` are structured
 precisely enough for an agent to navigate and analyze, while remaining
 readable by humans. They should not be treated as an automatic guarantee of
 correctness; the repository includes an audit record (`AUDIT_LEDGER.md`) and
-reproducibility checks (`ps_p1mod4.py`, `q5_equivalence/`) so that claims can
-be examined rather than merely accepted.
+reproducibility checks (everything in `code/`) so that claims can be examined rather
+than merely accepted.
 
 ### Ask your agent
 
@@ -111,9 +149,9 @@ Point your agent to this repository and try questions such as:
   `χ(−1) = 1` enter, and what fails for `q ≡ 3 (mod 4)`?
 - How does this construction differ from Farouk–Wang's, and where is that
   comparison audited?
-- Rebuild the `q = 5` inequivalence evidence from `q5_equivalence/` and check
+- Rebuild the `q = 5` inequivalence evidence from `code/q5_equivalence/` and check
   the 4‑profile computation independently.
-- Run the verification sweep in `ps_p1mod4.py` and say what passes and what
+- Run the verification sweep in `code/ps_p1mod4.py` and say what passes and what
   those checks actually establish.
 - What are the strongest unresolved limitations (for example, what remains
   open about equivalence to other outputs of the Farouk–Wang procedure)?
@@ -127,27 +165,40 @@ and line numbers—and verify the answer against the underlying source.
 against a full Gram check:
 
 ```bash
-python ps_p1mod4.py
+cd code && python ps_p1mod4.py
 ```
 
 This prints `ALL PASS` (exit code `0`) if every case in the sweep satisfies
 `HHᵀ = N·I`.
 
-**What's here:**
+**Layout:**
 
-- `ps_p1mod4.py` — the construction, a small finite‑field layer (so extension
-  fields such as `q = 9, 25, 49, 81, 125` work), the verification routines, and
-  the figure/matrix export code. Everything below is a flag on this one script.
-- `paley_scarpis_p1mod4_v2.tex` / `.pdf` — the write‑up: the proof, the
-  Farouk–Wang comparison, and the coverage analysis.
-- `images/` — the figures shown above (`q5_side_by_side.png`,
-  `structure_q5_N60.png`) plus per‑order `H`|Gram figures for `q = 5, 9, 13`
-  (`H_q5_N60.png`, `H_q9_N180.png`, `H_q13_N364.png`), regenerable with
-  `--figures` below.
+- `paper/` — `main.tex` / `main.pdf`, the write‑up: the proof, the Farouk–Wang
+  comparison, §5–§6, and the coverage analysis. `paper/images/` holds the
+  figures shown above (`q5_side_by_side.png`, `structure_q5_N60.png`) plus
+  per‑order `H`|Gram figures for `q = 5, 9, 13`, regenerable with `--figures`
+  below.
+- `code/` — all verification code; see [`code/README.md`](code/README.md) for
+  the per‑script table.
+  - `ps_p1mod4.py` — the construction, a small finite‑field layer (so extension
+    fields such as `q = 9, 25, 49, 81, 125` work), the verification routines,
+    and the figure/matrix export code.
+  - `coverage_table.py` — Appendix A: the audited range, the
+    elementary‑witness screen (232 orders, 128 covered, 104 without a witness),
+    and the smallest failure `q = 109`.
+  - `nearfield_q9.py` — Remark 11: the `q = 9` Dickson‑nearfield matrix of
+    order 180 and its inequivalence to the matrix of Theorem 1.
+  - `gaussian_c30.py` — Theorem 3 and Remark 13: `Γ ∈ BH(30,4)`, the check that
+    `φ(Γ)` is the order‑60 matrix entrywise, and inequivalence to `C₃₀ + iI`.
+  - `q5_equivalence/` — the `q = 5` comparison against Farouk–Wang's printed
+    order‑60 example, with a positive control.
+- `AUDIT_LEDGER.md` — the per‑claim audit record: what was checked, by what
+  evidence, and what remains open.
 
 **Reproducing the verification:**
 
 ```bash
+cd code
 python ps_p1mod4.py                                 # default sweep, full Gram
 python ps_p1mod4.py --q 81 --sampled --pairs 5000    # headline order 13284
 python ps_p1mod4.py --big                            # add q=81 to the sweep
@@ -164,19 +215,35 @@ All default cases pass; `q = 9, 25, 49` exercise the extension‑field path.
 **Reproducing the figures:**
 
 ```bash
-python ps_p1mod4.py --figures images --figq 5,9,13   # structure + per-order H|Gram figures
+cd code && python ps_p1mod4.py --figures ../paper/images --figq 5,9,13   # structure + per-order H|Gram figures
 ```
 
 **Exporting a matrix** (e.g. to inspect or compare against another
 construction's output):
 
 ```bash
-python ps_p1mod4.py --q 5 --write - --which H --fmt signs   # H to stdout, compact +/- form
+cd code && python ps_p1mod4.py --q 5 --write - --which H --fmt signs   # H to stdout, compact +/- form
 ```
 
 `--which` selects `H` (the order‑`N` Hadamard matrix, default) or `seed` (the
 order‑`2(q+1)` Paley‑II seed `S`); `--fmt` selects `ints` (space‑separated
 `+1`/`-1`, default) or `signs` (compact `+`/`-` characters).
+
+**Reproducing the paper's other numeric claims** — each script re-derives the
+published numbers and exits nonzero if any disagrees:
+
+```bash
+cd code
+python coverage_table.py            # Appendix A: 232 / 128 / 104, smallest failure q=109
+python coverage_table.py --table    # ...and print the 104 orders without a witness
+python nearfield_q9.py              # Remark 11: 44 attained on 112,752 quadruples vs none
+python gaussian_c30.py              # Theorem 3 + Remark 13: 500 on 240 quadruples vs none
+```
+
+`nearfield_q9.py` covers all `C(180,4) = 42,296,805` row quadruples (about 8
+seconds); it validates its vectorized profile routine against a direct
+`O(n⁴)` reference at order 60, and against the recorded `q = 5` profile, before
+using it at order 180.
 
 **Requirements:**
 
@@ -188,15 +255,19 @@ order‑`2(q+1)` Paley‑II seed `S`); `--fmt` selects `ints` (space‑separated
 Because `q ≡ 1 (mod 4)`, every order factors as `2q(q+1) = 4·q·(q+1)/2` with both
 `q` and `(q+1)/2` **odd** — i.e. the order is always `4×(odd)`. Consequently:
 
-- the family never meets the dominant open Hadamard orders of the form `4×prime`
-  (here the odd part is always composite);
-- every order whose odd part is `≤ 3000` is already a known Hadamard order, and the
+- the odd part is always composite — but that is a structural description, **not**
+  an exclusion: of the 195 odd `m ≤ 2999` with no known Hadamard matrix of order
+  `4m` (Cati–Pasechnik, Table 4), 71 are composite, so the check has to be made
+  value by value rather than inferred;
+- made value by value, it passes: every order whose odd part is `≤ 3000` is
+  already a known Hadamard order — the twelve odd parts arising for `q ≤ 73` are
+  each absent from that table — and the
   first instance beyond that audited range, `q = 81` (order `13284 = 4·41·81`), is
   covered by a classical **Turyn product** using `T`‑matrices of order `41` with
   Williamson‑type matrices of order `81 = 9²`.
 
 The accompanying note
-[`paley_scarpis_p1mod4_v2.tex`](paley_scarpis_p1mod4_v2.tex) gives the proof, a
+[`paper/main.tex`](paper/main.tex) gives the proof, a
 coverage table for orders with odd part `≤ 3000`, the `q = 81` witness, and a list
 of orders up to `q = 2917` for which no elementary construction is presently
 evident (these are *unaudited*, not open).
@@ -232,4 +303,4 @@ the `note` field.
   DOI: [10.2298/FIL2206025F](https://doi.org/10.2298/FIL2206025F)
 
 (Full bibliography, including Scarpis, Đoković, Paley, and Turyn, is in
-[`paley_scarpis_p1mod4_v2.tex`](paley_scarpis_p1mod4_v2.tex).)
+[`paper/main.tex`](paper/main.tex).)
