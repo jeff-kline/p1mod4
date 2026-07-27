@@ -50,7 +50,32 @@ closed form by the quadratic character on \(\F_q\) composed with the
 is proved by four block-Gram identities computed directly from
 character sums.  The outputs differ as well: at \(q=5\) our matrix is
 not Hadamard-equivalent to the order-\(60\) example printed by Farouk
-and Wang.  We also make the family's coverage explicit:
+and Wang.
+
+We then ask what the construction actually requires.  Replacing the
+character by a function \(\delta\colon G\to\{0,\pm1\}\) with
+\(\delta(0)=0\) on a finite abelian group \(G\) of order \(n\), and the
+shift by an arbitrary array \(T\), the resulting matrix is Hadamard
+\emph{if and only if} \(\delta\) is of Paley type and \(T\) is a
+\((G,n;1)\)-difference matrix.  The two conditions separate the sign
+pattern from the shift array and account for the shape of the family:
+the first makes \(\{z:\delta(z)=1\}\) a regular partial difference set
+with the Paley parameters, forcing \(n\equiv1\pmod4\); the second
+yields \(n-1\) mutually orthogonal Latin squares, so an instance on a
+group of non-prime-power order would produce a projective plane of
+non-prime-power order.
+
+A second reading of the same matrix is arithmetic rather than
+combinatorial.  The Paley--II blocks are the real \(2\times2\)
+representation of the Gaussian units, and through it the construction
+factors through a Butson matrix \(\Gamma\in BH\bigl(q(q+1),4\bigr)\) of
+half the order whose Turyn double is \(H\).  This locates the note
+against a second line in the literature: composing the complex Scarpis
+lift of Sargent, Lee and Rushall (2024) with the same doubling gives a
+further route to the existence statement, alongside Farouk and Wang,
+and \(\Gamma\) is equivalent to one of their outputs.
+
+We also make the family's coverage explicit:
 every order \(2q(q+1)\) whose odd part is at most \(3000\) is already
 recorded in the
 standard tables, and the smallest order lying beyond that audited range,
@@ -58,7 +83,8 @@ standard tables, and the smallest order lying beyond that audited range,
 classical Turyn product using \(T\)-matrices of order \(41\) and
 Williamson-type matrices of order \(81=9^{2}\).  We exhibit the
 witnessing constructions, identify the smallest
-unaudited order, and
+unaudited order, give a second worked example lying beyond the reach of
+the elementary screen, and
 tabulate, for \(q\le3000\), those orders for which a deliberately
 restricted elementary screen supplies no witness, emphasising that these
 are \emph{unaudited} rather than open.

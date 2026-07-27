@@ -540,3 +540,27 @@ analysis rather than by compilation, which stayed silent throughout. Two items
 remain **open**, both concerning artifacts outside the paper body (the
 pre-existing appendix tag letter, and README/scorecard staleness), and neither
 gates the merge.
+
+---
+
+## Merge Record 002 — abstract brought current with the merged body — 2026-07-27
+
+Follow-up to Merge Record 001. The abstract had never been audited — the
+standard five-axis split includes an abstract auditor and no such pass was run
+on this paper — and the merge left it describing a four-section paper.
+
+| # | Claim/target | Verdict | Evidence | Required fix | Disposition |
+|---|---|---|---|---|---|
+| 1 | The abstract as it stood after the merge | GAP, not WRONG | Every sentence remained true, including the coverage claims, which §A.3 strengthened rather than contradicted. But the paper carries 3 theorems and 3 corollaries and the abstract described **Theorem 1 only** — omitting Theorem 2 (the characterisation), Corollaries 2–3 (the mod-4 and projective-plane consequences) and Theorem 3 (the factorisation over `Z[i]`), i.e. two of three theorems and roughly a third of the body | add two paragraphs covering §5 and §6 | fixed |
+| 2 | Attribution stance under an abstract-only reading | OVERSTATED by omission | The abstract credited the *q* ≡ 1 case to Farouk–Wang alone. Their 2020 priority is intact, so nothing was false, but §6 now records a **second route in the literature** (the complex Scarpis lift of Sargent–Lee–Rushall composed with Turyn doubling), and an abstract-only reader would not have known of it | name the second route in the abstract | fixed |
+| 3 | Disclosure that `Γ` is equivalent to an SLR output | CONFIRMED present | The abstract states it explicitly rather than leaving it to §6. Phrased "**is equivalent to** one of their outputs", not "is one of" — the distinction Audit 005 row 10 and Audit 006 row 5 were convened over. Guarded by an automated regression check | none | — |
+| 4 | Every factual assertion added to the abstract | CONFIRMED | 12 load-bearing claims each matched mechanically against the supporting statement in the body: the `if and only if` characterisation and its two conditions, the `δ(0)=0` hypothesis, the regular-PDS/Paley-parameter consequence, `n ≡ 1 (mod 4)`, the `n−1` MOLS and non-prime-power-plane consequence, `Γ ∈ BH(q(q+1),4)`, the Turyn double, the SLR attribution, and the second worked example. Zero mismatches | none | — |
+| 5 | `δ(0)=0` carried into the abstract | CONFIRMED | Stated explicitly in the abstract's hypothesis. Its omission was the single false mathematical statement of the entire campaign (Audit 005, lane 4 `cor:mod4`); restating the definition in a new summary surface without it would have reintroduced that defect in the paper's most-read paragraph | none | — |
+| 6 | Abstract length | INFORMATIONAL | 534 words, up from ~290. Long for the genre, and a deliberate trade against completeness across three theorems. Four paragraphs where the original was one — a style change, flagged for owner review | owner to trim if desired | open |
+| 7 | The §1 contribution paragraph | GAP | It enumerates the contributions as the method plus "a secondary contribution\ldots the coverage analysis of Appendix A", and does not mention §5 or §6 — the same omission just repaired in the abstract. **Deliberately not fixed**: the owner scoped this change to the abstract | bring §1's enumeration into line | open |
+
+**Disposition summary:** the abstract now covers all three theorems and
+discloses the second literature route. Two items remain **open**: the §1
+contribution paragraph carries the identical gap and was left alone as
+out of scope, and the abstract's length is an owner call. No claim in
+the paper body changed; this entry concerns summary surfaces only.
