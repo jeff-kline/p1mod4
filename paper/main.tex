@@ -29,69 +29,39 @@
 \maketitle
 
 \begin{abstract}
-A Hadamard matrix of order \(m\) is a \(\{1,-1\}\)-matrix \(H\) with
-\(HH^{T}=mI_{m}\).  Scarpis (1898) showed that for a prime
-\(p\equiv 3\pmod 4\) a Hadamard matrix of order \(p+1\) can be lifted to
-one of order \(p(p+1)\), and \DJ okovi\'c extended the lift to all prime
-powers \(q\equiv 3\pmod 4\), asking for the analogous procedure for
-\(q\equiv 1\pmod 4\).  That case was settled by Farouk and Wang (2020),
-who lift an input Hadamard matrix of order \(2(q+1)\), subject to
-eligibility conditions, to one of order \(2q(q+1)\), verifying
-orthogonality by row-pair counting arguments in which the key inner
-products are imported from the Hadamard property of the input matrix.
-This note contributes a different method, not a new existence result.
-Both routes are constructive; the difference is procedure versus
-formula: their lift takes choices --- an input matrix and a bijection
---- that can change the output, while the matrix here is given by a
-choice-free closed form, one matrix for each \(q\).  There is no input
-matrix: the finite bands are given entrywise in
-closed form by the quadratic character on \(\F_q\) composed with the
-\(2\times 2\) Paley--II replacement blocks, and the Hadamard property
-is proved by four block-Gram identities computed directly from
-character sums.  The printed outputs differ as well: at \(q=5\) our matrix is
-not Hadamard-equivalent to the order-\(60\) example printed by Farouk
-and Wang, although it need not differ from every output of their
-procedure (Remark~\ref{rem:alpha5}).
+For a prime power \(q\equiv 1\pmod 4\) we write down a Hadamard matrix
+of order \(2q(q+1)\) in closed form: the finite bands are given
+entrywise by the quadratic character on \(\F_q\) composed with the
+\(2\times2\) Paley--II replacement blocks, with no input matrix and no
+choices; orthogonality follows from four block-Gram identities in
+character sums.  The existence statement is not new: it is Farouk and
+Wang's (2020), whose lift from order \(2(q+1)\) takes choices that can
+change the output.  The contribution is the method: formula rather than
+procedure.  At \(q=5\) our matrix is not Hadamard-equivalent to the
+order-\(60\) example they print, though it need not differ from every
+output of their procedure (Remark~\ref{rem:alpha5}).
 
-We then ask what the construction actually requires.  Replacing the
-character by a function \(\delta\colon G\to\{0,\pm1\}\) with
-\(\delta(0)=0\) on a finite abelian group \(G\) of order \(n\), and the
-shift by an arbitrary array \(T\), the resulting matrix is Hadamard
-\emph{if and only if} \(\delta\) is of Paley type and \(T\) is a
-\((G,n;1)\)-difference matrix.  The sufficiency half is known in greater
-generality, in the Butson setting and without commutativity, from Seberry
-and from Nu\~nez Ponasso; what is new here is the converse, that the two
-conditions are forced.  They separate the sign
-pattern from the shift array and account for the shape of the family:
-the first makes \(\{z:\delta(z)=1\}\) a regular partial difference set
-with the Paley parameters, forcing \(n\equiv1\pmod4\); the second
+We then ask what the construction needs.  On a finite abelian group
+\(G\) of order \(n\), replace the character by
+\(\delta\colon G\to\{0,\pm1\}\) with \(\delta(0)=0\) and the shift by an
+arbitrary array \(T\); the matrix is Hadamard \emph{if and only if}
+\(\delta\) is of Paley type and \(T\) is a \((G,n;1)\)-difference
+matrix.  Sufficiency is known in greater generality (Seberry;
+Nu\~nez Ponasso); new is the converse, that both are forced.  Paley
+type forces \(n\equiv1\pmod4\), and the difference-matrix condition
 yields \(n-1\) mutually orthogonal Latin squares, so an instance on a
-group of non-prime-power order would produce a projective plane of
+group of non-prime-power order would give a projective plane of
 non-prime-power order.
 
-A second reading of the same matrix is arithmetic rather than
-combinatorial.  The Paley--II blocks are the real \(2\times2\)
-representation of the Gaussian units, and through it the construction
-factors through a Butson matrix \(\Gamma\in BH\bigl(q(q+1),4\bigr)\) of
-half the order whose Turyn double is \(H\).  This locates the note
-against a second line in the literature: composing the complex Scarpis
-lift of Sargent, Lee and Rushall (2024) with the same doubling gives a
-further route to the existence statement, alongside Farouk and Wang,
-and \(\Gamma\) is equivalent to one of their outputs.
-
-We also make the family's coverage explicit:
-every order \(2q(q+1)\) whose odd part is at most \(3000\) is already
-recorded in the
-standard tables, and the smallest order lying beyond that audited range,
-\(q=81\) (order \(13284=4\cdot 41\cdot 81\)), also follows from a
-classical Turyn product using \(T\)-matrices of order \(41\) and
-Williamson-type matrices of order \(81=9^{2}\).  We exhibit the
-witnessing constructions, identify the smallest
-unaudited order, give a second worked example lying beyond the reach of
-the elementary screen, and
-tabulate, for \(q\le3000\), those orders for which a deliberately
-restricted elementary screen supplies no witness, emphasising that these
-are \emph{unaudited} rather than open.
+The Paley--II blocks are the Gaussian units in the real \(2\times2\)
+representation, and our matrix is the Turyn double of a Butson matrix
+\(\Gamma\in BH\bigl(q(q+1),4\bigr)\) that is equivalent to an output of
+the complex Scarpis lift of Sargent, Lee and Rushall (2024).  An
+appendix makes coverage explicit: orders with odd part at most
+\(3000\) are in the standard tables, the first unaudited order (\(q=81\))
+follows from a classical Turyn product, and for \(q\le3000\) we
+tabulate the orders a restricted elementary screen fails to witness ---
+\emph{unaudited} rather than open.
 \end{abstract}
 
 \section{Introduction}
@@ -122,23 +92,29 @@ the residue class is used, and it is exactly what fails for
 \(q\equiv 3\pmod 4\).
 
 The existence of Hadamard matrices of order \(2q(q+1)\) for prime powers
-\(q\equiv1\pmod4\) is due to Farouk and Wang \cite{FaroukWang2020}; the
-contribution of this note is the method of
-construction and proof.  Farouk and Wang obtain the matrix as the output
-of a lifting procedure applied to an input Hadamard matrix of order
-\(2(q+1)\) meeting certain eligibility conditions, and their verification
-proceeds row pair by row pair, by counting arguments in which the key
-inner-product values are imported from the Hadamard property of the
-input matrix.  Here there is no input matrix: the finite bands are
-written entrywise in the closed form \(\psi(\chi(y-x-t))\), and the
-Hadamard property follows from four block-Gram identities whose
-ingredients are computed directly from the quadratic character --- the
-sums \eqref{eq:rowsum} and \(\sum_{z}\chi(z(z-d))=-1\), together with
-the block identity \(P+ZR=0\).  The proof is thus self-contained at the
-level of character sums, and the single place where the residue class
-enters, \(\chi(-1)=1\), is isolated.  A secondary contribution is the
-coverage analysis of Appendix~\ref{app:coverage}, which has no
-counterpart in \cite{FaroukWang2020}: it locates the initial range
+\(q\equiv1\pmod4\) is due to Farouk and Wang \cite{FaroukWang2020}; that
+existence statement is not new here, and the contribution of this note is
+the method of construction and proof.  Farouk and Wang obtain the matrix
+as the output of a lifting procedure that varies with an input Hadamard
+matrix of order \(2(q+1)\) and a bijection, verified row pair by row pair
+from the input matrix's Hadamard property.  Here there is no input matrix
+and no bijection: the finite bands are written entrywise in the closed
+form \(\psi(\chi(y-x-t))\), and the Hadamard property follows from four
+block-Gram identities computed directly from the quadratic character.
+
+\S5 asks what this construction requires: replacing \(\chi\) by a
+function \(\delta\colon G\to\{0,\pm1\}\) with \(\delta(0)=0\) and the
+shift by an arbitrary array \(T\), the resulting matrix is Hadamard
+\emph{if and only if} \(\delta\) is of Paley type and \(T\) is a
+\((G,n;1)\)-difference matrix (Theorem~\ref{thm:char}); sufficiency is
+prior art, due to Seberry \cite{Seberry1980} and to Nu\~nez Ponasso
+\cite[Thm.~4.3.3]{Ponasso2024}, and the converse is new here.  \S6 reads
+the same matrix over the Gaussian integers: it factors through a Butson
+matrix \(\Gamma\) of half the order whose Turyn double it is
+(Theorem~\ref{thm:complex}).  \S7 collects the open problems these
+readings raise.  A further contribution is the coverage analysis of
+Appendix~\ref{app:coverage}, which has no counterpart in
+\cite{FaroukWang2020}: it locates the initial range
 against audited tables of known Hadamard orders and applies a restricted
 elementary screen beyond that range.
 
