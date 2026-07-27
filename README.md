@@ -29,8 +29,12 @@ seed has order `2(q+1)`, the natural Scarpis‑type target here is `q·2(q+1) = 
 > [FW2020]** (the two matrices' row‑quadruple correlation multisets, an
 > invariant of Hadamard equivalence, differ). Farouk–Wang note that their
 > output may vary with a choice of bijection `α`, so this is inequivalence to
-> their *published* example specifically — whether the matrix here matches
-> some other output of their procedure is left open. See
+> their *published* example specifically. Whether the matrix here matches some
+> other output of their procedure is open for `q > 5`; **at `q = 5` an
+> unrefereed computation reports that it does** — see Remark 5 of the paper and
+> `code/alpha_family.py`. That report is agent-produced and has not been
+> refereed, but if it holds, the inequivalence above is to their printed
+> representative rather than to their family. See
 > [References](#references) below.
 
 ## What else is in the paper
@@ -57,7 +61,8 @@ Beyond the construction and the Farouk–Wang comparison:
   `Aut(G)`; where the obstruction sits beyond the prime powers (the `δ`-slot
   *is* available at `n = 5625`, the `T`-slot is not, so the whole obstruction
   is in `T`); the `q ≡ 3 (mod 4)` class; and equivalence to the rest of the
-  Farouk–Wang family.
+  Farouk–Wang family — the last of which is now answered at `q = 5` by the
+  unrefereed Remark 5, and open beyond it.
 - **Appendix A — coverage.** Which orders in the family are already known
   Hadamard orders, an explicit witness where one exists, the first unaudited
   order (`q = 81`), a second worked example (`q = 109`), and a screen over
@@ -65,17 +70,18 @@ Beyond the construction and the Farouk–Wang comparison:
 
 ## Scorecard
 
-_`repo-rank` pass, commit `5cb92e7` (branch `merge/audits-005-006-additions`),
-run 2026-07-27 — four independent cold graders, each shown only its own axis.
-Qualitative notes only._ Per-axis reasoning, the confirmed findings and what
-would move each axis are in [`AUDIT_LEDGER.md`](AUDIT_LEDGER.md), Scorecard 003.
+_`repo-rank` pass, commit `5cb92e7`, run 2026-07-27 — four independent cold
+graders, each shown only its own axis — with the notes revised after the
+follow-up work of Scorecard 003's addendum. Qualitative notes only._ Per-axis
+reasoning, the confirmed findings, the open items and what would move each axis
+are in [`AUDIT_LEDGER.md`](AUDIT_LEDGER.md), Scorecard 003 and its addendum.
 
 | Axis | Note |
 |---|---|
-| Novelty | The weakest axis, and the paper says so itself. Existence at these orders is Farouk–Wang's; §5's *sufficiency* half is prior art (Seberry; Nuñez Ponasso); §6's Γ is conceded equivalent to a Sargent–Lee–Rushall output; and Nuñez Ponasso's dissertation turns out to reach the existence statement too, by a route the paper does not yet cite. What is left, and what no grader could locate anywhere, is §5's **converse** — that the two conditions are forced. |
-| Depth | The strongest axis. Every theorem and corollary proved outright, nothing conditional, nothing carried by numerics. A grader working *only from the paper's text* — not from the code — reimplemented the construction and got exact Hadamard matrices at q = 5, 9, 13, 17, 25, so the prose now determines the object. Open: the row-quadruple statistic is used as a Hadamard-equivalence invariant in three places without that invariance being stated as a lemma. |
-| Reach | Settles the question §5 poses and gives a proved, quantitative delimitation — the entire non-prime-power obstruction is localised to the `T`-slot, with the smallest conceivable instance pinned at order 63,292,500 and Bruck–Ryser explicitly ruled out as a tool. It partially answers a published Farouk–Wang open problem. It reaches **no** currently-open Hadamard order, and could not: that cap is prior art, not arithmetic. |
-| Evidence | Every script runs, reproduces its published numbers, and leaves the tree clean; the fast profile routine is genuinely validated against a direct O(n⁴) reference before being trusted at scale, and all 104 rows of the coverage screen match the paper's printed table. Open: one sub-claim of Remark 11 (that 6 of 16 sign patterns are of Paley type) is still unscripted, and the transcribed external table has no internal consistency check. |
+| Novelty | The weakest axis, and it moved **down** this round. Existence at these orders is Farouk–Wang's; §5's *sufficiency* half is prior art (Seberry; Nuñez Ponasso, whose dissertation also reaches the existence statement); §6's Γ is conceded equivalent to a Sargent–Lee–Rushall output. The `q = 5` inequivalence used to support the claim that this construction yields a *different object* — an unrefereed computation (Remark 5) now reports it is equivalent to an output of their procedure after all, which removes that support. What is left, and what no grader could locate, is §5's **converse**. |
+| Depth | The strongest axis. Every theorem and corollary proved outright, nothing conditional, nothing carried by numerics. A grader working *only from the paper's text* — not from the code — reimplemented the construction and got exact Hadamard matrices at q = 5, 9, 13, 17, 25, so the prose determines the object. The quadruple-statistic invariance, previously used in three places without proof, is now Lemma 5. Still asserted rather than proved: that Γ is equivalent to a Sargent–Lee–Rushall output. |
+| Reach | Settles the question §5 poses and gives a proved, quantitative delimitation — the entire non-prime-power obstruction is localised to the `T`-slot, the smallest conceivable instance pinned at order 63,292,500, Bruck–Ryser explicitly ruled out. It partially answers a published Farouk–Wang open problem, and §7 problem 5 is now answered at `q = 5` — though the answer is negative for this work, which is why the axis did not move. It reaches **no** currently-open Hadamard order, and could not: that cap is prior art, not arithmetic. |
+| Evidence | The most improved axis. Every script runs, reproduces its published numbers, and leaves the tree clean; the fast profile routine is genuinely validated against a direct O(n⁴) reference before being trusted at scale, and all 104 rows of the coverage screen match the paper's printed table. The two gaps found last round are closed: the 6-of-16 Paley-type count is scripted, and the transcribed external table now carries an integrity check that catches compensating edits. |
 
 ## Ours vs. Farouk–Wang at q = 5
 

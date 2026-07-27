@@ -23,6 +23,7 @@ deliberately NOT implemented.
 """
 
 import argparse
+import hashlib
 import sys
 
 # ---------------------------------------------------------------------------
@@ -51,6 +52,38 @@ CP_TABLE4 = [
     2893, 2899, 2903, 2913, 2927, 2939, 2951, 2963, 2971, 2973, 2987,
     2995, 2999,
 ]
+
+
+# --------------------------------------------------- transcription integrity
+# CP_TABLE4 is copied by hand from a PDF, so it gets the same treatment as the
+# other transcription in this repository (the Farouk-Wang matrix, which
+# self-validates via H H^T = 60 I).  The constants below were fixed against an
+# independent re-extraction of Table 4 from the source PDF, which agreed with
+# the list above entry for entry.
+#
+# CATCHES: any dropped, added, duplicated, reordered or mistyped entry --
+# including a "compensating" pair of edits that preserves count, parity, order
+# and sum, which the structural checks alone would miss but the digest will not.
+# DOES NOT CATCH: an erratum already present in the published table, or a
+# misreading of the PDF shared by both this transcription and the
+# re-extraction.  Neither is a defect this repository can detect on its own.
+_CP_LEN, _CP_MIN, _CP_MAX, _CP_SUM = 195, 167, 2999, 342953
+_CP_SHA256 = "4407fcdd31f6fc595b6a863fdc27dc64cf032a0901a2b9a51fb057cd84bbe625"
+
+
+def cp_table4_integrity(table):
+    """Yield (ok, label, got, want) for each structural/digest check."""
+    yield len(table) == _CP_LEN, "entry count", len(table), _CP_LEN
+    yield (all(v % 2 == 1 for v in table), "all entries odd",
+           all(v % 2 == 1 for v in table), True)
+    inc = all(table[i] < table[i + 1] for i in range(len(table) - 1))
+    yield inc, "strictly increasing (no dups, no swaps)", inc, True
+    yield ((table[0], table[-1]) == (_CP_MIN, _CP_MAX), "endpoints",
+           (table[0], table[-1]), (_CP_MIN, _CP_MAX))
+    yield sum(table) == _CP_SUM, "sum of entries", sum(table), _CP_SUM
+    digest = hashlib.sha256(repr(tuple(sorted(table))).encode()).hexdigest()
+    yield (digest == _CP_SHA256, "sha256 vs independent PDF re-extraction",
+           digest[:16] + "...", _CP_SHA256[:16] + "...")
 
 
 # ------------------------------------------------------------------ arithmetic
@@ -186,6 +219,12 @@ def main():
         print(f"[{mark}] {label}: {got}" + ("" if ok else f"   (expected {want})"))
         if not ok:
             fails.append(label)
+
+    # -- transcription integrity of the external table ---------------------
+    print("CP_TABLE4 transcription integrity")
+    for ok, label, got, want in cp_table4_integrity(CP_TABLE4):
+        check(ok, f"  {label}", got, want)
+    print()
 
     # -- A.1: the audited range -------------------------------------------
     audited = prime_powers_1mod4(73)

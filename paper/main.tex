@@ -324,7 +324,28 @@ Lemma~\ref{lem:cross}, and their imported inner products match the
 values that Lemma~\ref{lem:self} derives from
 \(\sum_{z}\chi(z(z-d))=-1\).  The devices used for the cap band also
 differ: a column permutation arranging balanced sign pairs in
-\cite{FaroukWang2020} versus right multiplication by \(R\) here.  The
+\cite{FaroukWang2020} versus right multiplication by \(R\) here.
+
+\begin{lemma}\label{lem:quadinv}
+Let \(M=(m_{ic})\) have all entries of modulus \(1\).  The multiset of
+\(\bigl|\sum_cm_{ic}\overline{m_{jc}}m_{kc}\overline{m_{lc}}\bigr|\), taken
+over quadruples of distinct rows --- equivalently, the multiset of its
+squares --- is unchanged by permuting rows or columns, by multiplying any row
+or column by a scalar of modulus \(1\), and by complex conjugation.
+\end{lemma}
+
+\begin{proof}
+Permuting rows permutes the quadruples and permuting columns permutes the
+summands.  Multiplying row \(i\) by \(u\) multiplies every summand by \(u\)
+or by \(\bar u\), and multiplying column \(c\) by \(v\) multiplies the
+\(c\)-th summand by \(v\bar vv\bar v=|v|^{4}=1\); conjugating \(M\) conjugates
+every sum.  No absolute value changes in any case.
+\end{proof}
+
+For a \(\{1,-1\}\)-matrix the conjugations are vacuous and the admissible
+scalars are \(\pm1\), which is the form used below and in
+Remark~\ref{rem:q9}; the column profile of \(M\) is the row profile of
+\(M^{T}\).  The
 two constructions moreover produce genuinely different matrices, not
 merely different presentations: at \(q=5\) the matrix of
 Theorem~\ref{thm:main} is not Hadamard-equivalent to the order-\(60\)
@@ -334,9 +355,30 @@ multiset of absolute row-quadruple correlations
 Hadamard equivalence, differs for the two matrices
 (Figure~\ref{fig:q5sbs}).  Since Farouk and
 Wang note that their output may vary with the choice of bijection
-\(\alpha\), we leave open whether the matrix of
-Theorem~\ref{thm:main} is equivalent to some other output of their
-procedure.
+\(\alpha\), the matrix of Theorem~\ref{thm:main} may still be equivalent to
+some other output of their procedure; see Remark~\ref{rem:alpha5}.
+
+\begin{remark}[unrefereed computational report]\label{rem:alpha5}
+The following is \emph{not} a claim of this note.  It was produced by
+automated agents, has been checked here only by re-running the computation,
+and has not been refereed; we record it because it bears directly on the
+paragraph above.  The report is that at \(q=5\) the matrix of
+Theorem~\ref{thm:main} \emph{is} Hadamard-equivalent to an output of the
+Farouk--Wang procedure --- to \(\Psi_{5,\alpha}(P'_5)\) for \(\alpha\) any of
+the twenty affine bijections \(k\mapsto ak+b\) of \(\F_5\) --- by an explicit
+signed row and column permutation, exhibited and checked by exact integer
+identity in \texttt{code/alpha\_family.py}.  If it is right, the inequivalence
+recorded above separates the matrix of Theorem~\ref{thm:main} from the
+particular representative printed in \cite{FaroukWang2020}, not from the
+family \(\Psi_{5,\alpha}\); the same computation reports that three of the
+four profiles arising in that family do differ from ours, so the matrix is
+equivalent to some outputs and inequivalent to others.  Two caveats are
+essential.  It covers \(q=5\) alone.  And it rests on a reading of
+\cite[Steps 4--7]{FaroukWang2020} that required correcting the permutation
+displayed in the proof of their Lemma 2.2(2), which at \(q=5\) does not
+satisfy their own condition; their Theorem 2.2 and Corollary 2.1 are
+unaffected.  Independent verification is wanted.
+\end{remark}
 
 \begin{figure}[t]
 \centering
@@ -827,7 +869,10 @@ credited to \cite{Turyn1970}; the one-line verification is included because
 it is shorter than the citation.)
 Composing their Corollary~1 with Lemma~\ref{lem:double} therefore yields a
 second route in the literature to the existence statement of
-Theorem~\ref{thm:main}, alongside \cite{FaroukWang2020}.
+Theorem~\ref{thm:main}, alongside \cite{FaroukWang2020}.  The same move is
+available in Butson generality: composing \cite[Thm.~4.3.3]{Ponasso2024} on a
+\(BH(q+1,4)\) seed with Lemma~\ref{lem:double} --- his Theorem~4.4.1 --- is a
+third such route.
 
 The matrix \(\Gamma\) of Theorem~\ref{thm:complex} is in fact equivalent to
 one of their outputs.  Index \(C-iI\) by \(\{\infty\}\cup\F\) with \(\infty\) first and
@@ -913,7 +958,8 @@ a characterisation of the shape of Theorem~\ref{thm:char}?
 inequivalence recorded in \S4 is to the order-\(60\) matrix printed in
 \cite{FaroukWang2020}.  Their procedure varies with a bijection \(\alpha\),
 so whether the matrix of Theorem~\ref{thm:main} is equivalent to
-\emph{some} output of that procedure is open; likewise for the complex lift
+\emph{some} output of that procedure is open for \(q>5\); at \(q=5\) see the
+unrefereed report of Remark~\ref{rem:alpha5}.  Likewise for the complex lift
 of \cite{SargentLeeRushall2024} beyond the equivalence noted in
 Remark~\ref{rem:slr}.
 

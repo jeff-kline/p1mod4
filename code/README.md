@@ -11,7 +11,9 @@ exits nonzero if any of them disagrees. Requires Python 3 and `numpy`
 | `coverage_table.py` | Appendix A | The audited range, and the elementary-witness screen: 232 orders, 128 covered, 104 without a witness, smallest failure `q = 109`. `--table` prints the 104 rows. |
 | `nearfield_q9.py` | Remark 11 | The `q = 9` Dickson-nearfield matrix of order 180 and its inequivalence to the matrix of Theorem 1, over all `C(180,4) = 42,296,805` row quadruples. |
 | `gaussian_c30.py` | Theorem 3, Remark 13 | `Γ ∈ BH(30,4)`, that `φ(Γ)` is the order-60 matrix entrywise, and inequivalence to Turyn's `C₃₀ + iI`. |
+| `paley_patterns_q9.py` | Remark 11, §7 problem 2 | That exactly 6 of the 16 even sign patterns on `Z₃²` vanishing at 0 are of Paley type, and that all 6 form a single orbit under `Aut(Z₃²) = GL(2,3)`. Confirms the `GF(9)` additive group really is `Z₃²` rather than assuming it. |
 | `q5_equivalence/` | §4 | The `q = 5` comparison against the order-60 example printed by Farouk–Wang, including a positive control. See its own README. |
+| `alpha_family.py` | Remark 5 — **unrefereed** | Enumerates the Farouk–Wang procedure over all 120 bijections `α` at `q = 5` and exhibits an explicit signed row/column permutation carrying the note's matrix onto `Ψ_{5,α}(P′₅)`. Agent-produced, checked only by re-running; the paper records it as a report, not a result. Read the caveats in Remark 5 before relying on it. |
 
 ## Run everything
 
@@ -21,6 +23,7 @@ python ps_p1mod4.py          # default sweep, full Gram      -> ALL PASS
 python coverage_table.py     # Appendix A                    -> ALL PASS
 python nearfield_q9.py       # Remark 11 (about 8 seconds)   -> ALL PASS
 python gaussian_c30.py       # Theorem 3 + Remark 13         -> ALL PASS
+python paley_patterns_q9.py  # Remark 11's delta-slot count  -> ALL PASS
 cd q5_equivalence && python profiles.py
 ```
 

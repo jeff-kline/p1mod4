@@ -794,3 +794,60 @@ defect regressed. Seven items are open, none of them a false statement: five
 are gaps of proof-status, reproducibility or framing, one is an attribution
 sentence, and one — the de Launey/Flannery search — is the single question on
 which two axis scores depend.
+
+### Scorecard 003 addendum — the four open items worked — 2026-07-27
+
+Three lanes ran read-only against the repository; the coordinator applied every
+edit, after independently verifying each result. Items are numbered as in
+Scorecard 003 above.
+
+| # | Item | Outcome | Evidence |
+|---|---|---|---|
+| 5 | Row-quadruple invariance never stated | **CLOSED** | Now Lemma 5 in §4, stated for entries of modulus 1 so that it covers all three uses — §4 and `rem:q9` (real, `±1`) and `rem:c30` (Butson, fourth roots and conjugation). The drafted version covered only the real case, which would have left `rem:c30` uncovered while appearing closed; it was widened before being applied. Verified numerically on both the order-60 matrix and Γ, under permutations, sign and fourth-root scalings, and conjugation — with a negative control confirming a generic single-entry phase *does* change the profile, so the lemma is not vacuous |
+| 6 | Ponasso also reaches the existence statement | **CLOSED** | One sentence added to `rem:slr`. The draft's stronger clause "not equivalent to Γ" was **rejected**: the coordinator's check established only that the natural instantiation is inequivalent, and a different seed or GH matrix could land elsewhere, so stating it flatly would have been an overclaim |
+| 9 | `rem:q9`'s 6-of-16 sub-claim unscripted | **CLOSED** | `code/paley_patterns_q9.py`. Confirms both halves: exactly 6 of the 16 patterns are of Paley type, and all 6 form a **single orbit** of size 6 under `Aut(Z₃²) = GL(2,3)` (order 48, stabiliser order 8), with χ among them. It verifies that `GF(9)`'s additive group really is `Z₃²` rather than assuming it |
+| 10 | `CP_TABLE4` had no integrity check | **CLOSED** | Added to `coverage_table.py`. The transcription was independently re-extracted from the source PDF and found identical entry for entry, so the digest pins a cross-checked state rather than freezing whatever was there. Negative control: a compensating edit (523→525, 571→569) passes count, parity, order, endpoints **and** sum, and is caught only by the digest |
+| 11 | The reach cap is prior art, not arithmetic | recorded in the README scorecard note | not a paper change |
+
+### The α-family result (item 1) — recorded as an unrefereed report
+
+The remaining item was to settle §7 problem 5 at `q = 5`. **It came out against
+the paper.** At `q = 5` the matrix of Theorem 1 *is* Hadamard-equivalent to an
+output of the Farouk–Wang procedure — to `Ψ_{5,α}(P′₅)` for α any of the twenty
+affine bijections `k ↦ ak+b` of `F₅` — by an explicit signed row and column
+permutation, not by an invariant coincidence.
+
+**Coordinator verification.** The H under test was confirmed byte-identical to
+what `PaleyScarpis(5)` builds; the Ψ target was rebuilt from parameters derived
+from the Paley-II seed rather than from saved state; the exact integer identity
+was then checked. The first attempt **failed** (max difference 2) — that was a
+permutation-convention error on the coordinator's part, and with row gather by
+`src` and column gather by `inv(perm)` the identity holds exactly.
+
+**What is not verified, and it is the crux.** That the implementation of
+`Ψ_{q,α}` is faithful to Farouk–Wang's Steps 4–7. Building it at all required
+correcting the permutation displayed in the proof of their Lemma 2.2(2), which
+at `q = 5` does not satisfy their own condition (`T·ε = (0,0,0,0,0,4,4,4,4,4)`),
+and their Step 6's block shape. Their Theorem 2.2 and Corollary 2.1 are
+unaffected. The evidence for faithfulness is strong but interpretive: the
+implementation reproduces the printed 4-profile `4:353800 12:111525 20:21910
+28:400` exactly, and their printed matrix was reverse-engineered and shown to
+carry the §2 block structure.
+
+It is therefore recorded in Remark 5 as an **unrefereed computational report,
+explicitly not a claim of the note**, with its scope limits stated: `q = 5`
+alone; the matrix is equivalent to *some* outputs and provably inequivalent to
+*others*; 66 further seed shapes unexplored; order-12 Hadamard uniqueness
+quoted, not verified. `code/alpha_family.py` ships so a referee can re-run it.
+
+**Effect on the axes.** Depth and Evidence improved and Novelty fell. Reach did
+not move: answering §7 problem 5 was priced as a gain, but the answer removes a
+distinctness claim the work previously leaned on, and the two cancel. The
+paper's §4 inequivalence survives — it is to the printed representative — but
+its significance is reduced, and the README front door was corrected to match.
+
+**Process note against the coordinator.** The α lane was told the repository was
+read-only while the coordinator was concurrently applying items 2, 3 and 4 to
+it; the agent correctly flagged the changing mtimes. No contamination resulted —
+its work depends on `ps_p1mod4.py` and the Farouk–Wang PDF, neither of which was
+touched — but the lanes should have been sequenced or the tree frozen.
