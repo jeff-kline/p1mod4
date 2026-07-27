@@ -851,3 +851,45 @@ read-only while the coordinator was concurrently applying items 2, 3 and 4 to
 it; the agent correctly flagged the changing mtimes. No contamination resulted —
 its work depends on `ps_p1mod4.py` and the Farouk–Wang PDF, neither of which was
 touched — but the lanes should have been sequenced or the tree frozen.
+
+### Correction to the Scorecard 003 addendum — Novelty — 2026-07-27
+
+The addendum above recorded that the Novelty axis fell on account of
+Remark~5's `q = 5` equivalence. **That was wrong**, and is retracted. The
+owner challenged it and an independent cold re-grade at commit `6e737f5`
+placed the axis exactly where Scorecard 003 had it — unchanged, not lowered.
+
+Two errors, recorded so a later pass does not repeat them:
+
+1. **Category error.** An *object*-level fact (the `q = 5` matrix lies inside
+   the Farouk–Wang family) was allowed to deflate a *method*-level claim (a
+   choice-free closed form replacing a choice-dependent procedure). A canonical
+   selector landing inside the known family is the success condition for such a
+   claim, not a failure of it.
+2. **Logic error.** Scorecard 001's `q = 5` argument was a steelman for moving
+   the axis *up*. Killing an argument for raising a score is not an argument for
+   lowering it; the base rests on prior-art analysis, which Remark 5 does not
+   touch.
+
+The re-grade's own mechanism is sharper than either: §6 already **proves, for
+every `q` and by argument**, that Γ is equivalent to a Sargent–Lee–Rushall
+output. A universal proved subsumption dominates a single-`q`, unrefereed,
+machine-produced coincidence, so there was no object-novelty credit left for
+Remark 5 to remove. Its verdict is *neutral* — not supporting either, since
+canonical selection is precisely what Sargent–Lee–Rushall's Theorem 1 does once
+seed, deleted row and α are fixed, and a property shared with the closest prior
+work is not evidence of novelty.
+
+A wrong dependency had been written into the README front door as a result:
+under the retracted reading, later *refuting* Remark 5 would not have restored
+the axis. The README note has been rewritten to state the §6 subsumption as the
+operative fact instead.
+
+**One real defect did come out of the re-grade, on presentation rather than
+novelty.** The abstract asserted "The outputs differ as well" and §4 "genuinely
+different matrices, not merely different presentations", while Remark 5 two
+sections later substantially undercuts both; inequivalence to a single printed
+representative of a choice-parametrised family is a weak signal at order 60.
+Both are now scoped: the abstract says "the printed outputs differ" and points
+at Remark 5, and §4 says the constructions "do not merely present the same
+matrix differently".
