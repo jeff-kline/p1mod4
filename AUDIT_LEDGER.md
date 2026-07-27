@@ -352,3 +352,191 @@ script that produced the coverage table.
 "what would move it" items above (Depth's alignment prose, Evidence's
 missing coverage script) are the only concrete, actionable gaps this pass
 surfaced.
+
+---
+
+## Audit 005 — three proposed appendix/section additions (not merged) — 2026-07-27
+
+- **Artifacts (none in this repository; all in an external scratchpad):**
+  - lane 6 draft, "The construction over the Gaussian integers" @ sha256
+    `7772b75c3eae6422903a07a1a5c804e2aa0bbad64fe625a0be6e7ab595d12223`
+  - lane 4 draft, "What the construction needs" @ sha256
+    `7ac65399f7f5b619cf05643352b317ff7c32c05d6c54e77b11720d581601b9bc`
+  - lane 5 draft, "A second worked example: q = 109" @ sha256
+    `6273b44a1e231e0611f2447a29f1d929dd53170601ad3a2859774532e87c3426`
+- **Artifact version note:** uncommitted; external to this repository.
+  **Nothing from these drafts has been merged into the paper.** This entry
+  records the audit only.
+- **Target paper pinned at:** `paley_scarpis_p1mod4_v2.tex` @ sha256
+  `67c34a9f064752c6b7f2fb585b7fde8e82cd1c48c6dec07e92c86c7d7230920e`
+  (commit c05ca65). The repository was read-only throughout; no file in it
+  was modified by any auditor.
+- **Auditors:** seven fresh agents, all cold-context: yes —
+  six on a math/citations axis split (one pair per draft), model claude-opus-5;
+  one further mathematics pass on the lane 6 draft, model claude-fable-5.
+  Two additional non-audit agents performed build remediation (claude-sonnet-5).
+- **Primary sources provided:** Sargent–Lee–Rushall, JCMCC 119 (2024) 105–111
+  (local copy sha256 `de8c684b0f37cf56bfbdbe28086fc27367a0ec931b100107716f7e114c8a76d6`);
+  Seberry–Yamada 1992, *Contemporary Design Theory* pp. 431–560 (local copy
+  sha256 `01cec87b0b76e22b546bc4ed7160faed8c6680e2f7b70c438bbd92bb362f0c9c`);
+  Egan–Ó Catháin arXiv:1707.08815; Heikoop et al. arXiv:1907.07024;
+  Wang arXiv:1908.07055; Farouk–Wang, Filomat 36:6 (2022);
+  Đoković arXiv:1008.2043 and arXiv:1002.1414; van Greevenbroek–Jedwab;
+  Polhill 2009 (author copy).
+- **Scope:** every theorem, proof, numeric claim and citation in the three
+  proposed additions. Explicitly out of scope: the paper's existing sections.
+- **Overall verdict:** FIT TO MERGE AFTER FIXES. One false statement and two
+  instances of uncited borrowing were found and repaired in the drafts; no
+  proposed theorem was broken. Merge remains gated pending Audit 006.
+
+| # | Claim/target | Verdict | Evidence | Required fix | Disposition |
+|---|--------------|---------|----------|--------------|-------------|
+| 1 | lane 4 `cor:mod4`: δ of Paley type ⟹ Σδ=0, D regular, n ≡ 1 (mod 4) | WRONG | Counterexample on G = Z₃, δ = (1,−1,−1): satisfies the draft's written definition (A(d) = [3,−1,−1]) yet Σδ = −1, n ≡ 3 (mod 4), and 0 ∈ D so D is not regular; the proof's step δ = 2D̂ − Ĝ + 1 yields (2,−1,−1) ≠ δ. Instantiated independently by the coordinator | add `δ(0)=0` to the definition of "of Paley type" | fixed |
+| 2 | lane 4 `cor:plane` first half, presented as the draft's own | OVERSTATED (uncited borrowing) | van Greevenbroek–Jedwab: "a (G, m, 1) difference matrix is equivalent to a G-regular set of m − 1 mutually orthogonal Latin squares of order \|G\| [Jun80, Theorem 1]" | cite Jungnickel, *Abh. Math. Sem. Hamburg* 50 (1980) 219–231, Thm 1 | fixed |
+| 3 | lane 4 `rem:supply` scarcity claim, presented as the draft's own | OVERSTATED (uncited borrowing) | "In all known examples of a GH(\|G\|, λ) over G, the group order \|G\| is a prime power … [Lau07, p. 303]" — i.e. de Launey, *Generalized Hadamard matrices*, pp. 301–306 of the Handbook the draft already cited | cite the Handbook at p. 303 | fixed |
+| 4 | lane 4: the `(G,n;1)`-difference matrix left unnamed | UNVERIFIABLE as written | The object is a generalized Hadamard matrix GH(n,1) over G, attaining Jungnickel's bound m ≤ λ\|G\| (*Math. Z.* 167 (1979) 49–60, Thm 2.2) | name it; cite Jungnickel 1979 | fixed |
+| 5 | lane 4 `rem:q9`: order-180 inequivalence attributed to non-Desarguesianness | OVERSTATED | Band-relabelling the *Desarguesian* field difference matrix already yields inequivalent order-180 matrices (4-profile 44-counts 12960/17496/11664/11664/18144/18144 vs the paper's 0), while π = multiplication-by-c reproduces the paper's profile exactly | state that the nearfield supplies a canonical second choice, not the cause | fixed |
+| 6 | lane 4: order 10 "excluded **only** by exhaustive computation" | OVERSTATED | Bright, Cheung, Stevens, Kotsireas, Ganesh (arXiv:2012.04715) produced machine-verifiable nonexistence certificates and report "consistency issues in both previous searches" | add the 2021 certificate-based resolution | fixed |
+| 7 | lane 4 `thm:char` (the main proposed theorem), both directions | CONFIRMED | Re-derived independently from the paper's text before the draft's proof was read; necessity chain σ²+n₀²=1 → σ=0, n₀∈{0,1} → Paley type → μ_rs ≡ 1; exhaustive at n=5 (243/243), plus n=9, n=13; all 90 000 normalised (Z₅,5;1)-difference matrices give Hadamard output | none | — |
+| 8 | lane 4 `cor:plane` n−1 vs n−2 MOLS off-by-one | CONFIRMED | Cross-checked by developing the difference matrix into an orthogonal array with n+1 factors, strength 2 index 1 on every pair, at n = 5, 9, 13, 25 and the order-9 nearfield | none | — |
+| 9 | lane 6: the paper's H is the Turyn/Cohn double of a BH(q(q+1),4) | CONFIRMED | Read off the 2×2 blocks; every block lies in φ({±1,±i}); de-doubled Γ satisfies ΓΓ\* = nI and φ(Γ) = H exactly, verified against this repository's own `ps_p1mod4.py` at q = 5, 9, 13, 17, 25, and by a second implementation at q = 29, 37, 41, 49, 81, 121, 125 | none | — |
+| 10 | lane 6: Γ **is** an output of Sargent–Lee–Rushall (2024) | OVERSTATED | The identity is SLR(N, delete ∞ row) = diag(I_q, i·I_{q²})·Γ, and that diagonal ≠ I; the scaling does lie in their equivalence group | "is equivalent to one of their outputs" | fixed |
+| 11 | lane 6: SLR 2024 is closer prior art than Farouk–Wang, and Remark 2 claimed parity between the two comparisons | OVERSTATED | §4 of the paper (tex ll. 279–290) additionally asserts the paper's matrix is *not* Hadamard-equivalent to the Farouk–Wang example; against SLR the matrix is the **same** up to a diagonal row scaling, so that half does not carry over | state explicitly that no inequivalence claim is available against SLR | fixed |
+| 12 | lane 6: the draft's reading of SLR Corollary 1 is "the only reading that makes the corollary true" | WRONG | Pairing seed column a with multiplier σ(a) for an arbitrary bijection σ also yields genuine complex Hadamard matrices (12/12 at q = 5, 9, 13). A q!-family of readings works | delete the uniqueness claim; justify the reading by SLR's printed subscript rule instead | fixed |
+| 13 | lane 6: the general-q SLR identification | CONFIRMED | Reconstructed twice independently from SLR's printed Theorem 1 before the draft's derivation was read; exact agreement at q = 5, 9, 13, 17, 25, 29, 37, 41, 49, 81, 121, 125 (extension degrees 1–4, including the smallest applicable p³ = 125); the scaling has exactly two values, multiplicities q and q², at every one of those q | none | — |
+| 14 | Dependence of the SLR output class on the bijection α | CONFIRMED (new) | Sweeping all 120 bijections at q = 5: all 120 give complex Hadamard matrices, but the 20 affine α — and exactly those — reproduce the paper's 4-profile; all 100 non-affine give a different profile and are therefore provably inequivalent. Four profile classes, sizes 40/40/20/20. For affine α the equivalence is proved for general q, requiring complex conjugation when the slope is a non-square | none; recorded so the identification is not over-generalised | — |
+| 15 | lane 5: Hadamard matrix of order 23980 = 4·55·109 exists | CONFIRMED | Seberry–Yamada 1992, Cor. 8.8 part 1 (p. 505) read verbatim; Williamson matrices of order 27 attested by their class w₁ = {1,…,33,37,39,41,43} (legend p. 541, Table A.1 p. 543); T-matrices of order 55 from BS(28,27), Đoković's classification | none | — |
+| 16 | lane 5: "the whole claim rests on the (q−1)/4 = 27 branch" | WRONG | Seberry–Yamada Table A.1 (p. 543) lists order 109 under method code `wk`, whose legend (p. 542) is Cor. 8.8 **part 2** — requiring only a symmetric *conference* matrix of order (q−1)/2 = 54, which exists by Paley since 53 is prime ≡ 1 (mod 4). The order is over-determined, not fragile | retract the single-branch framing; cite Table A.1 | fixed |
+| 17 | lane 5: order 27 lies in an "exhaustively searched range" of Holzmann–Kharaghani–Tayfeh-Rezaie whose nonexistence orders are 35, 47, 53, 59 | OVERSTATED | Remark 1 of the paper (tex ll. 439–444) attributes order 35 to Đoković, states that HKT-R found "the **further** nonexistence orders 47, 53, and 59", and states no searched range at all | rest the argument on w ≤ 33 and on 35 > 33 instead | fixed |
+| 18 | lane 5: q = 121 named as the smallest order with no witness of any kind | WRONG | For q = 121, m = 7381 = 11²·61 and 2·121 − 1 = 241 is prime, so w is already W-known; the neighbouring proposed paragraph cites T-sequences for every length ≤ 100 except 97 | delete the sentence; claim only that no entry is asserted open | fixed |
+| 19 | Uncited borrowing of the lane 4 main theorem, or of the lane 5/lane 6 results | CONFIRMED ABSENT | Targeted searches plus full-text checks of nine related papers; the nearest prior work on the lane 4 axis is Đoković's prime-power extension of Scarpis, which contains no characterisation | none | — |
+| 20 | Audit of the fixes themselves (coordinator-introduced defects) | OVERSTATED | Audit 006: nine repair-introduced defects, four must-fix — the most serious a wrong-source citation created by the repair round itself (an orphaned `\url` line moved the Handbook's DOI onto the Lam's-problem reference). No repair was mathematically wrong | see Audit 006 | fixed |
+
+**Missed points raised by auditors — defects in this repository's own files,
+outside the audited artifacts.** Four independent auditors surfaced these
+incidentally; none was in scope, and none is fixed:
+
+1. `Turyn1974` is cited (tex l. 404) for Turyn's 9-power family of Williamson
+   matrices; that theorem is Turyn, *J. Combin. Theory Ser. A* 12 (1972)
+   319–321, cited as ref [6] *by* the 1974 paper itself.
+2. `KharaghaniTayfehRezaie2005` is cited (tex ll. 401–403) for the base
+   sequences BS(21,20); that paper is "A Hadamard matrix of order 428" and
+   concerns Turyn-type sequences of lengths 36,36,36,35. `Djokovic2010BS`
+   is the correct source.
+3. `Turyn1974` is cited for BS(21,20) as well; a full-text search of the 1974
+   paper for "base sequence" / "T-matrices" returns nothing (scan OCR is poor,
+   so this is flagged, not concluded).
+4. `Djokovic2016` is cited arXiv-only (tex ll. 684–687); the published version
+   is *Linear and Multilinear Algebra* 65 (2017) no. 10, 1985–1987.
+5. `README.md` l. 201 says the coverage table runs "up to q = 2917"; the
+   table's own caption (tex l. 496) and last row say 2969.
+6. An equation inside Appendix A is manually tagged `(C.1)` (tex l. 428).
+7. The `M_∞` paragraph never states that the column-pair expansion is *in
+   place* — which S-pair sits over which group element. The reference
+   implementation and the proposed Theorem 2 both use the in-place reading;
+   any other placement permutes column blocks only.
+
+**Disposition summary:** Of 19 resolved findings, four were WRONG (rows 1,
+12, 16, 18 — one mathematical, three descriptive), and two were uncited
+borrowings of classical results (rows 2, 3). All were repaired in the external
+drafts; none is yet in this repository. The main proposed theorem of each
+draft survived independent re-derivation. The seven repository-level defects
+above are recorded as **open** and warrant a dedicated bibliography audit.
+Merge is gated on Audit 006 (audit of the repairs).
+
+---
+
+## Audit 006 — the repairs made in response to Audit 005 — 2026-07-27
+
+- **Artifacts (external scratchpad; post-repair state):**
+  lane 4 @ sha256 `423a8a5700bc5308e3100e2f68bbfde00a85652767f3b8a88e9541dc29487d71`;
+  lane 5 @ sha256 `8069741e31dc3d38b5d202713b15202b622aac7330646317775cfaecbbd49689`;
+  lane 6 @ sha256 `2b31c91ac1979cf7d8ee0dcd71fcd450348dc4c917f312e68753e5e77720c686`
+- **Artifact version note:** uncommitted; external to this repository. Still not merged.
+- **Target paper pinned at:** unchanged, sha256
+  `67c34a9f064752c6b7f2fb585b7fde8e82cd1c48c6dec07e92c86c7d7230920e`; repository
+  read-only throughout.
+- **Auditor:** fresh agent, model claude-opus-5, cold-context: yes.
+- **Scope:** deliberately narrow — **only** text added or altered while repairing
+  Audit 005's findings. The drafts were not re-audited as wholes. Rationale: the
+  characteristic failure of a fix round is that the repairs introduce fresh defects,
+  which then present as new findings in the next round and consume it.
+- **Overall verdict:** FIT TO MERGE AFTER FIXES. Nine repair-introduced defects, four
+  requiring fixes; all four have been repaired and re-verified. No repair was found to
+  be mathematically wrong.
+
+| # | Claim/target | Verdict | Evidence | Required fix | Disposition |
+|---|--------------|---------|----------|--------------|-------------|
+| 1 | Adding `δ(0)=0` to the definition of "of Paley type" (the Audit 005 row 1 repair) | CONFIRMED | Wang defines a *regular* PDS as one with `D⁽⁻¹⁾=D` **and `e ∉ D`**, and a Paley type PDS as a regular PDS with those parameters. Under `D={z:δ(z)=1}`, the added clause is exactly `e ∉ D` and the pre-existing `δ(−z)=δ(z)` is exactly `D⁽⁻¹⁾=D`. The pre-repair definition was missing half of Wang's regularity condition | none — the repair restores the literature's own condition | fixed |
+| 2 | Whether `cor:mod4` is now circular (Wang's term presupposes `v ≡ 1 mod 4`; the corollary derives `n ≡ 1 mod 4`) | CONFIRMED not circular | Re-derived using only the four clauses of the amended definition: `σ²=Σ_d A(d)=0`, so `σ=0` and `\|D\|=(n−1)/2`; expanding `(2D̂−Ĝ+1)²` gives `μ=(n−1)/4 ∈ Z`, hence `n ≡ 1 (mod 4)`. The load-bearing input is `A(0)=n−1`, which is what `δ(0)=0` supplies. Exhaustive machine check over all sign patterns on `Z_n`, `n=3..15`: with the clause, no Paley-type `δ` at any `n ≢ 1 (mod 4)`; without it, exactly the two `n=3` patterns | none | — |
+| 3 | `BrightEtAl2021` bibitem | WRONG | The entry carried `\url{https://doi.org/10.1201/9781420010541}`, which Crossref resolves to *Handbook of Combinatorial Designs* — while `ColbournDinitz2007`, whose DOI that is, was left with none. Cause: the repair's search string did not capture the Handbook entry's trailing `\url` line, orphaning it onto the last newly inserted bibitem. As printed, a reference for Lam's problem pointed at a design handbook | restore the DOI to `ColbournDinitz2007`; give `BrightEtAl2021` its own | fixed |
+| 4 | `BrightEtAl2021` deliberately cited arXiv-only, published coordinates withheld as unverifiable | CONFIRMED in method, superseded in fact | The abstention was correct at the time. The coordinates are now obtained and independently confirmed via Crossref `10.1609/aaai.v35i5.16483`: *Proc. AAAI Conf. on Artificial Intelligence* **35** (2021) no. 5, 3669–3676, all five authors matching | add the published coordinates | fixed |
+| 5 | "`Γ` **is** one specific output" surviving in the lane 6 self-report | WRONG | A restatement of precisely the claim Audit 005 row 10 corrected. The repair round reported correcting three sites; there were four | "is **equivalent to** one specific output" | fixed |
+| 6 | "orthogonality forces `nλ_c = n`, so `λ_c = 1`" | UNVERIFIABLE as written | `λ_c` is used once and never defined, in a section where `λ` already denotes both Jungnickel's difference-matrix parameter and the PDS parameter `(n−5)/4`. The mathematics is right; none of it was on the page | replace with the explicit counting argument | fixed |
+| 7 | The lane 4 self-report's claim-by-claim citation table | GAP | Four new bibliography entries and one new pinpoint had been added to the LaTeX with no corresponding row in the document's own status table, and its row C7 still read "I did not open the book, so I cannot give a chapter/theorem number" while the body now gave a page | add rows for the new entries; rewrite C7 | fixed |
+| 8 | The de Launey pinpoint `p. 303` | GAP (disclosure) | The page number is quoted from van Greevenbroek–Jedwab, not read in the Handbook. Verified as *what Jedwab attributes to that page*, not as what that page says | record it as second-hand | fixed (new row C10) |
+| 9 | `\cite{Turyn1970}` extended to cover the conference-matrix construction `I ± iC` | GAP | The two sources actually read corroborate Turyn 1970 for the `BH(n,4) → BH(2n,2)` doubling only, not for `I+iC`; the draft states plainly that Turyn 1970 itself was never read. The "generally credited to" hedge is doing real work | retain the hedge | accepted-as-risk |
+| 10 | Every other new mathematical claim introduced by the repairs | CONFIRMED | The symmetric conference matrix of order 54 was constructed and verified (Paley over GF(53); symmetric, zero diagonal, `CCᵀ = 53·I₅₄`); the `GH(n,1)` parameter mapping checked against Jungnickel's bound; the `ρ(Z[i])`-commutativity parenthetical and the `ZR=−P` + `PR=−RP` derivation both verified exactly | none | — |
+| 11 | "over-determined" phrasing implying three independent supports for order 109 | OVERSTATED | Table A.1's method code `wk` **is** Corollary 8.8(2), citing the same source; the tabulated row is an instance of that branch, not a third route. Two routes, not three | reword to name the two branches explicitly | fixed |
+
+**Missed points raised by auditor:** the lane 5 repair left "§A.3" denoting two
+different subsections under its own stated pre-insertion numbering convention
+(fixed); and the new lane 5 subsection forward-references four objects defined in
+the following subsection, which is pre-existing house style in this appendix rather
+than a new defect.
+
+**Disposition summary:** Of nine repair-introduced defects, the most serious was a
+**wrong-source citation created by the round convened to remove wrong-source
+citations** (row 3) — an orphaned `\url` line, invisible to every check that had been
+run because both the source and target bibitems were otherwise well-formed and the
+document compiled cleanly. This is recorded prominently because it is the strongest
+available argument for auditing repairs rather than trusting them. All four must-fix
+items are repaired and re-verified; all three drafts still compile with zero undefined
+references, zero undefined citations and zero errors. Merge remains ungated by any
+open finding in Audits 005–006, but nothing has been merged.
+
+---
+
+## Merge Record 001 — Audits 005–006 additions merged into the paper — 2026-07-27
+
+The three draft additions cleared by Audits 005–006 are now **merged**. This
+entry supersedes the closing sentence of Audit 006 ("nothing has been merged").
+The merge was performed by a fresh subagent against a scratchpad copy and
+validated independently by the coordinator before anything was written here;
+the coordinator's checks did not import, read, or re-run the merge agent's own
+scripts.
+
+**Result.** `paley_scarpis_p1mod4_v2.tex` 712 → 1373 lines, 10 → 17 pages,
+compiling with zero errors, zero LaTeX warnings, zero undefined references,
+zero undefined citations and zero multiply-defined labels.
+
+* New **§5 "What the construction needs"** — the characterisation, the mod-4
+  corollary, and the projective-plane barrier.
+* New **§6 "The construction over the Gaussian integers"** — the factorisation
+  through `Z[i]` and the relation to Sargent–Lee–Rushall.
+* New **§A.3** — the `q = 109` worked example, plus four edits repairing the
+  appendix roadmap and the two sentences it falsifies.
+* 18 new `\bibitem` entries (bibliography 14 → 32).
+
+| # | Claim/target | Verdict | Evidence | Required fix | Disposition |
+|---|---|---|---|---|---|
+| 1 | The two new sections and lane 5's five edits landed at their specified anchors | CONFIRMED | Ordering in the merged file: §5 L339 < §6 L624 < `\appendix` L798 < new §A.3 L871 < existing §A.4 L946 < `\end{thebibliography}` L1371 | none | — |
+| 2 | The merged document says what the audited drafts say | CONFIRMED | A line-level diff against the 712-line original decomposes into exactly 3 insert hunks + 4 replace hunks + **0 deletions**, every hunk attributable to a named draft edit; all draft LaTeX blocks byte-identical | none | — |
+| 3 | Manual equation tags | WRONG before merge | §5 and §6 were drafted independently and **each** used `\tag{5.1},{5.2},{5.3}`, each having assumed it would be the sole new §5. `\tag` is literal text: LaTeX emits no warning and the document compiles cleanly while two equations both print "(5.1)". Detectable only on merge | renumber §6's tags to 6.1–6.3 | fixed |
+| 4 | Bibliography integrity across an 18-entry splice | CONFIRMED | Per-key URL/DOI association recomputed from source and compared for all 32 entries; zero gained, lost, or swapped. The specific orphaned-`\url` defect of Audit 006 row 3 did **not** recur: `ColbournDinitz2007` retains its Handbook DOI and `BrightEtAl2021` its own AAAI DOI | none | — |
+| 5 | Label, key and tag uniqueness | CONFIRMED | 36 labels, 32 bibitem keys, 9 manual tags — all distinct within their kind; 29 cite keys all resolve | none | — |
+| 6 | Printed numbering of every numbered environment | CONFIRMED | Extracted from the compiled PDF and matched against a prediction registered **before** the merge agent reported: Lemmas 1–4 / Theorem 1 / Corollary 1 (pre-existing); Lemma 5, Theorem 2, Corollaries 2–3, Remarks 1–3 (§5); Lemma 6, Theorem 3, Remarks 4–6 (§6); Remark 7 (appendix). Exact match | none | — |
+| 7 | §6's two literal `Corollary~1` references | CONFIRMED (not a defect) | Both read "**their** Corollary~1" — Sargent–Lee–Rushall's, an external result, unaffected by this document's numbering. The paper's own unlabeled corollary still prints as Corollary 1 | none | — |
+| 8 | A rejected alternative in the lane 5 draft | CONFIRMED excluded | That draft contains nine fenced LaTeX blocks, one of which it explicitly rejects ("NOT RECOMMENDED"). Verified absent from the merged file, along with its marker string. A glob-all-blocks merge would have spliced in content contradicting the edit two paragraphs above it | none | — |
+| 9 | `EganOCathain2019` present in the bibliography but never cited | CONFIRMED | Owner elected to leave it uncited. Consistent with existing practice: `Hadamard1893` and `Williamson1944` are likewise uncited and were so **before** this merge | none | accepted-as-risk |
+| 10 | `\tag{C.1}` prints "(C.1)" inside Appendix A | CONFIRMED | The paper has exactly one appendix section, so the manual tag's letter does not match its appendix. **Pre-existing; not merge-induced** | renumber to A.1, or drop the manual tag | open |
+| 11 | `README.md` against the merged paper | GAP | No statement in it is false — "the four block-Gram lemmas" and "Theorem 1 through the four lemmas" both still hold. But it predates §5 and §6 and does not mention them, and Scorecard 001's qualitative notes were written against a paper lacking both | re-read the README against the merged paper; consider a `repo-rank` re-run | open |
+
+**Disposition summary:** the merge is complete and every check passes. The one
+defect it introduced — the duplicate `\tag` — belonged to a class that no
+single-lane audit could have caught, since each draft was individually correct
+and only their *combination* was wrong; it was found by pre-merge collision
+analysis rather than by compilation, which stayed silent throughout. Two items
+remain **open**, both concerning artifacts outside the paper body (the
+pre-existing appendix tag letter, and README/scorecard staleness), and neither
+gates the merge.

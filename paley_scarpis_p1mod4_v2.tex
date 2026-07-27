@@ -336,15 +336,476 @@ Turyn product, and a restricted screen beyond the audited range records
 exactly which orders it does and does not cover.  Failure of that screen is
 not a claim that an order is open.
 
+\section{What the construction needs}\label{sec:char}
+
+Theorem~\ref{thm:main} is stated over \(\F_q\), but the field enters the
+proofs of Lemmas~\ref{lem:self}--\ref{lem:cap} in only two ways: through the
+character sums attached to \(\chi\), and, at exactly one line in the proof of
+Lemma~\ref{lem:cross}, through the fact that \(a\mapsto a(r-s)\) is a
+bijection of \(\F\) when \(r\neq s\).  This section replaces each of the two
+by an abstract hypothesis and shows that the resulting pair of conditions is
+not merely sufficient but necessary.  The conclusion is a clean division of
+labour --- one condition on the sign pattern, one on the shift array --- and,
+through the second condition, an explanation of why the family is confined to
+prime powers.
+
+Let \(G\) be a finite abelian group, written additively, with \(|G|=n\).
+Replace \(\chi\) by a function \(\delta\colon G\to\{0,\pm1\}\) with
+\(\delta(0)=0\), and replace the shift \(ar\) by an arbitrary array
+\(T\colon G\times G\to G\).  Put
+\[
+        K_t[x,y]=\psi\bigl(\delta(y-x-t)\bigr)\qquad(x,y\in G),
+\]
+let \(B_r\) be the \(2n\times2n\) matrix each of whose rows \((x,\alpha)\)
+equals row \((r,\alpha)\) of \(K_0\), and set
+\[
+        M_r=\bigl[\,B_r\mid K_{T(r,a)}\ (a\in G)\,\bigr],\qquad r\in G .
+\]
+Let \(C\) be indexed by \(\{\infty\}\cup G\) with \(C_{u,u}=0\),
+\(C_{\infty,x}=C_{x,\infty}=1\), \(C_{x,y}=\delta(y-x)\), let \(S\) be its
+\(\psi\)-replacement, and let \(M_\infty\) be built from \(S\) exactly as in
+\S3.  Write
+\[
+        H(G,\delta,T)=\begin{bmatrix}M_\infty\\ M_r\ (r\in G)\end{bmatrix},
+\]
+a \(\{1,-1\}\)-matrix of order \(2n(n+1)\).  Taking \(G=(\F_q,+)\),
+\(\delta=\chi\) and \(T(r,a)=ar\) returns the matrix of
+Theorem~\ref{thm:main} entry for entry.
+
+Call \(\delta\) \emph{of Paley type} if \(\delta(0)=0\),
+\(\delta(z)\neq0\) for \(z\neq0\), \(\delta(-z)=\delta(z)\), and
+\(\sum_{z\in G}\delta(z)\delta(z-d)=-1\) for every \(d\neq0\).  Call \(T\) a \emph{\((G,n;1)\)-difference matrix} if for
+all \(r\neq s\) the map \(a\mapsto T(r,a)-T(s,a)\) is a bijection of \(G\).
+Such a \(T\) attains Jungnickel's bound \(m\le\lambda|G|\) for
+\((G,m,\lambda)\)-difference matrices \cite[Thm.~2.2]{Jungnickel1979}, and
+is in the standard terminology a \emph{generalized Hadamard matrix}
+\(GH(n,1)\) over \(G\).
+
+\begin{lemma}\label{lem:pair}
+For \(c\in\{0,\pm1\}\) put \(e(c)=1-c^{2}\).  Then
+\[
+        \psi(c)\psi(c')^{T}
+        =2\bigl[cc'+e(c)e(c')\bigr]\I_2
+         +2\bigl[c\,e(c')-c'e(c)\bigr]R
+        \qquad(c,c'\in\{0,\pm1\}),
+\]
+and consequently, for every \(\delta\colon G\to\{0,\pm1\}\) and \(c\in G\),
+\[
+        B(c):=\sum_{z\in G}\psi(\delta(z))\psi(\delta(z-c))^{T}
+        =2\bigl[A(c)+E(c)\bigr]\I_2+2W(c)R,
+        \tag{5.1}\label{eq:blocksum}
+\]
+where \(A(c)=\sum_{z}\delta(z)\delta(z-c)\),
+\(E(c)=\#\{z:\delta(z)=\delta(z-c)=0\}\) and
+\(W(c)=\sum_{w:\,\delta(w)=0}\bigl[\delta(w+c)-\delta(w-c)\bigr]\).
+\end{lemma}
+
+\begin{proof}
+The first identity is a check on nine pairs, and reduces to
+\(PP^{T}=ZZ^{T}=2\I_2\), \((cP)(c'P)^{T}=2cc'\I_2\) for \(c,c'\neq0\),
+\(PZ^{T}=2R\) and \(ZP^{T}=-2R\).  Summing it over \(z\in G\) and collecting
+the four resulting sums gives \eqref{eq:blocksum}; in the skew part the
+substitution \(z-c=w\) turns \(\sum_z\delta(z)e(\delta(z-c))\) into
+\(\sum_{\delta(w)=0}\delta(w+c)\) and \(\sum_z\delta(z-c)e(\delta(z))\) into
+\(\sum_{\delta(w)=0}\delta(w-c)\).
+\end{proof}
+
+\begin{theorem}\label{thm:char}
+Let \(G\) be a finite abelian group of order \(n\), let
+\(\delta\colon G\to\{0,\pm1\}\) satisfy \(\delta(0)=0\), and let
+\(T\colon G\times G\to G\).  Then
+\[
+        H(G,\delta,T)\,H(G,\delta,T)^{T}=2n(n+1)\,\I
+\]
+if and only if \(\delta\) is of Paley type and \(T\) is a
+\((G,n;1)\)-difference matrix.
+\end{theorem}
+
+\begin{proof}
+Let \(B\) be as in \eqref{eq:blocksum} and put
+\(\mu_{rs}(u)=\#\{a\in G:\,T(r,a)-T(s,a)=u\}\).  Rerunning the block
+computations of \S3 with \(\chi\) replaced by \(\delta\) and \(ar\) by
+\(T(r,a)\) --- no step of which uses anything beyond the abelian group law
+--- gives every Gram block of \(H\).  For \(r,s\in G\) and \(x,x'\in G\), with
+\(d=x'-x\),
+\[
+        \bigl(M_rM_s^{T}\bigr)[x,x']
+        =B(s-r)+\sum_{u\in G}\mu_{rs}(u)\,B(d-u),
+        \tag{5.2}\label{eq:gram}
+\]
+the first term from \(B_rB_s^{T}\) and the second from
+\(\sum_aK_{T(r,a)}K_{T(s,a)}^{T}\) after the substitutions
+\(z=y-x-T(r,a)\), \(u=T(r,a)-T(s,a)\).  Likewise
+\(\bigl(M_\infty M_\infty^{T}\bigr)[e,e']=2n\I_2+n\,B(e'-e)\), because the
+\(\infty\)-column pair contributes \(nPP^{T}=2n\I_2\) and
+\(RR^{T}=\I_2\) makes the finite columns contribute \(nB(e'-e)\).  Finally,
+writing \(\Sigma=\sum_{c\in G}\psi(\delta(c))=n_0Z+\sigma P\) with
+\(n_0=\#\{z:\delta(z)=0\}\) and \(\sigma=\sum_z\delta(z)\), every block of
+\(M_\infty M_r^{T}\) equals
+\[
+        P\Sigma^{T}+\Sigma R\Sigma^{T}
+        =2\sigma\I_2+2n_0R-2\bigl(n_0^{2}+\sigma^{2}\bigr)R,
+        \tag{5.3}\label{eq:capcross}
+\]
+using \(PP=2\I_2\), \(PZ=2R\), \(ZZ=2\I_2\), \(ZP=-2R\), \(ZR=-P\),
+\(PR=Z\) and \(RZ=P\); the term \(P\Sigma^{T}\) comes from the border and
+\(\Sigma R\Sigma^{T}\) from the \(n\) finite column blocks.
+
+\emph{Necessity.}  Take \(r=s\) in \eqref{eq:gram}: then
+\(\mu_{rr}(u)=n\) if \(u=0\) and \(0\) otherwise, so the block is
+\(2n\I_2+nB(d)\).  Vanishing off the diagonal forces
+\[
+        B(d)=-2\I_2\qquad\text{for all }d\neq0,
+\]
+i.e.\ \(A(d)+E(d)=-1\) and \(W(d)=0\) for \(d\neq0\).  Next,
+\eqref{eq:capcross} vanishes only if \(\sigma=0\) and
+\(n_0=n_0^{2}+\sigma^{2}\), hence \(n_0\in\{0,1\}\); since \(\delta(0)=0\) we
+get \(n_0=1\), so \(\delta\) vanishes only at \(0\).  Then \(E(d)=0\) for
+\(d\neq0\), so \(A(d)=-1\), and \(W(d)=\delta(d)-\delta(-d)=0\), so
+\(\delta\) is even: \(\delta\) is of Paley type.  Finally take \(r\neq s\) in
+\eqref{eq:gram}.  Since \(B(0)=2n\I_2\) and \(B(c)=-2\I_2\) for \(c\neq0\),
+\[
+        \bigl(M_rM_s^{T}\bigr)[x,x']
+        =-2\I_2+2\bigl[(n+1)\mu_{rs}(d)-n\bigr]\I_2
+        =2(n+1)\bigl[\mu_{rs}(d)-1\bigr]\I_2 ,
+\]
+and as \(d=x'-x\) runs over all of \(G\), vanishing forces
+\(\mu_{rs}\equiv1\): \(T\) is a \((G,n;1)\)-difference matrix.
+
+\emph{Sufficiency.}  If \(\delta\) is of Paley type then \(n_0=1\) and
+\(\sigma^{2}=\sum_{d}A(d)=(n-1)-(n-1)=0\), so \eqref{eq:capcross} vanishes and
+\(M_\infty M_r^{T}=0\); also \(B(0)=2n\I_2\) and \(B(d)=-2\I_2\) for
+\(d\neq0\), whence \(M_\infty M_\infty^{T}=2n(n+1)\I\) and, in
+\eqref{eq:gram} with \(r=s\), \(M_rM_r^{T}=2n(n+1)\I\).  If in addition
+\(\mu_{rs}\equiv1\) for \(r\neq s\), the display above gives
+\(M_rM_s^{T}=0\).  Hence \(HH^{T}=2n(n+1)\I\).
+\end{proof}
+
+\begin{corollary}\label{cor:mod4}
+If \(\delta\) is of Paley type on \(G\), \(|G|=n\), then
+\(\sum_z\delta(z)=0\), the set \(D=\{z:\delta(z)=1\}\) has \((n-1)/2\)
+elements, and in the group ring \(\Z[G]\)
+\[
+        \widehat D^{\,2}+\widehat D=\tfrac{n-1}{4}\bigl(1+\widehat G\bigr),
+\]
+so that \(D\) is a regular partial difference set with the Paley parameters
+\(\bigl(n,\tfrac{n-1}{2},\tfrac{n-5}{4},\tfrac{n-1}{4}\bigr)\).  In
+particular \(n\equiv1\pmod4\).
+\end{corollary}
+
+\begin{proof}
+In \(\Z[G]\), \(\delta=2\widehat D-\widehat G+1\) and, \(\delta\) being even,
+\(\delta^{2}=\sum_{d}A(d)\,d=(n-1)\cdot1-(\widehat G-1)=n\cdot1-\widehat G\);
+in particular \(\sigma^{2}=\sum_dA(d)=0\), so \(|D|=(n-1)/2\).  Expanding
+\((2\widehat D-\widehat G+1)^{2}\) with \(\widehat D\widehat G=|D|\widehat G\)
+and \(\widehat G^{2}=n\widehat G\) and comparing with \(n\cdot1-\widehat G\)
+gives the displayed identity.  Reading off coefficients gives
+\(\lambda=(n-5)/4\) on \(D\) and \(\mu=(n-1)/4\) off \(D\cup\{0\}\);
+integrality forces \(n\equiv1\pmod4\).
+\end{proof}
+
+\begin{corollary}\label{cor:plane}
+Let \(G\) be abelian of order \(n\) and let \(T\) be a
+\((G,n;1)\)-difference matrix.  Then there exist \(n-1\) mutually orthogonal
+Latin squares of order \(n\), hence a projective plane of order \(n\).
+Consequently, by Theorem~\ref{thm:char}, an instance of the construction on a
+group of non-prime-power order would produce a projective plane of
+non-prime-power order.
+\end{corollary}
+
+\begin{proof}
+Put \(\widetilde T(r,a)=T(r,a)-T(0,a)\); this is again a difference matrix and
+\(\widetilde T(0,a)=0\), so \(a\mapsto\widetilde T(r,a)\) is a bijection for
+every \(r\neq0\).  For \(r\neq0\) define \(L_r[x,a]=x+\widetilde T(r,a)\).
+Each row and each column of \(L_r\) is a bijection, so \(L_r\) is a Latin
+square on \(G\).  For \(r\neq s\) the pair \(\bigl(L_r[x,a],L_s[x,a]\bigr)\)
+determines \(\widetilde T(r,a)-\widetilde T(s,a)\), hence \(a\), hence \(x\);
+so \(L_r\) and \(L_s\) are orthogonal.  (The equivalence between
+\((G,n;1)\)-difference matrices and \(G\)-regular sets of \(n-1\) mutually
+orthogonal Latin squares of order \(n\) is due to Jungnickel
+\cite[Thm.~1]{Jungnickel1980}; the short proof of the direction needed here
+is included for self-containedness.)  These \(n-1\) squares are a complete
+set, and a complete set of \(n-1\) mutually orthogonal Latin squares of order
+\(n\) is equivalent to a projective plane of order \(n\)
+\cite{ColbournDinitz2007}.  The last sentence is Theorem~\ref{thm:char}
+applied in the direction "Hadamard \(\Rightarrow\) \(T\) is a difference
+matrix".
+\end{proof}
+
+\begin{remark}\label{rem:supply}
+The two slots of Theorem~\ref{thm:char} have very different supply.  By
+Corollary~\ref{cor:mod4} the \(\delta\)-slot asks exactly for a Paley type
+partial difference set, and these are classified: Wang \cite{Wang2020} proved
+that a Paley type partial difference set in an abelian group of
+non-prime-power order forces \(|G|=m^{4}\) or \(9m^{4}\) with \(m>1\) odd,
+and Polhill \cite{Polhill2010} had constructed them at all such
+orders --- the first construction at a non-prime-power order, in
+\(\Z_3^{2}\times\Z_p^{4t}\), being \cite{Polhill2009} --- so
+\cite[Thm.~1.2]{Wang2020} an odd \(v>1\) admits a Paley type
+partial difference set in some abelian group if and only if \(v\) is a prime
+power \(\equiv1\pmod4\), or \(v=m^{4}\) or \(9m^{4}\) with \(m>1\) odd.  The
+smallest non-prime-power in that list is \(9\cdot5^{4}=5625\).  So the
+\(\delta\)-slot does reach beyond prime powers.  The \(T\)-slot does not, as
+far as anything known: in every known example of a \(GH(|G|,\lambda)\) over
+\(G\) the group order \(|G|\) is a prime power, and if \(G\) is not
+elementary abelian then \(|G|\) is a square
+\cite[p.~303]{ColbournDinitz2007}; and by Corollary~\ref{cor:plane} an
+instance at
+\(n=5625\) would supply a projective plane of order \(5625=3^{2}\cdot5^{4}\),
+and no projective plane of non-prime-power order is known.  The
+Bruck--Ryser theorem \cite{BruckRyser1949} gives no help here, since every
+candidate order \(m^{4}\) or \(9m^{4}\) is a perfect square and hence a sum of
+two squares.  The smallest order this construction could conceivably reach
+outside the prime powers is therefore \(2\cdot5625\cdot5626=63\,292\,500\), and
+reaching it entails settling a much older question.  For scale, plane order
+\(10\) was excluded by exhaustive computation
+\cite{LamThielSwiercz1989}, and re-established with machine-verifiable
+nonexistence certificates only in \(2021\) \cite{BrightEtAl2021}; order
+\(12\) is still undecided (see e.g.\ \cite{AkiyamaSuetakeTanaka2023}).
+\end{remark}
+
+\begin{remark}\label{rem:lsesc}
+Farouk and Wang \cite{FaroukWang2022} abstract the shift array of a
+Scarpis-type construction in a related but formally weaker way: a pair of
+Latin squares \(L,L'\) of order \(n\) is \emph{eligible} if for all \(i,i'\)
+there is a unique \(j\) with \(L[i,j]=L'[i',j]\) \cite[Def.~2.2]{FaroukWang2022};
+at most \(n-1\) squares can be pairwise eligible \cite[Thm.~2.4]{FaroukWang2022};
+the squares \(x_i+bx_j\) over \(\F_q\) realise the bound
+\cite[Cor.~2.5]{FaroukWang2022}; and complete eligible sets need not be sets
+of mutually orthogonal Latin squares, which is why they raise the
+construction of a complete eligible set of non-prime-power order as an open
+problem.  Corollary~\ref{cor:plane} says that this loophole is closed for a
+closed-form construction of the present shape.  The layout of \S3 produces
+only the group-developed squares \(L_r[x,a]=x+\widetilde T(r,a)\), and for
+those three conditions coincide: eligibility of \(L_r,L_s\) says that for
+every \(c\in G\) there is a unique \(a\) with
+\(\widetilde T(r,a)-\widetilde T(s,a)=c\), which is the difference-matrix
+condition, which by the proof of Corollary~\ref{cor:plane} is orthogonality
+(and conversely: if \(L_r,L_s\) are orthogonal then for each \(c\in G\) the
+\(n\) cells \((x,a)\) with \(L_r[x,a]-L_s[x,a]=c\) are in bijection with the
+\(n\) ordered pairs of values differing by \(c\), so exactly one \(a\)
+satisfies \(\widetilde T(r,a)-\widetilde T(s,a)=c\)).
+The coincidence is an observation about this layout rather than new
+machinery: the underlying correspondence is Jungnickel's
+\cite[Thm.~1]{Jungnickel1980}, and group-developed Latin squares and their
+orthomorphisms are the subject of a standard monograph \cite{Evans2018}.
+An eligible-but-not-orthogonal set of non-prime-power order, if one exists,
+cannot be group-developed, and so cannot be fed to a closed form of this kind.
+\end{remark}
+
+\begin{remark}\label{rem:q9}
+Theorem~\ref{thm:char} also shows that fixing \(q\) does not fix the matrix.
+At \(q=9\) the \(\delta\)-slot is rigid: of the \(2^{4}=16\) even sign
+patterns on \(\Z_3^{2}\) vanishing at \(0\), exactly \(6\) are of Paley type,
+and all are equivalent to \(\chi\) under \(\mathrm{Aut}(\Z_3^{2})\).  The
+\(T\)-slot is not rigid.  Let \(N\) be the Dickson nearfield of order \(9\):
+the additive group is again \(\Z_3^{2}=(\F_9,+)\), with
+\(r\circ a=ra\) for \(r\) a square and \(r\circ a=ra^{3}\) for \(r\) a
+non-square.  Each \(a\mapsto r\circ a\) is additive and \(r\circ a-s\circ a\)
+vanishes only at \(a=0\) for \(r\neq s\), so \(T(r,a)=r\circ a\) is a
+\((\Z_3^{2},9;1)\)-difference matrix and Theorem~\ref{thm:char} yields a
+second Hadamard matrix of order \(180\), obtained from Theorem~\ref{thm:main}
+by the single substitution \(\F_9\rightsquigarrow N\).  It is not
+Hadamard-equivalent to the matrix of Theorem~\ref{thm:main}: over the
+\(\binom{180}{4}=42\,296\,805\) row quadruples the multiset of
+\(\bigl|\sum_ch_{ic}h_{jc}h_{kc}h_{lc}\bigr|\) attains the value \(44\) on
+\(112\,752\) quadruples for the nearfield matrix and on none for the matrix of
+Theorem~\ref{thm:main}, and the comparison fails in all four row/column
+orientations.  Since \(\{a\mapsto r\circ a: r\in N\}\) is not closed under
+addition, the translation plane it coordinatises is not Desarguesian, and
+the matrix of Theorem~\ref{thm:main} is the Desarguesian choice.  We do not
+claim that the inequivalence is \emph{caused} by non-Desarguesianness:
+relabelling the bands of the Desarguesian difference matrix already yields
+order-\(180\) matrices inequivalent to that of Theorem~\ref{thm:main}.
+What the nearfield supplies is a canonical second choice, not the only
+source of inequivalence.
+\end{remark}
+
+\section{The construction over the Gaussian integers}
+\label{sec:gaussian}
+
+The blocks \(P\), \(Z\), \(R\) of \S2 are not three unrelated objects: they
+are the real \(2\times2\) representation of the Gaussian units, and through
+it Theorem~\ref{thm:main} factors through a matrix of half the order over
+\(\Z[i]\).  This section makes that factorisation explicit and records what
+it implies about the relation of Theorem~\ref{thm:main} to the literature.
+Nothing in \S\S1--4 depends on this section.
+
+Let
+\[
+        \rho\colon\Z[i]\to M_2(\Z),\quad \rho(a+bi)=aI_2+bR,
+        \qquad
+        \varphi\colon\Z[i]\to M_2(\Z),\quad \varphi(w)=\rho(w)P .
+\]
+Since \(R^{2}=-I_2\), the map \(\rho\) is an injective ring homomorphism, and
+\(\rho(w)^{T}=\rho(\bar w)\).  Directly from the definitions,
+\[
+        \varphi(1)=P,\qquad \varphi(-1)=-P,\qquad
+        \varphi(-i)=-RP=Z,\qquad \varphi(i)=-Z,
+\]
+the third identity being the relation \(ZR=-P\) of \S2 rewritten together
+with \(PR=-RP\).  Define
+\(e\colon\F\to\{1,-1,-i\}\subset\Z[i]\) by
+\[
+        e(z)=\chi(z)\quad(z\neq0),\qquad e(0)=-i .
+        \tag{6.1}\label{eq:edef}
+\]
+Comparing with \(\psi(0)=Z\), \(\psi(\pm1)=\pm P\) gives
+\[
+        \psi(\chi(z))=\varphi\bigl(e(z)\bigr)\qquad\text{for every }z\in\F ,
+        \tag{6.2}\label{eq:psiphi}
+\]
+so the Paley--II replacement blocks are the Gaussian units in disguise, with
+\(e\) the quadratic character punctured by \(-i\) rather than by \(0\).
+Since \(PR=Z\), and since \(\rho(\Z[i])\) is commutative (so that
+\(\rho(-i)\rho(w)=\rho(w)\rho(-i)\); note \(P\) itself does \emph{not}
+commute with \(R\)),
+\[
+        \varphi(w)R=\rho(w)PR=\rho(w)Z=\varphi(-iw),
+        \tag{6.3}\label{eq:capR}
+\]
+so the right multiplication by \(R\) used to build the cap band \(M_\infty\)
+is multiplication of a Gaussian unit by \(-i\).
+
+\begin{lemma}\label{lem:double}
+For all \(w,v\in\Z[i]\) we have \(\varphi(w)\varphi(v)^{T}=2\rho(w\bar v)\).
+Consequently, let \(\Gamma=(\gamma_{uv})\) be an \(n\times n\) matrix with
+entries in \(\{1,-1,i,-i\}\) and let \(\varphi(\Gamma)\) denote the
+\(2n\times2n\) \(\{1,-1\}\)-matrix whose \((u,v)\) block is
+\(\varphi(\gamma_{uv})\).  Then the \((u,u')\) block of
+\(\varphi(\Gamma)\varphi(\Gamma)^{T}\) is
+\(2\rho\bigl((\Gamma\Gamma^{*})_{u,u'}\bigr)\), and \(\varphi(\Gamma)\) is a
+Hadamard matrix of order \(2n\) if and only if \(\Gamma\Gamma^{*}=nI_n\).
+\end{lemma}
+
+\begin{proof}
+Using \(PP^{T}=2I_2\) and \(\rho(v)^{T}=\rho(\bar v)\),
+\[
+        \varphi(w)\varphi(v)^{T}=\rho(w)PP^{T}\rho(v)^{T}
+        =2\rho(w)\rho(\bar v)=2\rho(w\bar v).
+\]
+Summing over the common index,
+\(\sum_{v}\varphi(\gamma_{uv})\varphi(\gamma_{u'v})^{T}
+ =2\rho\bigl(\sum_{v}\gamma_{uv}\overline{\gamma_{u'v}}\bigr)
+ =2\rho\bigl((\Gamma\Gamma^{*})_{u,u'}\bigr)\).
+As \(\rho\) is injective and \(\rho(n)=nI_2\), this block equals
+\(2n\delta_{u,u'}I_2\) precisely when
+\((\Gamma\Gamma^{*})_{u,u'}=n\delta_{u,u'}\).
+\end{proof}
+
+A matrix \(\Gamma\) with entries in \(\{1,-1,i,-i\}\) and
+\(\Gamma\Gamma^{*}=nI_n\) is a Butson--Hadamard matrix, written
+\(\Gamma\in BH(n,4)\).  Lemma~\ref{lem:double} is thus the classical
+morphism \(BH(n,4)\to BH(2n,2)\), obtained independently by Cohn
+\cite{Cohn1965} and Turyn \cite{Turyn1970}; we call \(\varphi(\Gamma)\) the
+\emph{Turyn double} of \(\Gamma\).
+
+\begin{theorem}\label{thm:complex}
+Let \(q\equiv1\pmod4\) be a prime power and \(n=q(q+1)\).  Let \(\Gamma\) be
+the \(n\times n\) matrix over \(\Z[i]\) whose rows are indexed by \(\F\)
+followed by \(\F\times\F\), whose columns are indexed by \(\F\) followed by
+\(\F\times\F\), and whose entries are
+\[
+\begin{aligned}
+        \Gamma\bigl[x;\,y\bigr]&=1, &\qquad
+        \Gamma\bigl[x;\,(a,y)\bigr]&=-i\,e(a-x),\\[2pt]
+        \Gamma\bigl[(r,x);\,y\bigr]&=e(y-r), &\qquad
+        \Gamma\bigl[(r,x);\,(a,y)\bigr]&=e(y-x-ar).
+\end{aligned}
+\]
+Then \(\Gamma\in BH\bigl(q(q+1),4\bigr)\), and the matrix \(H\) of
+Theorem~\ref{thm:main} is its Turyn double: \(H=\varphi(\Gamma)\).
+\end{theorem}
+
+\begin{proof}
+Read off the \(2\times2\) blocks of \(H\).  In \(K_{ar}\) the \((x,y)\) block
+is \(\psi(\chi(y-x-ar))=\varphi(e(y-x-ar))\) by \eqref{eq:psiphi}; in the
+border block \(B_r\) the \((x,y)\) block is
+\(\psi(\chi(y-r))=\varphi(e(y-r))\); in the cap band \(M_\infty\) the
+repeated \(\infty\)-column pair contributes \(P=\varphi(1)\) and a finite
+column pair contributes
+\(\psi(\chi(a-x))R=\varphi(e(a-x))R=\varphi(-i\,e(a-x))\) by
+\eqref{eq:capR}.  These are exactly the entries listed for \(\Gamma\), and
+\(\varphi\) is injective on \(\{1,-1,i,-i\}\), so \(H=\varphi(\Gamma)\).
+By Theorem~\ref{thm:main} and Lemma~\ref{lem:double},
+\(\Gamma\Gamma^{*}=nI_n\).
+\end{proof}
+
+\begin{remark}\label{rem:scalar}
+Lemma~\ref{lem:double} converts the four block-Gram identities of \S3 into
+scalar identities over \(\Z[i]\); the \(2\times2\) block algebra carries no
+information beyond \(\rho\).  Lemma~\ref{lem:self}, for instance, becomes
+\[
+        \sum_{z\in\F}e(z)\overline{e(z-d)}=
+        \begin{cases} q,& d=0,\\ -1,& d\neq0,\end{cases}
+\]
+which is \(\sum_{z}\chi(z(z-d))=-1\) together with the cancellation
+\(e(0)\overline{e(-d)}+e(d)\overline{e(0)}=-i\chi(d)+i\chi(d)=0\) already
+used in the proof of Lemma~\ref{lem:self} --- the step where
+\(\chi(-1)=1\) enters.  Likewise \eqref{eq:rowsum} becomes
+\(\sum_{u\in\F}e(u)=-i\).
+\end{remark}
+
+\begin{remark}\label{rem:slr}
+Sargent, Lee and Rushall \cite{SargentLeeRushall2024} carry the Scarpis lift
+over to complex Hadamard matrices: by their Corollary~1, for an odd prime
+power \(q\) a complex (Butson-type) Hadamard matrix of order \(q+1\) yields
+one of order \(q(q+1)\).  Every entry of their output is a product of
+entries of the input and of its negated core, so a \(BH(q+1,4)\) input
+gives a \(BH(q(q+1),4)\) output.  For \(q\equiv1\pmod4\) the Paley
+conference matrix \(C\) of order \(q+1\) is symmetric with \(CC^{T}=qI\), so
+\((C-iI)(C-iI)^{*}=CC^{T}+I=(q+1)I\) and \(C-iI\) is such an input.  (This
+is the standard conference-matrix construction \(I\pm iC\), generally
+credited to \cite{Turyn1970}; the one-line verification is included because
+it is shorter than the citation.)
+Composing their Corollary~1 with Lemma~\ref{lem:double} therefore yields a
+second route in the literature to the existence statement of
+Theorem~\ref{thm:main}, alongside \cite{FaroukWang2020}.
+
+The matrix \(\Gamma\) of Theorem~\ref{thm:complex} is in fact equivalent to
+one of their outputs.  Index \(C-iI\) by \(\{\infty\}\cup\F\) with \(\infty\) first and
+normalise it by dividing each row by its first entry and then each column by
+its first entry; the result \(N\) satisfies \(N[\infty,u]=N[u,\infty]=1\)
+and \(N[x,a]=-i\,e(a-x)\) for \(x,a\in\F\).  Feeding \(N\) to their
+construction with the row indexed by \(\infty\) deleted returns
+\(\operatorname{diag}(I_q,\,iI_{q^{2}})\,\Gamma\); a diagonal unimodular row
+scaling lies in their equivalence group, so \(\Gamma\) is equivalent to that
+output.  Over \(\Z[i]\), then, the construction of \S3 is the instance of
+theirs in which the seed, the deleted row and the bijection \(\alpha\) are
+all determined by \(q\); the distinction drawn in \S4 against
+\cite{FaroukWang2020} --- formula rather than procedure --- is the accurate
+description of the difference here as well.  The relation recorded here is,
+however, strictly closer than the one recorded in \S4.  There we note in
+addition that the two constructions yield inequivalent matrices; no
+corresponding statement is available here, and none is made.  The matrix
+\(\Gamma\) is equivalent to an output of \cite{SargentLeeRushall2024}, not
+merely analogous to one.
+\end{remark}
+
+\begin{remark}\label{rem:c30}
+\(\Gamma\) is not the classical Butson matrix of its order.  At \(q=5\),
+\(\Gamma\in BH(30,4)\), and so is Turyn's \(C_{30}+iI\) built from the Paley
+conference matrix of order \(30\) (that is, from the prime \(29\)); the two
+are inequivalent.  The multiset of
+\(\bigl|\sum_{c}\gamma_{ic}\overline{\gamma_{jc}}\gamma_{kc}
+\overline{\gamma_{lc}}\bigr|^{2}\) over ordered quadruples of distinct rows
+is invariant under row and column permutations, multiplication of rows and
+columns by fourth roots of unity, and complex conjugation; it takes the
+value \(500\) on \(240\) quadruples for \(\Gamma\) and on none for
+\(C_{30}+iI\), in both orientations.
+\end{remark}
+
 \appendix
 
 \section{Coverage analysis}\label{app:coverage}
 
 Write \(N=2q(q+1)\) and \(m=q(q+1)/2\) for its odd part, so
-\(N=4m\).  We assess coverage of \(N\) by prior constructions on three
+\(N=4m\).  We assess coverage of \(N\) by prior constructions on four
 levels: the audited tables (\S\ref{app:audit}), the first unaudited
-order (\S\ref{app:81}), and an elementary-witness test that isolates
-candidate orders (\S\ref{app:candidates}).
+order (\S\ref{app:81}), a second worked example lying beyond the reach
+of the elementary test (\S\ref{app:109}), and that elementary-witness
+test itself, which isolates the candidate orders
+(\S\ref{app:candidates}).
 
 \subsection{Orders with odd part at most \texorpdfstring{\(3000\)}{3000}}
 \label{app:audit}
@@ -406,6 +867,81 @@ KharaghaniTayfehRezaie2005}, and Williamson-type matrices of order
 \cite{SeberryYamada1992,SeberryYamada2020} yields a Hadamard matrix of
 order \(4\cdot41\cdot81=13284\).  Thus \(q=81\) is the smallest unaudited
 order, and it is covered.
+
+\subsection{A second worked example: \texorpdfstring{\(q=109\)}{q=109}}
+\label{app:109}
+
+The smallest order of the family for which the restricted test of
+\S\ref{app:candidates} supplies no witness is
+\[
+        q=109,\qquad N=23980,\qquad m=5995=5\cdot11\cdot109>3000 .
+\]
+It too is a known Hadamard order.  By \eqref{eq:fourodd},
+\[
+        23980 = 4\cdot 55\cdot 109 = 4tw,\qquad t=55,\ w=109 .
+\]
+The first ingredient is already admitted by \eqref{eq:strictwitness}:
+\(t=55\le59\) is \(T\)-known, the \(T\)-matrices of order \(55\) coming
+from the base sequences \(BS(28,27)\), which lie inside \DJ okovi\'c's
+classification of \(BS(n+1,n)\) for \(n\le30\) \cite{Djokovic2010BS};
+independently, \cite[\S2]{Djokovic2011} records that \(T\)-sequences of
+every length \(n\le100\) exist except possibly \(n=97\).  Only the
+second ingredient is missing from \eqref{eq:strictwitness}, and it is
+supplied by a result of Miyamoto \cite{Miyamoto1991}, in the
+reformulation of Seberry and Yamada
+\cite[Cor.~8.8, part~1]{SeberryYamada1992}, as quoted by
+\DJ okovi\'c \cite[Thm.~2.5]{Djokovic2011}:
+\emph{if \(q\equiv1\pmod4\) is a prime power, then there exist
+Williamson-type matrices of order \(q\) if there are Williamson-type
+matrices of order \((q-1)/4\), or an Hadamard matrix of order
+\((q-1)/2\).}
+
+Here \(q=109\) is prime and \(\equiv1\pmod 4\), and \((109-1)/4=27\).
+Williamson matrices of order \(27\) are known: \(27\le33\), so \(27\) is
+\(W\)-known in the sense of \S\ref{app:candidates}, and Seberry and
+Yamada record order \(27\) directly, their class \(w_{1}\) of Williamson
+orders being \(\{1,\dots,33,37,39,41,43\}\)
+\cite[Table~A.1 and legend, pp.~541--543]{SeberryYamada1992}.  No
+nonexistence result bears on \(27\): the smallest odd order at which
+Williamson matrices are known not to exist is \(35\), and \(35>33\)
+(cf.\ Remark~\ref{rem:mult}).  Williamson
+matrices are in particular Williamson-type: symmetric circulants
+commute, so \(AB^{T}=AB=BA=BA^{T}\), and
+\(AA^{T}+BB^{T}+CC^{T}+DD^{T}=A^{2}+B^{2}+C^{2}+D^{2}=4nI\).  (The
+second hypothesis of the theorem as quoted cannot be used here:
+\((109-1)/2=54\) is neither \(1\) nor \(2\) nor divisible by \(4\), so
+no Hadamard matrix of order \(54\) exists.  The conclusion is
+nonetheless over-determined rather than fragile: the companion part of
+the same corollary \cite[Cor.~8.8(2), p.~505]{SeberryYamada1992} asks
+only for a \emph{symmetric conference} matrix of order
+\((q-1)/2=54\), which exists by Paley's construction since \(53\) is a
+prime \(\equiv1\pmod4\); Seberry and Yamada tabulate order \(109\) under
+exactly that mechanism \cite[Table~A.1, p.~543]{SeberryYamada1992}.  The
+two routes are therefore the \((q-1)/4\) branch used here and the
+conference-matrix branch they tabulate.  The route through
+\((q-1)/4=27\) is preferred here only because it terminates in an
+ingredient already admitted by \eqref{eq:strictwitness}.)  Hence
+Williamson-type matrices of order
+\(109\) exist, and the Turyn array on these together with the
+\(T\)-matrices of order \(55\)
+\cite{Turyn1974,SeberryYamada1992,SeberryYamada2020,CatiPasechnik2024}
+yields a Hadamard matrix of order \(4\cdot55\cdot109=23980\).  (The
+Turyn-array statements of \cite{SeberryYamada1992} are given for
+Williamson matrices; the Williamson-\emph{type} form used here is
+\cite[Thm.~5]{CatiPasechnik2024}.)
+
+The same ingredient is used in the literature in exactly this way:
+\DJ okovi\'c \cite[Prop.~3.4]{Djokovic2011} obtains a Hadamard matrix
+of order \(4\cdot79\cdot109=34444\) from \(T\)-sequences of length
+\(79\) together with Williamson-type matrices of order \(109\), citing
+\cite{SeberryYamada1992} for the latter.  The test of
+\S\ref{app:candidates} misses \(q=109\) because its \(W\)-known class
+admits only two mechanisms --- \(w\le33\), and \(2w-1\) a prime power,
+which fails here since \(2\cdot109-1=217=7\cdot31\) --- whereas
+Miyamoto's theorem is a third.  We therefore leave that test and
+Table~\ref{tab:candidates} unchanged, \(q=109\) being a genuine failure
+of the test as stated; as with \(q=73\) in \S\ref{app:audit}, the
+failure is a property of the test, not of Hadamard existence.
 
 \subsection{An elementary-witness test and the candidate orders}
 \label{app:candidates}
@@ -477,17 +1013,26 @@ and leaves \(104\) without a witness.  The smallest failure remains
 \]
 for which none of the possible \(T\)-known divisors produces a
 \(W\)-known complementary factor.  In particular,
-\(2\cdot109-1=217=7\cdot31\) is not a prime power.  This
-\(N=23980\) is the smallest order of the family for which we exhibit
-neither an audited entry nor a restricted elementary witness; we do not
-assert it is open.  Williamson-type matrices of order \(109\), if
-available, would settle it at once using \(t=55,w=109\) (compare
-\(q=73\)).
+\(2\cdot109-1=217=7\cdot31\) is not a prime power.  The failure is
+again a property of the test alone: the single missing ingredient is
+Williamson-type matrices of order \(109\), and \S\ref{app:109} supplies
+them, so the split \(t=55,\ w=109\) does cover \(N=23980\) (compare
+\(q=73\)).  We do not assert that any entry of
+Table~\ref{tab:candidates} is open.
 
 Table~\ref{tab:candidates} lists all \(104\) failures of this restricted
 test for \(q\le3000\).  It is a reproducible classification relative to
 the stated ingredient sets, not a literature-complete classification of
-the corresponding Hadamard orders.
+the corresponding Hadamard orders.  The ingredient sets themselves are
+conservative choices rather than the state of the art, and the first
+entry of the table already illustrates this: \S\ref{app:109} covers
+\(q=109\) by a mechanism the test does not admit.  Widening the
+\(T\)-known class would remove further entries --- \cite[\S2]{Djokovic2011}
+records \(T\)-sequences of every length \(n\le100\) except possibly
+\(n=97\), against the bound \(t\le59\) used here.  We have not
+recomputed the table under any widened ingredient set;
+Table~\ref{tab:candidates} is exactly the output of the rules as stated
+in \eqref{eq:strictwitness}.
 
 {\footnotesize
 \begin{longtable}{r r l}
@@ -706,6 +1251,122 @@ M.~Cati and D.~V.~Pasechnik,
 \newblock arXiv:2411.18897v2, 2025.
 \newblock \url{https://arxiv.org/abs/2411.18897}.
 \newblock \url{https://doi.org/10.48550/arXiv.2411.18897}.
+
+\bibitem{Wang2020}
+Z.~Wang,
+\newblock Paley type partial difference sets in abelian groups,
+\newblock {\em J.\ Combin.\ Des.} 28 (2020), no.\ 2, 149--152.
+\newblock \url{https://doi.org/10.1002/jcd.21691}.
+\newblock arXiv:1908.07055.
+
+\bibitem{Polhill2009}
+J.~Polhill,
+\newblock Paley type partial difference sets in non \(p\)-groups,
+\newblock {\em Des.\ Codes Cryptogr.} 52 (2009), no.\ 2, 163--169.
+\newblock \url{https://doi.org/10.1007/s10623-009-9274-2}.
+
+\bibitem{Polhill2010}
+J.~Polhill,
+\newblock Paley partial difference sets in groups of order \(n^{4}\) and
+  \(9n^{4}\) for any odd \(n>1\),
+\newblock {\em J.\ Combin.\ Theory Ser.\ A} 117 (2010), no.\ 8, 1027--1036.
+\newblock \url{https://doi.org/10.1016/j.jcta.2010.02.008}.
+
+\bibitem{ColbournDinitz2007}
+C.~J.~Colbourn and J.~H.~Dinitz (eds.),
+\newblock {\em Handbook of Combinatorial Designs},
+\newblock 2nd ed., Chapman \& Hall/CRC, Boca Raton, 2007.
+\newblock \url{https://doi.org/10.1201/9781420010541}.
+\newblock (The generalized-Hadamard-matrix statement cited at p.~303 is
+  W.~de~Launey, \emph{Generalized Hadamard matrices}, pp.~301--306 of this
+  volume.)
+
+\bibitem{Jungnickel1979}
+D.~Jungnickel,
+\newblock On difference matrices, resolvable transversal designs and
+  generalized Hadamard matrices,
+\newblock {\em Math.\ Z.} 167 (1979), 49--60.
+
+\bibitem{Jungnickel1980}
+D.~Jungnickel,
+\newblock On difference matrices and regular Latin squares,
+\newblock {\em Abh.\ Math.\ Sem.\ Univ.\ Hamburg} 50 (1980), 219--231.
+
+\bibitem{Evans2018}
+A.~B.~Evans,
+\newblock {\em Orthogonal Latin Squares Based on Groups},
+\newblock Springer International Publishing, 2018.
+
+\bibitem{BrightEtAl2021}
+C.~Bright, K.~K.~H.~Cheung, B.~Stevens, I.~Kotsireas, and V.~Ganesh,
+\newblock A SAT-based resolution of Lam's problem,
+\newblock {\em Proc.\ AAAI Conf.\ on Artificial Intelligence} 35 (2021),
+  no.\ 5, 3669--3676.
+\newblock \url{https://doi.org/10.1609/aaai.v35i5.16483}.
+\newblock arXiv:2012.04715.
+
+\bibitem{BruckRyser1949}
+R.~H.~Bruck and H.~J.~Ryser,
+\newblock The nonexistence of certain finite projective planes,
+\newblock {\em Canad.\ J.\ Math.} 1 (1949), 88--93.
+\newblock \url{https://doi.org/10.4153/CJM-1949-009-2}.
+
+\bibitem{LamThielSwiercz1989}
+C.~W.~H.~Lam, L.~Thiel, and S.~Swiercz,
+\newblock The non-existence of finite projective planes of order 10,
+\newblock {\em Canad.\ J.\ Math.} 41 (1989), no.\ 6, 1117--1123.
+\newblock \url{https://doi.org/10.4153/CJM-1989-049-4}.
+
+\bibitem{AkiyamaSuetakeTanaka2023}
+K.~Akiyama, C.~Suetake, and M.~Tanaka,
+\newblock Projective planes of order 12 do not have a collineation group of
+  order 4,
+\newblock {\em J.\ Combin.\ Des.} 31 (2023), no.\ 2, 87--123.
+\newblock \url{https://doi.org/10.1002/jcd.21869}.
+
+\bibitem{Miyamoto1991}
+M.~Miyamoto,
+\newblock A construction of Hadamard matrices,
+\newblock {\em J.\ Combin.\ Theory Ser.\ A} 57 (1991), no.\ 1, 86--108.
+\newblock \url{https://doi.org/10.1016/0097-3165(91)90008-5}.
+
+\bibitem{Djokovic2010BS}
+D.~Z.~\DJ okovi\'c,
+\newblock Classification of base sequences \(BS(n+1,n)\),
+\newblock {\em Int.\ J.\ Combin.} 2010 (2010), Article ID 851857, 21 pp.
+\newblock \url{https://doi.org/10.1155/2010/851857}.
+\newblock arXiv:1002.1414.
+
+\bibitem{Djokovic2011}
+D.~Z.~\DJ okovi\'c,
+\newblock Small orders of Hadamard matrices and base sequences,
+\newblock {\em Int.\ Math.\ Forum} 6 (2011), no.\ 62, 3061--3067.
+\newblock arXiv:1008.2043.
+\newblock \url{https://arxiv.org/abs/1008.2043}.
+
+\bibitem{Cohn1965}
+J.~H.~E.~Cohn,
+\newblock Hadamard matrices and some generalisations,
+\newblock {\em Amer.\ Math.\ Monthly} 72 (1965), 515--518.
+
+\bibitem{Turyn1970}
+R.~J.~Turyn,
+\newblock Complex Hadamard matrices,
+\newblock in {\em Combinatorial Structures and their Applications} (Proc.\
+  Calgary Internat.\ Conf., Calgary, Alta., 1969), Gordon and Breach,
+  New York, 1970, pp.\ 435--437.
+
+\bibitem{SargentLeeRushall2024}
+M.~Sargent, K.~Lee, and J.~Rushall,
+\newblock On generalizing the method of Scarpis to complex Hadamard matrices,
+\newblock {\em J.\ Combin.\ Math.\ Combin.\ Comput.} 119 (2024), 105--111.
+\newblock \url{https://doi.org/10.61091/jcmcc119-11}.
+
+\bibitem{EganOCathain2019}
+R.~Egan and P.~\'O~Cath\'ain,
+\newblock Morphisms of Butson classes,
+\newblock {\em Linear Algebra Appl.} 577 (2019), 78--93.
+\newblock \url{https://arxiv.org/abs/1707.08815}.
 
 \end{thebibliography}
 
