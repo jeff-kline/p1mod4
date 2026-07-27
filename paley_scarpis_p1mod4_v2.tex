@@ -157,7 +157,17 @@ where \(\J_q\) is the \(q\times q\) all-ones matrix.  We use repeatedly
         \sum_{u\in\F}\psi(\chi(u))=Z,
         \tag{2.1}\label{eq:rowsum}
 \]
-which holds because the nonzero squares and non-squares are equinumerous.
+which holds because the nonzero squares and non-squares are equinumerous,
+and the character sum
+\[
+        \sum_{z\in\F}\chi\bigl(z(z-d)\bigr)=-1\qquad(d\neq0).
+        \tag{2.2}\label{eq:charsum}
+\]
+For the latter, the term \(z=0\) contributes \(\chi(0)=0\), while for
+\(z\neq0\) we have \(z(z-d)=z^{2}\bigl(1-dz^{-1}\bigr)\) with
+\(\chi(z^{2})=1\); as \(z\) runs over \(\F^{\times}\) the element
+\(u=1-dz^{-1}\) runs over \(\F\setminus\{1\}\), so the sum equals
+\(\sum_{u\neq1}\chi(u)=-\chi(1)=-1\) because \(\sum_{u\in\F}\chi(u)=0\).
 
 \section{The construction}
 
@@ -179,7 +189,7 @@ The \((x,x')\) block of \(K_tK_t^{T}\), with \(d=x'-x\) and
 terms \(z=0\) and \(z=d\) carry opposite skew parts and cancel, using
 \(\chi(-d)=\chi(d)\) (here \(\chi(-1)=1\)); for \(z\neq0,d\),
 \(\psi(\chi(z))\psi(\chi(z-d))^{T}=2\chi(z)\chi(z-d)I_2\), and
-\(\sum_z\chi(z(z-d))=-1\) yields \(-2I_2\).  These are the diagonal and
+\eqref{eq:charsum} yields \(-2I_2\).  These are the diagonal and
 off-diagonal blocks of \(2(q+1)I-2\Rcal\).
 \end{proof}
 
@@ -247,7 +257,7 @@ distinct column pairs alternate, does not yield a Hadamard matrix.
 \end{lemma}
 
 \begin{proof}
-The first identity holds because \(S\) is Hadamard, each column pair is
+The first identity holds because \(S\) is Hadamard \cite{Paley1933}, each column pair is
 repeated \(q\) times, and right multiplication by \(R\) preserves row
 inner products.  For the cross identity, summing a cap row against a row
 of \(M_r\) and using \eqref{eq:rowsum} on every \(2q\)-block leaves

@@ -66,9 +66,9 @@ are recorded in [`AUDIT_LEDGER.md`](AUDIT_LEDGER.md), Scorecard 002.
 | Axis | Note |
 |---|---|
 | Novelty | Choice-free closed form vs. Farouk–Wang's choice-*dependent* lift (verified against their 2020 text: it takes an input matrix, a bijection and two unexhibited permutations). Bounded: FW 2022 Cor. 4.2 already has the same affine shift array, §6's Γ is conceded equivalent to a Sargent–Lee–Rushall output, and §5's sufficiency half is prior art. |
-| Depth | Every theorem and corollary proved outright — nothing conditional, nothing carried by numerics; §5's necessity direction re-derived independently by a second route. One repeat presentation gap, now closed: §3 states the M∞ column alignment explicitly, since the interleaved reading satisfied the old prose but is not Hadamard. |
+| Depth | Every theorem and corollary proved outright — nothing conditional, nothing carried by numerics; §5's necessity direction re-derived independently by a second route. Two presentation gaps found and closed: §3 now states the M∞ column alignment explicitly (the interleaved reading satisfied the old prose but is not Hadamard), and the character sum `Σ_z χ(z(z−d)) = −1`, used four times and previously imported silently, is now stated and proved where the blocks are defined. |
 | Reach | Settles the question posed and gives a real quantitative delimitation (non-prime-power instances need a projective plane of non-prime-power order); partially answers Farouk–Wang's published open problem 2. Adds no new Hadamard order. No open-problems section; the quasifield/translation-plane program the T-slot implies is exercised once at q=9 and never stated. |
-| Evidence | Every shipped script reproduces exactly (sweep, sampled q=81/125, figures byte-identical, full-scale q=5 inequivalence). Weakest axis: three numeric claims stated with equal confidence have no committed script — the coverage table, `rem:q9` and `rem:c30`. |
+| Evidence | Every shipped script reproduces exactly (sweep, sampled q=81/125, figures byte-identical, full-scale q=5 inequivalence). The three claims this pass found unscripted — the coverage screen, `rem:q9` and `rem:c30` — now ship as `coverage_table.py`, `nearfield_q9.py` and `gaussian_c30.py`, each re-deriving its published numbers and failing loudly if they disagree. |
 
 ## Ours vs. Farouk–Wang at q = 5
 
@@ -123,8 +123,9 @@ four block‑Gram lemmas in `paley_scarpis_p1mod4_v2.tex` are structured
 precisely enough for an agent to navigate and analyze, while remaining
 readable by humans. They should not be treated as an automatic guarantee of
 correctness; the repository includes an audit record (`AUDIT_LEDGER.md`) and
-reproducibility checks (`ps_p1mod4.py`, `q5_equivalence/`) so that claims can
-be examined rather than merely accepted.
+reproducibility checks (`ps_p1mod4.py`, `q5_equivalence/`, `coverage_table.py`,
+`nearfield_q9.py`, `gaussian_c30.py`) so that claims can be examined rather
+than merely accepted.
 
 ### Ask your agent
 
@@ -169,6 +170,13 @@ This prints `ALL PASS` (exit code `0`) if every case in the sweep satisfies
   `structure_q5_N60.png`) plus per‑order `H`|Gram figures for `q = 5, 9, 13`
   (`H_q5_N60.png`, `H_q9_N180.png`, `H_q13_N364.png`), regenerable with
   `--figures` below.
+- `coverage_table.py` — regenerates Appendix A: the audited range, the
+  elementary‑witness screen (232 orders, 128 covered, 104 without a witness),
+  and the smallest failure `q = 109`.
+- `nearfield_q9.py` — Remark 11: the `q = 9` Dickson‑nearfield matrix of order
+  180 and its inequivalence to the matrix of Theorem 1.
+- `gaussian_c30.py` — Theorem 3 and Remark 13: `Γ ∈ BH(30,4)`, the check that
+  `φ(Γ)` is the order‑60 matrix entrywise, and inequivalence to `C₃₀ + iI`.
 
 **Reproducing the verification:**
 
@@ -202,6 +210,21 @@ python ps_p1mod4.py --q 5 --write - --which H --fmt signs   # H to stdout, compa
 `--which` selects `H` (the order‑`N` Hadamard matrix, default) or `seed` (the
 order‑`2(q+1)` Paley‑II seed `S`); `--fmt` selects `ints` (space‑separated
 `+1`/`-1`, default) or `signs` (compact `+`/`-` characters).
+
+**Reproducing the paper's other numeric claims** — each script re-derives the
+published numbers and exits nonzero if any disagrees:
+
+```bash
+python coverage_table.py            # Appendix A: 232 / 128 / 104, smallest failure q=109
+python coverage_table.py --table    # ...and print the 104 orders without a witness
+python nearfield_q9.py              # Remark 11: 44 attained on 112,752 quadruples vs none
+python gaussian_c30.py              # Theorem 3 + Remark 13: 500 on 240 quadruples vs none
+```
+
+`nearfield_q9.py` covers all `C(180,4) = 42,296,805` row quadruples (about 8
+seconds); it validates its vectorized profile routine against a direct
+`O(n⁴)` reference at order 60, and against the recorded `q = 5` profile, before
+using it at order 180.
 
 **Requirements:**
 

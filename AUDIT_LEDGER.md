@@ -645,3 +645,28 @@ both the same item: the coverage table, `rem:q9` and `rem:c30` still have no
 committed script, and two of those three were introduced by the merge
 recorded above. Closing them is the single highest-value action available
 on this repository.
+
+### Scorecard 002 addendum — Evidence and Depth repaired — 2026-07-27
+
+Rows 11–12 above are **closed**, and the two remaining Depth items with them.
+Three scripts were added, each re-deriving its published numbers and exiting
+nonzero on any disagreement.
+
+| # | Item | Was | Now | Evidence |
+|---|---|---|---|---|
+| 14 | Appendix A screen | asserted as computed, no script | `coverage_table.py` | Reproduces 232 orders / 128 covered / 104 without a witness, and the smallest failure `q = 109`, `N = 23980`, `m = 5·11·109`. `--table` prints all 104 rows. Implements (C.1) from actual divisor splits; the withdrawn factorwise test of Remark 7 is deliberately not implemented |
+| 15 | The A.1 statistics added when defect 1 was fixed | newly written, unscripted | same script | Also checks the numbers that replaced the false claim: Table 4 has **195** entries, **124** prime and **71** composite, smallest **167**, smallest composite **515**, and all twelve odd parts `m = q(q+1)/2` for `q ≤ 73` absent from it. Table 4 is transcribed into the script with its provenance, so the check is self-contained |
+| 16 | `rem:q9` (q = 9 nearfield) | asserted as computed, no script | `nearfield_q9.py` | Builds both order-180 matrices by subclassing the shipped `PaleyScarpis` and overriding only the T-slot, verifies both are Hadamard, verifies `T(r,a) = r∘a` really is a `(Z₃², 9; 1)`-difference matrix, and reproduces **44 on 112,752** of all 42,296,805 quadruples for the nearfield matrix against **0** for Theorem 1, with all four row/column comparisons distinct. Runtime ≈ 8 s |
+| 17 | Trusting a fast path at scale | — | built into the same script | The vectorized profile routine is validated against a direct `O(n⁴)` reference at order 60 **before** being used at order 180, and the resulting `q = 5` profile is checked against the recorded `NOTE_rows` value `4:359000 12:103125 20:25510`. This is the "cross-check the fast implementation against a dense reference at small size" discipline, made permanent |
+| 18 | `rem:c30` (Γ vs Turyn's `C₃₀ + iI`) | asserted as computed, no script | `gaussian_c30.py` | Confirms Γ ∈ BH(30,4) and `C₃₀ + iI` ∈ BH(30,4), and reproduces **500 on 240** ordered quadruples for Γ against **0** for `C₃₀ + iI`, in both orientations |
+| 19 | Theorem 3's `H = φ(Γ)` | proved, never checked numerically | same script | `φ(Γ)` is verified **entrywise equal** to the order-60 matrix built by the shipped construction — a claim of Theorem 3 that no script previously touched |
+| 20 | The character sum `Σ_z χ(z(z−d)) = −1` | used four times, never stated or cited | fixed in §2 | Flagged by the Depth agent as a silent classical import, against an abstract advertising the proof as computed "directly from character sums". Now stated as (2.2) beside (2.1) with a three-line proof (the `z = 0` term vanishes; for `z ≠ 0`, `z(z−d) = z²(1−dz⁻¹)` and `χ(z²) = 1`, so the sum is `Σ_{u≠1} χ(u) = −1`), and referenced rather than restated at its first use. Verified numerically for `q = 5, 9, 13, 17, 25, 29, 49, 81, 121, 125` |
+| 21 | "because `S` is Hadamard" in Lemma 4 | silent import | fixed in §3 | Now carries the Paley citation already in the bibliography |
+
+**Disposition summary:** every item this scorecard opened is now closed. The
+paper's numeric claims are reproducible end to end from the repository:
+`ps_p1mod4.py` for the construction itself, `q5_equivalence/` for the
+Farouk–Wang comparison, and the three scripts above for Appendix A, Remark 11,
+Remark 13 and Theorem 3. The reproducibility regression introduced by the §5/§6
+merge is undone, and the paper no longer imports a character-sum identity
+without proof.
