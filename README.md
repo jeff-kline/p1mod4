@@ -1,5 +1,10 @@
 # A choice-free Paley–II construction of Hadamard matrices
 
+**Release 0.1.0 — ADMITTED (August 2, 2026).** Cite the
+[version archive](https://doi.org/10.5281/zenodo.21759966); the
+[living repository](https://github.com/jeff-kline/p1mod4) remains available
+for corrections and later versions.
+
 This repository gives an explicit formula for a real Hadamard matrix of order
 
 ```text
@@ -24,10 +29,18 @@ The complete proof is in [the paper](paper/main.pdf); its source is
 
 ## Release status
 
-Version `0.1.0` is a release candidate and is **not yet admitted**. The three
-pre-freeze gates have passed, but no immutable tag, verified public archive, or
-permanent citation is available yet. Use the eventual tagged archive—not this
-moving branch—for citation.
+Version `0.1.0` is admitted under the project's
+[public research standard](https://jeff-kline.github.io/posts/research-program/index.html).
+The immutable [`v0.1.0` tag](https://github.com/jeff-kline/p1mod4/releases/tag/v0.1.0)
+resolves to commit `6f28f27cb36aa3585a180d28bf5d10651bbbb909`; its
+[Zenodo archive](https://doi.org/10.5281/zenodo.21759966) was downloaded and
+verified byte-for-byte against the tagged GitHub archive. The tag honestly
+retains prepublication “release candidate” wording because the DOI did not
+exist when that immutable snapshot was made.
+
+Admission means that the claim, evidence, prior-work record, reproducibility
+materials, citation, and correction policy passed the project-defined gates.
+It is not peer review, a correctness certificate, or proof of global novelty.
 
 ## What is new—and what is not
 
@@ -218,19 +231,18 @@ material corrections or withdrawals in the public history.
 
 ## Citation
 
-There is not yet a stable release to cite. Until an immutable archive is
-published, reference the living repository and include the commit hash you
-used:
+For reproducibility, cite the archived version rather than the moving default
+branch:
 
 ```bibtex
-@misc{kline2026p1mod4,
+@software{kline2026p1mod4,
   author       = {Kline, Jeffery},
-  title        = {A Paley--II analogue of the Scarpis--\DJ okovi\'c construction
-                  for prime powers q congruent to 1 modulo 4},
+  title        = {A choice-free Paley--II construction of Hadamard matrices},
   year         = {2026},
-  howpublished = {GitHub repository},
-  url          = {https://github.com/jeff-kline/p1mod4},
-  note         = {Release candidate; cite the commit hash used}
+  version      = {0.1.0},
+  doi          = {10.5281/zenodo.21759966},
+  url          = {https://doi.org/10.5281/zenodo.21759966},
+  note         = {Living repository: https://github.com/jeff-kline/p1mod4}
 }
 ```
 

@@ -1,15 +1,15 @@
 # Reproducibility verification record
 
-**Verdict:** PASS for the release-candidate tree
+**Verdict:** PASS for immutable release `v0.1.0` and its public archive
 
 **Run date:** August 2, 2026
 
-**Release identifier:** `v0.1.0` (the immutable tag, once created, is the
-canonical resolver for the release commit)
+**Release identifier:** `v0.1.0`, resolving to commit
+`6f28f27cb36aa3585a180d28bf5d10651bbbb909`
 
 **Starting repository commit:** `a074c6444e020f39dde51c2a14373d044dfa9ba4`
 
-**Final content integrity:** `MANIFEST.sha256`
+**Tagged content integrity:** `MANIFEST.sha256` inside `v0.1.0`
 
 The literal release-commit hash is not embedded in its own tracked tree: doing
 so would change that hash. The signed/annotated tag and archive record resolve
@@ -95,7 +95,12 @@ SOURCE_DATE_EPOCH=1785646800 FORCE_SOURCE_DATE=1 \
 ```
 
 ```text
+tagged v0.1.0 PDF:
 f679d91e74b412a0eb0aec9597fc670a41eef1a7f7a627fa4bd3432817fa90d9  paper/main.pdf
+
+post-publication DOI-bearing living PDF:
+232e9a7a667e30762c32729029bf3ddc1d60e8d5cad8ab842a645a878630b86e  paper/main.pdf
+
 pages: 19
 creation/modification date: August 2, 2026 00:00:00 CDT
 ```
@@ -106,6 +111,36 @@ ligatures. Rendered pages 1, 5, 7, 8, 14, 15, and 19 were inspected for title
 metadata, abstract and introduction flow, the order-60 visualization, the
 converse theorem, Appendix equation `(A.1)`, the long table, and bibliography.
 No clipping, broken glyph, unreadable figure, or stray link border was found.
+
+## Public archive verification
+
+The GitHub Release for `v0.1.0` triggered Zenodo record
+[21759966](https://zenodo.org/records/21759966), with version DOI
+[10.5281/zenodo.21759966](https://doi.org/10.5281/zenodo.21759966) and concept
+DOI `10.5281/zenodo.21759965`. The public record was checked through Zenodo's
+API and record page on August 2, 2026.
+
+```text
+record status: published; open access
+title: A choice-free Paley-II construction of Hadamard matrices
+creator: Kline, Jeffery
+publication date: 2026-08-02
+version: v0.1.0
+license: GPL-3.0-only
+resource type: software
+repository: https://github.com/jeff-kline/p1mod4
+filename: jeff-kline/p1mod4-v0.1.0.zip
+size: 755938 bytes
+provider checksum: md5:b743e315aecdeb87849c54d3f448991e
+SHA-256: 23fb02a93d8a9adbabb25482ede7892d1df6e429d2187847fdce803e5e6df926
+```
+
+Two prepublication downloads of GitHub's `v0.1.0` tag zipball were
+byte-identical. The public Zenodo file is byte-identical to that pinned
+zipball, and its internal manifest verifies all 34 release files. A separate
+`git archive --format=zip` was also generated twice with prefix
+`p1mod4-0.1.0/`; both copies had SHA-256
+`3c2f9aed96c43aaf11afb121d60c74400ce37486ad0679066df7399ad216bcfb`.
 
 ## Scope and exclusions
 
@@ -118,5 +153,5 @@ No clipping, broken glyph, unreadable figure, or stray link border was found.
   Sargent–Lee–Rushall experiment, and a Nuñez Ponasso instantiation—are not
   promoted to release evidence unless covered by the current proof or scripts.
 - `alpha_family.py` is reproducible but explicitly unrefereed.
-- Archive byte identity and DOI reconciliation are tested only after the tag
-  and public archive exist.
+- Archive byte identity and DOI reconciliation were completed after the tag
+  and public archive existed; the evidence is recorded above.

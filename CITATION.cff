@@ -1,8 +1,10 @@
 cff-version: 1.2.0
-message: "If you use this construction, cite the archived release once it is available."
+message: "If you use this construction, cite version 0.1.0 via its Zenodo DOI."
 title: "A choice-free Paley-II construction of Hadamard matrices"
 type: software
 version: 0.1.0
+doi: 10.5281/zenodo.21759966
+date-released: 2026-08-02
 authors:
   - family-names: Kline
     given-names: Jeffery

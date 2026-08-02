@@ -893,3 +893,40 @@ representative of a choice-parametrised family is a weak signal at order 60.
 Both are now scoped: the abstract says "the printed outputs differ" and points
 at Remark 5, and §4 says the constructions "do not merely present the same
 matrix differently".
+
+---
+
+## Admission audit — v0.1.0 — 2026-08-02
+
+- **Standard applied:** Jeff Kline, “A Public Standard for This Work,” version
+  0.4 draft, August 1, 2026.
+- **Verdict:** ADMITTED under the project-defined release standard. This is not
+  peer review, a correctness certificate, or proof of global novelty.
+- **Immutable release:** tag `v0.1.0`, commit
+  `6f28f27cb36aa3585a180d28bf5d10651bbbb909`.
+- **Permanent version DOI:** `10.5281/zenodo.21759966`; concept DOI
+  `10.5281/zenodo.21759965`.
+- **Archived file:** `jeff-kline/p1mod4-v0.1.0.zip`, 755,938 bytes;
+  provider checksum `md5:b743e315aecdeb87849c54d3f448991e`; SHA-256
+  `23fb02a93d8a9adbabb25482ede7892d1df6e429d2187847fdce803e5e6df926`.
+- **Archive verification:** the public Zenodo download is byte-identical to
+  two independently downloaded copies of GitHub's `v0.1.0` tag zipball. Its
+  internal `MANIFEST.sha256` verifies all 34 release files. A separate
+  deterministic `git archive` was generated twice with SHA-256
+  `3c2f9aed96c43aaf11afb121d60c74400ce37486ad0679066df7399ad216bcfb`.
+- **Metadata verification:** public status, version DOI, title, creator,
+  publication date, version, GPL-3.0-only license, software resource type,
+  repository URL, filename, byte size, and provider checksum were checked
+  against the Zenodo record and public record page.
+- **Gate disposition:** P1 PASS, A1 PASS, R1 PASS. The bounded prior-work and
+  consistency records remain `audit/PRIOR_WORK.md` and
+  `audit/CONSISTENCY.md`; the exact computational and document checks remain
+  `VERIFICATION.md`.
+- **Residual risks:** the novelty statement remains bounded by the recorded
+  corpus and its access limits; `alpha_family.py` remains explicitly
+  unrefereed; sampled large-order checks do not replace proof; process-separated
+  AI audits are not independent expert review.
+- **Immutable-wording disclosure:** the tag was packaged before DOI activation
+  and honestly retains “release candidate” wording. The living metadata was
+  updated after archive verification; the tag and Zenodo file were not moved
+  or rewritten.
