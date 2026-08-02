@@ -12,7 +12,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(HERE, "..", "images", "q5_side_by_side.png")
+OUT = os.path.join(HERE, "..", "..", "paper", "images", "q5_side_by_side.png")
 
 
 def load(path):

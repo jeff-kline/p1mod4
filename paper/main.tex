@@ -1,11 +1,22 @@
 \documentclass[11pt]{article}
 
-\usepackage[T1]{fontenc}      % needed for \DJ (Đ in "Đoković")
+% OT1 Computer Modern is installed here as scalable Type 1 fonts.  Define the
+% crossed D used in Đoković without falling back to bitmap-only T1 fonts.
+\DeclareTextCommand{\DJ}{OT1}{%
+  \leavevmode\makebox[0pt][l]{\raisebox{.45ex}{\hspace{.04em}\rule{.48em}{.05em}}}D}
+
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage{longtable}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\hypersetup{
+  hidelinks,
+  pdftitle={A Paley-II analogue of the Scarpis-Djokovic construction for prime powers q congruent to 1 modulo 4},
+  pdfauthor={Jeffery Kline},
+  pdfsubject={An explicit Hadamard-matrix construction of order 2q(q+1)},
+  pdfkeywords={Hadamard matrix, Paley construction, Scarpis construction, difference matrix, Butson matrix}
+}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
@@ -20,103 +31,96 @@
 
 \title{A Paley--II analogue of the Scarpis--\DJ okovi\'c construction\\
        for prime powers \(q\equiv 1\pmod 4\)}
-% Edit author/affiliation as appropriate before submission.
 \author{Jeffery Kline}
-\date{\today}
+\date{Release candidate 0.1.0\\August 2, 2026}
 
 \begin{document}
 
 \maketitle
 
+\begin{center}
+\small Living repository: \url{https://github.com/jeff-kline/p1mod4}.\\
+This release candidate has no permanent archive or DOI yet.
+\end{center}
+
 \begin{abstract}
-For a prime power \(q\equiv 1\pmod 4\) we write down a Hadamard matrix
-of order \(2q(q+1)\) in closed form: the finite bands are given
-entrywise by the quadratic character on \(\F_q\) composed with the
-\(2\times2\) Paley--II replacement blocks, with no input matrix and no
-choices; orthogonality follows from four block-Gram identities in
-character sums.  The existence statement is not new: it is Farouk and
-Wang's (2020), whose lift from order \(2(q+1)\) takes choices that can
-change the output.  The contribution is the method: formula rather than
-procedure.  At \(q=5\) our matrix is not Hadamard-equivalent to the
-order-\(60\) example they print, though it need not differ from every
-output of their procedure (Remark~\ref{rem:alpha5}).
+A Hadamard matrix is a square sign matrix with pairwise orthogonal rows.
+For every prime power \(q\equiv1\pmod4\), we give a choice-free formula for
+such a matrix of order \(2q(q+1)\).  Its finite bands are written entry by
+entry from the quadratic character of \(\F_q\) and the \(2\times2\)
+Paley--II blocks.  Four block-Gram identities prove orthogonality.
 
-We then ask what the construction needs.  On a finite abelian group
-\(G\) of order \(n\), replace the character by
-\(\delta\colon G\to\{0,\pm1\}\) with \(\delta(0)=0\) and the shift by an
-arbitrary array \(T\); the matrix is Hadamard \emph{if and only if}
-\(\delta\) is of Paley type and \(T\) is a \((G,n;1)\)-difference
-matrix.  Sufficiency is known in greater generality (Seberry;
-Nu\~nez Ponasso); new is the converse, that both are forced.  Paley
-type forces \(n\equiv1\pmod4\), and the difference-matrix condition
-yields \(n-1\) mutually orthogonal Latin squares, so an instance on a
-group of non-prime-power order would give a projective plane of
-non-prime-power order.
+The existence result is due to Farouk and Wang (2020).  Their construction
+lifts an input Hadamard matrix and depends on auxiliary choices; the formula
+here uses neither.  At \(q=5\), it produces a matrix inequivalent to their
+printed order-\(60\) example, although another choice in their procedure
+produces an equivalent matrix (Remark~\ref{rem:alpha5}).
 
-The Paley--II blocks are the Gaussian units in the real \(2\times2\)
-representation, and our matrix is the Turyn double of a Butson matrix
-\(\Gamma\in BH\bigl(q(q+1),4\bigr)\) that is equivalent to an output of
-the complex Scarpis lift of Sargent, Lee and Rushall (2024).  An
-appendix makes coverage explicit: orders with odd part at most
-\(3000\) are in the standard tables, the first unaudited order (\(q=81\))
-follows from a classical Turyn product, and for \(q\le3000\) we
-tabulate the orders a restricted elementary screen fails to witness ---
-\emph{unaudited} rather than open.
+We also characterize the two ingredients that the formula needs.  On a finite
+abelian group \(G\) of order \(n\), the generalized matrix is Hadamard if and
+only if its sign function is of Paley type and its shift array is a
+\((G,n;1)\)-difference matrix.  The sufficiency direction was known in greater
+generality; the converse is apparently new within the bounded literature
+corpus recorded with this release.  It forces
+\(n\equiv1\pmod4\), and an example of non-prime-power order would yield a
+projective plane of that order.  Finally, we express the construction as the
+Turyn double of a Butson matrix over the Gaussian units and record the known
+coverage of its orders.  The coverage screen identifies unaudited cases, not
+open Hadamard orders.
 \end{abstract}
 
 \section{Introduction}
 
-For a prime power \(q\) let \(\F=\F_q\) and let
-\(\chi\colon\F\to\{0,\pm1\}\) be the quadratic character,
-\(\chi(0)=0\), \(\chi(x)=1\) for nonzero squares and \(-1\) otherwise.
-Paley's two constructions split on the residue of \(q\): for
-\(q\equiv 3\pmod 4\) Paley~I gives a Hadamard matrix of order \(q+1\),
-and for \(q\equiv 1\pmod 4\) Paley~II gives one of order \(2(q+1)\)
+A Hadamard matrix of order \(N\) is an \(N\times N\) matrix with entries
+in \(\{\pm1\}\) whose rows are pairwise orthogonal.  Equivalently, it
+satisfies \(HH^{\mathsf T}=N\I_N\) \cite{Hadamard1893}.  This note gives an explicit formula for
+one such matrix of order \(2q(q+1)\) whenever \(q\equiv1\pmod4\) is a prime
+power.
+
+The starting point is Paley's use of quadratic residues in finite fields.  Let
+\(\F=\F_q\), and define the quadratic character
+\(\chi\colon\F\to\{0,\pm1\}\) by \(\chi(0)=0\), with value \(1\) on nonzero
+squares and \(-1\) on non-squares.  When \(q\equiv3\pmod4\), the Paley--I
+construction gives a Hadamard matrix of order \(q+1\).  When
+\(q\equiv1\pmod4\), Paley--II gives one of order \(2(q+1)\)
 \cite{Paley1933}.
 
-Scarpis \cite{Scarpis1898} showed that for a prime \(p\equiv 3\pmod 4\) a
-Hadamard matrix of order \(p+1\) lifts to one of order \(p(p+1)\).
-\DJ okovi\'c \cite{Djokovic2016} replaced the prime by an arbitrary prime
-power: if \(q\equiv 3\pmod 4\) is a prime power there is a Hadamard
-matrix of order \(q(q+1)\); his note closes with the open problem of an
-analogous procedure for \(q\equiv 1\pmod 4\).
-
-Because the Paley--II seed has order \(2(q+1)\), the natural
-Scarpis-type target in the \(q\equiv 1\pmod 4\) case is
+Scarpis \cite{Scarpis1898} showed that, for a prime \(p\equiv3\pmod4\), a
+Hadamard matrix of order \(p+1\) can be lifted to order \(p(p+1)\).
+\DJ okovi\'c \cite{Djokovic2016} extended this result from primes to prime
+powers and asked for an analogue when \(q\equiv1\pmod4\).  In that case the
+Paley--II seed has order \(2(q+1)\), so the corresponding target is
 \[
         q\cdot 2(q+1)=2q(q+1).
 \]
-We construct such a matrix directly from \(\chi\).  Throughout, \(q\equiv
-1\pmod 4\) is a prime power, so \(\chi(-1)=1\); this is the only place
-the residue class is used, and it is exactly what fails for
-\(q\equiv 3\pmod 4\).
 
-The existence of Hadamard matrices of order \(2q(q+1)\) for prime powers
-\(q\equiv1\pmod4\) is due to Farouk and Wang \cite{FaroukWang2020}; that
-existence statement is not new here, and the contribution of this note is
-the method of construction and proof.  Farouk and Wang obtain the matrix
-as the output of a lifting procedure that varies with an input Hadamard
-matrix of order \(2(q+1)\) and a bijection, verified row pair by row pair
-from the input matrix's Hadamard property.  Here there is no input matrix
-and no bijection: the finite bands are written entrywise in the closed
-form \(\psi(\chi(y-x-t))\), and the Hadamard property follows from four
-block-Gram identities computed directly from the quadratic character.
+Farouk and Wang \cite{FaroukWang2020} already proved existence at these
+orders.  Their method lifts an eligible Hadamard matrix of order \(2(q+1)\)
+and depends on a chosen bijection.  The formula here is a different route to
+the same existence statement.  It takes no input matrix and makes no
+auxiliary choice: its finite bands have entries
+\(\psi(\chi(y-x-t))\), where \(\psi\) replaces the three character values by
+the Paley--II \(2\times2\) blocks.  Four block-Gram identities, computed from
+the quadratic character, prove that the rows are orthogonal.  The assumption
+\(q\equiv1\pmod4\) enters through \(\chi(-1)=1\), the identity that fails in
+the other residue class.
 
-\S5 asks what this construction requires: replacing \(\chi\) by a
-function \(\delta\colon G\to\{0,\pm1\}\) with \(\delta(0)=0\) and the
-shift by an arbitrary array \(T\), the resulting matrix is Hadamard
-\emph{if and only if} \(\delta\) is of Paley type and \(T\) is a
-\((G,n;1)\)-difference matrix (Theorem~\ref{thm:char}); sufficiency is
-prior art, due to Seberry \cite{Seberry1980} and to Nu\~nez Ponasso
-\cite[Thm.~4.3.3]{Ponasso2024}, and the converse is new here.  \S6 reads
-the same matrix over the Gaussian integers: it factors through a Butson
-matrix \(\Gamma\) of half the order whose Turyn double it is
-(Theorem~\ref{thm:complex}).  \S7 collects the open problems these
-readings raise.  A further contribution is the coverage analysis of
-Appendix~\ref{app:coverage}, which has no counterpart in
-\cite{FaroukWang2020}: it locates the initial range
-against audited tables of known Hadamard orders and applies a restricted
-elementary screen beyond that range.
+The method also exposes a second result.  Section~5 replaces \(\chi\) by a
+function \(\delta\colon G\to\{0,\pm1\}\) on a finite abelian group and
+replaces the field shifts by an arbitrary array \(T\).  The resulting matrix
+is Hadamard exactly when \(\delta\) is of Paley type and \(T\) is a
+\((G,n;1)\)-difference matrix (Theorem~\ref{thm:char}).  Seberry
+\cite{Seberry1980} and Nu\~nez Ponasso \cite[Thm.~4.3.3]{Ponasso2024} proved
+the sufficiency direction in greater generality.  The claimed new part is the
+converse: the Hadamard property forces both ingredients.
+
+Section~6 rewrites the same construction over the Gaussian integers.  The
+real matrix is the Turyn double of a Butson matrix \(\Gamma\) of half the
+order (Theorem~\ref{thm:complex}).  Section~7 states the remaining open
+questions.  Appendix~\ref{app:coverage} compares the resulting orders with
+published tables and then applies a restricted elementary witness screen.
+Orders missed by that screen are recorded as unaudited, not as open Hadamard
+orders.
 
 \section{The Paley--II blocks}
 
@@ -437,7 +441,7 @@ equals row \((r,\alpha)\) of \(K_0\), and set
 Let \(C\) be indexed by \(\{\infty\}\cup G\) with \(C_{u,u}=0\),
 \(C_{\infty,x}=C_{x,\infty}=1\), \(C_{x,y}=\delta(y-x)\), let \(S\) be its
 \(\psi\)-replacement, and let \(M_\infty\) be built from \(S\) exactly as in
-\S3.  Write
+Section~3.  Write
 \[
         H(G,\delta,T)=\begin{bmatrix}M_\infty\\ M_r\ (r\in G)\end{bmatrix},
 \]
@@ -500,17 +504,25 @@ on Rajkundlia, gave a generalized-Hadamard form of the Scarpis
 construction, and Nu\~nez Ponasso \cite[Thm.~4.3.3]{Ponasso2024} proves
 that a \(BH(n+1,m)\) together with a \(GH(n,G)\) with \(|G|=n\) yields a
 \(BH(n(n+1),m)\), for any group \(G\) and any \(m\).  Taking \(m=4\) and
-composing with the doubling of \S6 recovers the ``if'' half of
+composing with the doubling of Section~6 recovers the ``if'' half of
 Theorem~\ref{thm:char} without the hypothesis that \(G\) be abelian.  What
 is proved here and does not follow from those results is the converse:
 that the two conditions are \emph{forced}, so that the construction admits
-no other input.  That is the direction Corollaries~\ref{cor:mod4} and
-\ref{cor:plane} rest on.
+no other input.  A bounded search also covered Jungnickel's difference-matrix
+papers, de Launey's surveys and developed-matrix work, and de Launey and
+Flannery's algebraic-design framework
+\cite{Jungnickel1979,Jungnickel1980,deLauney1986,deLauney1992,
+deLauneyFlannery2011,ColbournDinitz2007}; it did not locate this necessity
+statement.  We therefore describe the converse only as \emph{apparently new
+within that corpus}, not as a claim of global priority.  The exact corpus,
+queries, access limits, and confidence judgment are recorded in
+\texttt{audit/PRIOR\_WORK.md}.  This is the direction
+Corollaries~\ref{cor:mod4} and \ref{cor:plane} rest on.
 
 \begin{proof}
 Let \(B\) be as in \eqref{eq:blocksum} and put
 \(\mu_{rs}(u)=\#\{a\in G:\,T(r,a)-T(s,a)=u\}\).  Rerunning the block
-computations of \S3 with \(\chi\) replaced by \(\delta\) and \(ar\) by
+computations of Section~3 with \(\chi\) replaced by \(\delta\) and \(ar\) by
 \(T(r,a)\) --- no step of which uses anything beyond the abelian group law
 --- gives every Gram block of \(H\).  For \(r,s\in G\) and \(x,x'\in G\), with
 \(d=x'-x\),
@@ -661,7 +673,7 @@ the squares \(x_i+bx_j\) over \(\F_q\) realise the bound
 of mutually orthogonal Latin squares, which is why they raise the
 construction of a complete eligible set of non-prime-power order as an open
 problem.  Corollary~\ref{cor:plane} says that this loophole is closed for a
-closed-form construction of the present shape.  The layout of \S3 produces
+closed-form construction of the present shape.  The layout of Section~3 produces
 only the group-developed squares \(L_r[x,a]=x+\widetilde T(r,a)\), and for
 those three conditions coincide: eligibility of \(L_r,L_s\) says that for
 every \(c\in G\) there is a unique \(a\) with
@@ -710,12 +722,12 @@ source of inequivalence.
 \section{The construction over the Gaussian integers}
 \label{sec:gaussian}
 
-The blocks \(P\), \(Z\), \(R\) of \S2 are not three unrelated objects: they
+The blocks \(P\), \(Z\), \(R\) of Section~2 are not three unrelated objects: they
 are the real \(2\times2\) representation of the Gaussian units, and through
 it Theorem~\ref{thm:main} factors through a matrix of half the order over
 \(\Z[i]\).  This section makes that factorisation explicit and records what
 it implies about the relation of Theorem~\ref{thm:main} to the literature.
-Nothing in \S\S1--4 depends on this section.
+Nothing in Sections~1--4 depends on this section.
 
 Let
 \[
@@ -729,7 +741,7 @@ Since \(R^{2}=-I_2\), the map \(\rho\) is an injective ring homomorphism, and
         \varphi(1)=P,\qquad \varphi(-1)=-P,\qquad
         \varphi(-i)=-RP=Z,\qquad \varphi(i)=-Z,
 \]
-the third identity being the relation \(ZR=-P\) of \S2 rewritten together
+the third identity being the relation \(ZR=-P\) of Section~2 rewritten together
 with \(PR=-RP\).  Define
 \(e\colon\F\to\{1,-1,-i\}\subset\Z[i]\) by
 \[
@@ -783,8 +795,9 @@ A matrix \(\Gamma\) with entries in \(\{1,-1,i,-i\}\) and
 \(\Gamma\Gamma^{*}=nI_n\) is a Butson--Hadamard matrix, written
 \(\Gamma\in BH(n,4)\).  Lemma~\ref{lem:double} is thus the classical
 morphism \(BH(n,4)\to BH(2n,2)\), obtained independently by Cohn
-\cite{Cohn1965} and Turyn \cite{Turyn1970}; we call \(\varphi(\Gamma)\) the
-\emph{Turyn double} of \(\Gamma\).
+\cite{Cohn1965} and Turyn \cite{Turyn1970}; see also the general treatment
+of Butson-class morphisms in \cite{EganOCathain2019}.  We call
+\(\varphi(\Gamma)\) the \emph{Turyn double} of \(\Gamma\).
 
 \begin{theorem}\label{thm:complex}
 Let \(q\equiv1\pmod4\) be a prime power and \(n=q(q+1)\).  Let \(\Gamma\) be
@@ -818,7 +831,7 @@ By Theorem~\ref{thm:main} and Lemma~\ref{lem:double},
 \end{proof}
 
 \begin{remark}\label{rem:scalar}
-Lemma~\ref{lem:double} converts the four block-Gram identities of \S3 into
+Lemma~\ref{lem:double} converts the four block-Gram identities of Section~3 into
 scalar identities over \(\Z[i]\); the \(2\times2\) block algebra carries no
 information beyond \(\rho\).  Lemma~\ref{lem:self}, for instance, becomes
 \[
@@ -859,12 +872,12 @@ and \(N[x,a]=-i\,e(a-x)\) for \(x,a\in\F\).  Feeding \(N\) to their
 construction with the row indexed by \(\infty\) deleted returns
 \(\operatorname{diag}(I_q,\,iI_{q^{2}})\,\Gamma\); a diagonal unimodular row
 scaling lies in their equivalence group, so \(\Gamma\) is equivalent to that
-output.  Over \(\Z[i]\), then, the construction of \S3 is the instance of
+output.  Over \(\Z[i]\), then, the construction of Section~3 is the instance of
 theirs in which the seed, the deleted row and the bijection \(\alpha\) are
-all determined by \(q\); the distinction drawn in \S4 against
+all determined by \(q\); the distinction drawn in Section~4 against
 \cite{FaroukWang2020} --- formula rather than procedure --- is the accurate
 description of the difference here as well.  The relation recorded here is,
-however, strictly closer than the one recorded in \S4.  There we note in
+however, strictly closer than the one recorded in Section~4.  There we note in
 addition that the two constructions yield inequivalent matrices; no
 corresponding statement is available here, and none is made.  The matrix
 \(\Gamma\) is equivalent to an output of \cite{SargentLeeRushall2024}, not
@@ -926,13 +939,13 @@ non-prime-power \(n\)?
 \emph{4.  The residue class \(q\equiv3\pmod4\).}  \DJ okovi\'c
 \cite{Djokovic2016} extends Scarpis to prime powers there, producing order
 \(q(q+1)\) from a Paley~I seed, and \(\chi(-1)=-1\) is exactly what obstructs
-the argument of \S3 --- the residue class is used in one place only, the
+the argument of Section~3 --- the residue class is used in one place only, the
 proof of Lemma~\ref{lem:self}.  Is
 there a choice-free closed form in that class as well, and does it fall under
 a characterisation of the shape of Theorem~\ref{thm:char}?
 
 \emph{5.  Equivalence to the rest of the Farouk--Wang family.}  The
-inequivalence recorded in \S4 is to the order-\(60\) matrix printed in
+inequivalence recorded in Section~4 is to the order-\(60\) matrix printed in
 \cite{FaroukWang2020}.  Their procedure varies with a bijection \(\alpha\),
 so whether the matrix of Theorem~\ref{thm:main} is equivalent to
 \emph{some} output of that procedure is open for \(q>5\); at \(q=5\) see the
@@ -946,11 +959,11 @@ Remark~\ref{rem:slr}.
 
 Write \(N=2q(q+1)\) and \(m=q(q+1)/2\) for its odd part, so
 \(N=4m\).  We assess coverage of \(N\) by prior constructions on four
-levels: the audited tables (\S\ref{app:audit}), the first unaudited
-order (\S\ref{app:81}), a second worked example lying beyond the reach
-of the elementary test (\S\ref{app:109}), and that elementary-witness
+levels: the audited tables (Section~\ref{app:audit}), the first unaudited
+order (Section~\ref{app:81}), a second worked example lying beyond the reach
+of the elementary test (Section~\ref{app:109}), and that elementary-witness
 test itself, which isolates the candidate orders
-(\S\ref{app:candidates}).
+(Section~\ref{app:candidates}).
 
 \subsection{Orders with odd part at most \texorpdfstring{\(3000\)}{3000}}
 \label{app:audit}
@@ -989,7 +1002,7 @@ elementary witness where one exists (Paley~I/II, or a Turyn product
 49 & 4900  & \(5^{2}\cdot7^{2}\)& Turyn \(4\cdot25\cdot49\)\\
 53 & 5724  & \(3^{3}\cdot53\)   & Paley II, \(p=2861\)\\
 61 & 7564  & \(31\cdot61\)      & Turyn \(4\cdot31\cdot61\)\\
-73 & 10804 & \(37\cdot73\)      & tables; no restricted witness (see \S\ref{app:candidates})\\
+73 & 10804 & \(37\cdot73\)      & tables; no restricted witness (see Section~\ref{app:candidates})\\
 \end{tabular}
 \end{center}
 
@@ -1025,7 +1038,7 @@ order, and it is covered.
 \label{app:109}
 
 The smallest order of the family for which the restricted test of
-\S\ref{app:candidates} supplies no witness is
+Section~\ref{app:candidates} supplies no witness is
 \[
         q=109,\qquad N=23980,\qquad m=5995=5\cdot11\cdot109>3000 .
 \]
@@ -1037,7 +1050,7 @@ The first ingredient is already admitted by \eqref{eq:strictwitness}:
 \(t=55\le59\) is \(T\)-known, the \(T\)-matrices of order \(55\) coming
 from the base sequences \(BS(28,27)\), which lie inside \DJ okovi\'c's
 classification of \(BS(n+1,n)\) for \(n\le30\) \cite{Djokovic2010BS};
-independently, \cite[\S2]{Djokovic2011} records that \(T\)-sequences of
+independently, \cite[Sec.~2]{Djokovic2011} records that \(T\)-sequences of
 every length \(n\le100\) exist except possibly \(n=97\).  Only the
 second ingredient is missing from \eqref{eq:strictwitness}, and it is
 supplied by a result of Miyamoto \cite{Miyamoto1991}, in the
@@ -1051,7 +1064,7 @@ matrices of order \((q-1)/4\), or an Hadamard matrix of order
 
 Here \(q=109\) is prime and \(\equiv1\pmod 4\), and \((109-1)/4=27\).
 Williamson matrices of order \(27\) are known: \(27\le33\), so \(27\) is
-\(W\)-known in the sense of \S\ref{app:candidates}, and Seberry and
+\(W\)-known in the sense of Section~\ref{app:candidates}, and Seberry and
 Yamada record order \(27\) directly, their class \(w_{1}\) of Williamson
 orders being \(\{1,\dots,33,37,39,41,43\}\)
 \cite[Table~A.1 and legend, pp.~541--543]{SeberryYamada1992}.  No
@@ -1088,12 +1101,12 @@ The same ingredient is used in the literature in exactly this way:
 of order \(4\cdot79\cdot109=34444\) from \(T\)-sequences of length
 \(79\) together with Williamson-type matrices of order \(109\), citing
 \cite{SeberryYamada1992} for the latter.  The test of
-\S\ref{app:candidates} misses \(q=109\) because its \(W\)-known class
+Section~\ref{app:candidates} misses \(q=109\) because its \(W\)-known class
 admits only two mechanisms --- \(w\le33\), and \(2w-1\) a prime power,
 which fails here since \(2\cdot109-1=217=7\cdot31\) --- whereas
 Miyamoto's theorem is a third.  We therefore leave that test and
 Table~\ref{tab:candidates} unchanged, \(q=109\) being a genuine failure
-of the test as stated; as with \(q=73\) in \S\ref{app:audit}, the
+of the test as stated; as with \(q=73\) in Section~\ref{app:audit}, the
 failure is a property of the test, not of Hadamard existence.
 
 \subsection{An elementary-witness test and the candidate orders}
@@ -1101,7 +1114,8 @@ failure is a property of the test, not of Hadamard existence.
 
 Beyond the audited range we have no table to appeal to, so we apply a
 deliberately conservative \emph{elementary-witness} test based on
-\eqref{eq:fourodd} and Turyn's array.  We call an odd order \(t\)
+\eqref{eq:fourodd} and Turyn's array, whose four-circulant antecedent is due
+to Williamson \cite{Williamson1944}.  We call an odd order \(t\)
 \emph{\(T\)-known} when \(t\le59\); the required \(T\)-matrices follow
 from the known base sequences
 \(BS((t+1)/2,(t-1)/2)\), whose second parameter is at most \(29\).
@@ -1114,7 +1128,7 @@ factorization
 \[
         m=tw,\qquad t\ \hbox{\(T\)-known},\qquad
         w\ \hbox{\(W\)-known}.
-        \tag{C.1}\label{eq:strictwitness}
+        \tag{A.1}\label{eq:strictwitness}
 \]
 Thus every passing verdict is an unconditional construction from the
 ingredients just listed; no multiplicative closure is assumed.
@@ -1149,10 +1163,10 @@ is prime, so \(t=3,w=6501\) is a witness under
 the prime factor \(197\).  This is why the table below is recomputed from
 actual divisor splits rather than inherited from the earlier screen.
 
-The audited range of \S\ref{app:audit} is a table lookup, and the
-\(q=81\) witness of \S\ref{app:81} cites its two ingredients
+The audited range of Section~\ref{app:audit} is a table lookup, and the
+\(q=81\) witness of Section~\ref{app:81} cites its two ingredients
 individually.  Both are independent of this correction.  Nothing in
-\S\S1--4, and in particular neither Theorem~\ref{thm:main} nor its proof,
+Sections~1--4, and in particular neither Theorem~\ref{thm:main} nor its proof,
 depends on this appendix.
 \end{remark}
 
@@ -1168,7 +1182,7 @@ for which none of the possible \(T\)-known divisors produces a
 \(W\)-known complementary factor.  In particular,
 \(2\cdot109-1=217=7\cdot31\) is not a prime power.  The failure is
 again a property of the test alone: the single missing ingredient is
-Williamson-type matrices of order \(109\), and \S\ref{app:109} supplies
+Williamson-type matrices of order \(109\), and Section~\ref{app:109} supplies
 them, so the split \(t=55,\ w=109\) does cover \(N=23980\) (compare
 \(q=73\)).  We do not assert that any entry of
 Table~\ref{tab:candidates} is open.
@@ -1178,9 +1192,9 @@ test for \(q\le3000\).  It is a reproducible classification relative to
 the stated ingredient sets, not a literature-complete classification of
 the corresponding Hadamard orders.  The ingredient sets themselves are
 conservative choices rather than the state of the art, and the first
-entry of the table already illustrates this: \S\ref{app:109} covers
+entry of the table already illustrates this: Section~\ref{app:109} covers
 \(q=109\) by a mechanism the test does not admit.  Widening the
-\(T\)-known class would remove further entries --- \cite[\S2]{Djokovic2011}
+\(T\)-known class would remove further entries --- \cite[Sec.~2]{Djokovic2011}
 records \(T\)-sequences of every length \(n\le100\) except possibly
 \(n=97\), against the bound \(t\le59\) used here.  We have not
 recomputed the table under any widened ingredient set;
@@ -1190,7 +1204,7 @@ in \eqref{eq:strictwitness}.
 {\footnotesize
 \begin{longtable}{r r l}
 \caption{Orders \(N=2q(q+1)\), \(q\) a prime power \(\equiv1\pmod4\),
-with no restricted elementary witness (\S\ref{app:candidates}),
+with no restricted elementary witness (Section~\ref{app:candidates}),
 \(109\le q\le2969\).}\label{tab:candidates}\\
 \hline
 \(q\) & \(N\) & odd part \(m\)\\\hline
@@ -1320,6 +1334,8 @@ Theorem~\ref{thm:main} is to give a single closed-form rule for the whole
 family, including the region this elementary screen does not reach,
 rather than to derive novelty from a coverage-table gap.
 
+\begingroup
+\small
 \begin{thebibliography}{99}
 
 \bibitem{FaroukWang2020}
@@ -1447,6 +1463,25 @@ C.~J.~Colbourn and J.~H.~Dinitz (eds.),
   W.~de~Launey, \emph{Generalized Hadamard matrices}, pp.~301--306 of this
   volume.)
 
+\bibitem{deLauney1986}
+W.~de~Launey,
+\newblock A survey of generalized Hadamard matrices and difference matrices
+  \(D(k,\lambda;G)\) with large \(k\),
+\newblock {\em Utilitas Math.} 30 (1986), 5--29.
+
+\bibitem{deLauney1992}
+W.~de~Launey,
+\newblock Generalised Hadamard matrices which are developed modulo a group,
+\newblock {\em Discrete Math.} 104 (1992), no.~1, 49--65.
+\newblock \url{https://doi.org/10.1016/0012-365X(92)90624-O}.
+
+\bibitem{deLauneyFlannery2011}
+W.~de~Launey and D.~L.~Flannery,
+\newblock {\em Algebraic Design Theory},
+\newblock Mathematical Surveys and Monographs 175, American Mathematical
+  Society, Providence, RI, 2011.
+\newblock \url{https://doi.org/10.1090/surv/175}.
+
 \bibitem{Jungnickel1979}
 D.~Jungnickel,
 \newblock On difference matrices, resolvable transversal designs and
@@ -1535,5 +1570,6 @@ R.~Egan and P.~\'O~Cath\'ain,
 \newblock \url{https://arxiv.org/abs/1707.08815}.
 
 \end{thebibliography}
+\endgroup
 
 \end{document}

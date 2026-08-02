@@ -5,6 +5,11 @@ Every script here re-derives numbers that the paper states as computed, and
 exits nonzero if any of them disagrees. Requires Python 3 and `numpy`
 (`matplotlib` only for the figures).
 
+From the repository root, the pinned environment is created with
+`python3 -m venv .venv` followed by
+`.venv/bin/pip install -r requirements.txt`. Activate that environment or
+replace `python3` below with `../.venv/bin/python` after entering `code/`.
+
 | Script | Covers | Checks |
 |---|---|---|
 | `ps_p1mod4.py` | Theorem 1 | The construction itself, plus a small finite-field layer so extension fields (`q = 9, 25, 49, 81, 125`) work. Full Gram `HHᵀ = N·I` for `q ≤ 49`; streamed sampled row-orthogonality above that. Also exports matrices and regenerates the figures. |
@@ -19,21 +24,26 @@ exits nonzero if any of them disagrees. Requires Python 3 and `numpy`
 
 ```bash
 cd code
-python ps_p1mod4.py          # default sweep, full Gram      -> ALL PASS
-python coverage_table.py     # Appendix A                    -> ALL PASS
-python nearfield_q9.py       # Remark 11 (about 8 seconds)   -> ALL PASS
-python gaussian_c30.py       # Theorem 3 + Remark 13         -> ALL PASS
-python paley_patterns_q9.py  # Remark 11's delta-slot count  -> ALL PASS
-cd q5_equivalence && python profiles.py
+python3 ps_p1mod4.py          # default sweep, full Gram      -> ALL PASS
+python3 coverage_table.py     # Appendix A                    -> ALL PASS
+python3 nearfield_q9.py       # Remark 11                     -> ALL PASS
+python3 gaussian_c30.py       # Theorem 3 + Remark 13         -> ALL PASS
+python3 paley_patterns_q9.py  # Remark 11's delta-slot count  -> ALL PASS
+python3 alpha_family.py       # unrefereed q=5 report         -> ALL PASS
+cd q5_equivalence
+python3 parse_fw.py
+python3 profiles.py
+python3 make_side_by_side.py
 ```
 
 Common flags on `ps_p1mod4.py`:
 
 ```bash
-python ps_p1mod4.py --q 81 --sampled --pairs 5000        # headline order 13284
-python ps_p1mod4.py --big                                # add q=81 to the sweep
-python ps_p1mod4.py --figures ../paper/images --figq 5,9,13
-python ps_p1mod4.py --q 5 --write - --which H --fmt signs
+python3 ps_p1mod4.py --q 81 --sampled --pairs 5000       # headline order 13284
+python3 ps_p1mod4.py --q 125 --sampled --pairs 5000      # paper's larger sampled check
+python3 ps_p1mod4.py --big                               # add q=81 to the sweep
+python3 ps_p1mod4.py --figures ../paper/images --figq 5,9,13
+python3 ps_p1mod4.py --q 5 --write - --which H --fmt signs
 ```
 
 ## A note on trusting the fast paths

@@ -7,7 +7,7 @@ the appendix of Farouk & Wang, Filomat 34:3 (2020) 815–834.
 Contents:
 
 - `H_note_q5.txt` — this note's q=5 matrix; regenerate with
-  `python ps_p1mod4.py --q 5 --write q5_equivalence/H_note_q5.txt`.
+  `cd .. && python3 ps_p1mod4.py --q 5 --write q5_equivalence/H_note_q5.txt`.
 - `fw_appendix.txt` — plain-text extraction of the printed order-60 example
   from the published Farouk–Wang PDF (see `parse_fw.py` docstring for the
   exact `pdftotext` recipe).
@@ -24,7 +24,8 @@ Contents:
   `H_note_scrambled.txt` (gitignored).
 - `profile_results.txt` — captured output: the profiles differ (their matrix
   has 400 quadruples with value 28; ours has none) ⇒ inequivalent.
-- `make_side_by_side.py` — regenerates `../images/q5_side_by_side.png`.
+- `make_side_by_side.py` — regenerates
+  `../../paper/images/q5_side_by_side.png`.
 
 Caveat, stated precisely: Farouk–Wang note their construction's output may
 vary with a choice of bijection α, so this establishes inequivalence to their

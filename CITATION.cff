@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this construction, cite the archived release once it is available."
+title: "A choice-free Paley-II construction of Hadamard matrices"
+type: software
+version: 0.1.0
+authors:
+  - family-names: Kline
+    given-names: Jeffery
+repository-code: "https://github.com/jeff-kline/p1mod4"
+url: "https://github.com/jeff-kline/p1mod4"
+license: GPL-3.0-only
+abstract: >-
+  An explicit, choice-free construction of a real Hadamard matrix of order
+  2q(q+1) for every prime power q congruent to 1 modulo 4, together with a
+  generalized characterization, exact verification code, and figures.
+keywords:
+  - Hadamard matrix
+  - Paley construction
+  - Scarpis construction
+  - difference matrix
+  - Butson matrix

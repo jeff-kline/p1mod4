@@ -3,8 +3,11 @@ __pycache__/
 *.aux
 *.log
 *.out
+*.fls
+*.toc
 *.synctex.gz
 .DS_Store
+.venv/
 tmp/
 .claude/
 code/q5_equivalence/H_note_scrambled.txt

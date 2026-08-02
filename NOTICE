@@ -1,0 +1,16 @@
+A choice-free Paley-II construction of Hadamard matrices
+Copyright 2026 Jeffery Kline
+
+Original text, code, and figures in this repository are licensed under the
+GNU General Public License v3.0 only. See LICENSE.
+
+The files code/q5_equivalence/fw_appendix.txt and
+code/q5_equivalence/H_fw.txt derive from the printed order-60 example in:
+
+  A. Farouk and Q.-W. Wang, "An infinite family of Hadamard matrices
+  constructed from Paley type matrices," Filomat 34 (2020), no. 3,
+  815-834. DOI: 10.2298/FIL2003815F.
+
+Those source-derived files retain their cited provenance and any rights that
+apply to the source publication; their presence does not relicense the source
+publication under the repository's GPL license.

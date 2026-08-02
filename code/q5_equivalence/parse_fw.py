@@ -54,20 +54,11 @@ assert H.shape == (60, 60)
 assert set(np.unique(H)) <= {-1, 1}
 
 G = H @ H.T
-D = G - 60 * np.eye(60, dtype=np.int64)
-bad = np.argwhere(D != 0)
-if bad.size:
-    print("GRAM DEFECTS (row pairs):")
-    seen = set()
-    for i, j in bad:
-        if i < j:
-            print(f"  rows {i},{j}: inner product {G[i,j]}")
-    print(f"total off-diagonal defects: {len([1 for i,j in bad if i<j])}")
-else:
-    print("Gram check PASSED: H @ H.T == 60*I exactly")
-
 Gc = H.T @ H
-assert np.array_equal(Gc, 60 * np.eye(60, dtype=np.int64)) == (bad.size == 0)
+target = 60 * np.eye(60, dtype=np.int64)
+assert np.array_equal(G, target), "row Gram check failed"
+assert np.array_equal(Gc, target), "column Gram check failed"
+print("Gram checks PASSED: H @ H.T == H.T @ H == 60*I exactly")
 
 np.savetxt(os.path.join(HERE, "H_fw.txt"), H, fmt="%d")
 print("saved H_fw.txt")
